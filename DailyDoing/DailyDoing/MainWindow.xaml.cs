@@ -23,6 +23,8 @@ namespace DailyDoing
     {
         string username = String.Empty;
         string password = String.Empty;
+        //DBService db = new DBService("sae", "sae123", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 3306); //8562
+        DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
         public MainWindow()
         {
             InitializeComponent();
@@ -35,8 +37,6 @@ namespace DailyDoing
             checkLogin();
         }
         private void checkLogin() {
-            //DBService db = new DBService("sae", "sae123", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 3306); //8562
-            DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
             bool isCorrectLogin = db.checkLogin(db.createconnectionstring(),username,password); //Login prüfen
             if (isCorrectLogin) {
                 MessageBox.Show("Successfully logged in!");
@@ -50,12 +50,28 @@ namespace DailyDoing
         private void getInfo(DBService db) {
             tab_contacts.IsSelected = true;
             InformationService infoService = new InformationService();
-            List<string> contacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring()));
-            foreach (string contactName in contacts)
+            List<string> allcontacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring()));
+            foreach (string contactName in allcontacts)
             {
                 lBox_Kontakte.Items.Add(contactName);
             }
         }
 
+        private void lBox_Kontakte_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lBox_Kontakte.SelectedItem != null)
+            {
+                List<string> allInfo =searchInfoForSelectedItem();
+                
+                txt_Name.Text = allInfo[2];
+                txt_Firstname.Text = allInfo[3];
+                txt_email.Text = allInfo[4];
+            }
+        }
+        private List<string> searchInfoForSelectedItem() {
+            int cid = Convert.ToInt32(lBox_Kontakte.SelectedItem.ToString().Substring(0,1));
+            InformationService infoService = new InformationService();
+            return infoService.getDetails(db.getContacts(db.createconnectionstring()),cid);
+        }
     }
 }
