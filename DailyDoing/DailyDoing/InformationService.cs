@@ -13,12 +13,16 @@ namespace DailyDoing
         {
 
         }
-        public void showInformation(List<string[]> contactsPerUser) {
-
+        public List<string> getInfoForListBox(List<string[]> contactsPerUser) {
+            List<string> contacts = new List<string>();
+            string result = String.Empty;
             foreach ( string[] contactInfo in contactsPerUser)
             {
-
+                result = contactInfo[1] + ", " + contactInfo[2];
+                contacts.Add(result);
             }
+            return contacts;
+            
         }
     }
 }

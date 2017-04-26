@@ -20,13 +20,7 @@
             </TabItem>
             <TabItem x:Name="tab_contacts" Header="Contacts">
                 <Grid Background="#FFE5E5E5">
-                    <RichTextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="501">
-                        <FlowDocument>
-                            <Paragraph>
-                                <Run Text="RichTextBox"/>
-                            </Paragraph>
-                        </FlowDocument>
-                    </RichTextBox>
+                    <ListBox x:Name="lBox_Kontakte" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="501"/>
                 </Grid>
             </TabItem>
         </TabControl>
