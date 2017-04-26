@@ -18,7 +18,7 @@ namespace DailyDoing
             string result = String.Empty;
             foreach ( string[] contactInfo in contactsPerUser)
             {
-                result = contactInfo[1] + ", " + contactInfo[2];
+                result = contactInfo[2] + ", " + contactInfo[3];
                 contacts.Add(result);
             }
             return contacts;
