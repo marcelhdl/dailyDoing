@@ -23,16 +23,18 @@ namespace DailyDoing
     {
         string username = String.Empty;
         string password = String.Empty;
+        
+
         public MainWindow()
         {
             InitializeComponent();
         }
-
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             username = txt_username.Text;
-            password = txt_passwd.Text;
+            password = txt_password.Text;
             checkLogin();
+            
         }
         private void checkLogin() {
             //DBService db = new DBService("sae", "sae123", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 3306); //8562
@@ -44,7 +46,7 @@ namespace DailyDoing
             }
             else
             {
-                MessageBox.Show("Incorrect Login! Please try again!");
+                MessageBox.Show(password + "Incorrect Login! Please try again!");
             }
         }
         private void getInfo(DBService db) {
@@ -56,6 +58,5 @@ namespace DailyDoing
                 lBox_Kontakte.Items.Add(contactName);
             }
         }
-
     }
 }
