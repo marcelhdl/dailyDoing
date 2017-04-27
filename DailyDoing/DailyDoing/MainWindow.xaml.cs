@@ -26,7 +26,7 @@ namespace DailyDoing
             username = txt_username.Text;
             password = txt_password.Password;
             checkLogin();
-            
+
         }
         //Login prüfen mit EnterTaste
         private void txt_password_KeyDown(object sender, KeyEventArgs e)
@@ -38,17 +38,20 @@ namespace DailyDoing
                 checkLogin();
             }
         }
-        private void checkLogin() {
-            bool isCorrectLogin = db.checkLogin(db.createconnectionstring(),username,password); //Login prüfen
-            if (isCorrectLogin) {
+        private void checkLogin()
+        {
+            bool isCorrectLogin = db.checkLogin(db.createconnectionstring(), username, password); //Login prüfen
+            if (isCorrectLogin)
+            {
                 int userID = db.getUserID(db.createconnectionstring(), username);
                 if (userID == -1)
                 {
                     MessageBox.Show("DB Error, please contact Admin");
                 }
-                else { 
-                MessageBox.Show("Successfully logged in!");
-                getInfo(db,userID);
+                else
+                {
+                    MessageBox.Show("Successfully logged in!");
+                    getInfo(db, userID);
                 }
             }
             else
@@ -56,10 +59,11 @@ namespace DailyDoing
                 MessageBox.Show("Incorrect Login! Please try again!");
             }
         }
-        private void getInfo(DBService db,int userID) {
+        private void getInfo(DBService db, int userID)
+        {
             tab_contacts.IsSelected = true;
             InformationService infoService = new InformationService();
-            List<string> allcontacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring(),userID));
+            List<string> allcontacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring(), userID));
             foreach (string contactName in allcontacts)
             {
                 lBox_Kontakte.Items.Add(contactName);
@@ -71,18 +75,41 @@ namespace DailyDoing
         {
             if (lBox_Kontakte.SelectedItem != null)
             {
-                List<string> allInfo =searchInfoForSelectedContact();
-                
+                List<string> allInfo = searchInfoForSelectedContact();
+
                 txt_Name.Text = allInfo[2];
                 txt_Firstname.Text = allInfo[3];
                 txt_email.Text = allInfo[4];
             }
         }
-        private List<string> searchInfoForSelectedContact() {
-            int cid = Convert.ToInt32(lBox_Kontakte.SelectedItem.ToString().Substring(0,1));
+        private List<string> searchInfoForSelectedContact()
+        {
+            int cid = Convert.ToInt32(lBox_Kontakte.SelectedItem.ToString().Substring(0, 1));
             InformationService infoService = new InformationService();
-            return infoService.getDetails(db.getDetailsFromContacts(db.createconnectionstring(),cid));
+            return infoService.getDetails(db.getDetailsFromContacts(db.createconnectionstring(), cid));
         }
-        
+
+        private void btn_createContact_Click(object sender, RoutedEventArgs e)
+        {
+            int userID = db.getUserID(db.createconnectionstring(), username);
+            CreateUser create = new CreateUser(userID);
+            create.Show();
+        }
+
+        private void btn_deleteContact_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_updateContact_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void lBox_Kontakte_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            btn_deleteContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
+            btn_updateContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
+        }
     }
 }
