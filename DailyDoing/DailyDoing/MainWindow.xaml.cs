@@ -13,8 +13,8 @@ namespace DailyDoing
         string username = String.Empty;
         string password = String.Empty;
 
-        //DBService db = new DBService("sae", "sae123", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 3306); //8562
-        DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
+        DBService db = new DBService("sae", "", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 8562); //3306
+        //DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
 
         public MainWindow()
         {
