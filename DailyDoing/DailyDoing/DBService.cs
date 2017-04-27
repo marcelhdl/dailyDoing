@@ -157,7 +157,7 @@ namespace DailyDoing
             con.Close();
             con.Open();
             Reader = command.ExecuteReader();
-            string[] contactinfo = new string[5];
+            string[] contactinfo = new string[6];
 
             while (Reader.Read())
             {
@@ -166,7 +166,7 @@ namespace DailyDoing
                 {
                     row += Reader.GetValue(i).ToString() + ",";
                 }
-                String[] contactInfo = row.Split(',');
+                contactinfo = row.Split(',');
                 return contactinfo;
             }
             return contactinfo;
