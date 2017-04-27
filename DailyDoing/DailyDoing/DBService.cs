@@ -157,7 +157,7 @@ namespace DailyDoing
             con.Close();
             con.Open();
             Reader = command.ExecuteReader();
-            string[] contactinfo = new string[]();
+            string[] contactinfo = new string[5];
 
             while (Reader.Read())
             {
