@@ -43,8 +43,14 @@ namespace DailyDoing
             bool isCorrectLogin = db.checkLogin(db.createconnectionstring(),username,password); //Login prüfen
             if (isCorrectLogin) {
                 userID = db.getUserID(db.createconnectionstring(), username);
+                if (userID == -1)
+                {
+                    MessageBox.Show("DB Error, please contact Admin");
+                }
+                else { 
                 MessageBox.Show("Successfully logged in!");
                 getInfo(db);
+                }
             }
             else
             {
