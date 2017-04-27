@@ -1,18 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
 
 namespace DailyDoing
 {
@@ -31,12 +20,24 @@ namespace DailyDoing
         {
             InitializeComponent();
         }
+        //Login prüfen mit Klick auf "Login"
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             username = txt_username.Text;
             password = txt_password.Text;
             checkLogin();
             
+        }
+        //Login prüfen mit EnterTaste
+        private void txt_password_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.Key == Key.Enter)
+            {
+                username = txt_username.Text;
+                password = txt_password.Text;
+                checkLogin();
+            }
         }
         private void checkLogin() {
             bool isCorrectLogin = db.checkLogin(db.createconnectionstring(),username,password); //Login prüfen
@@ -46,7 +47,7 @@ namespace DailyDoing
             }
             else
             {
-                MessageBox.Show(password + "Incorrect Login! Please try again!");
+                MessageBox.Show("Incorrect Login! Please try again!");
             }
         }
         private void getInfo(DBService db) {
@@ -64,17 +65,18 @@ namespace DailyDoing
         {
             if (lBox_Kontakte.SelectedItem != null)
             {
-                List<string> allInfo =searchInfoForSelectedItem();
+                List<string> allInfo =searchInfoForSelectedContact();
                 
                 txt_Name.Text = allInfo[2];
                 txt_Firstname.Text = allInfo[3];
                 txt_email.Text = allInfo[4];
             }
         }
-        private List<string> searchInfoForSelectedItem() {
+        private List<string> searchInfoForSelectedContact() {
             int cid = Convert.ToInt32(lBox_Kontakte.SelectedItem.ToString().Substring(0,1));
             InformationService infoService = new InformationService();
             return infoService.getDetails(db.getContacts(db.createconnectionstring()),cid);
         }
+        
     }
 }
