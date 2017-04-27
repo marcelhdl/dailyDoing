@@ -32,7 +32,7 @@
                     </LinearGradientBrush>
                 </TabItem.Background>
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,1">
-                    <ListBox x:Name="lBox_Kontakte" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" MouseDoubleClick="lBox_Kontakte_MouseDoubleClick" SelectionChanged="lBox_Kontakte_SelectionChanged" Margin="0,0,0,-1"/>
+                    <ListBox x:Name="lBox_Kontakte" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Kontakte_SelectionChanged" Margin="0,0,0,-1"/>
                     <Label x:Name="lbl_name" Content="Name" HorizontalAlignment="Left" Margin="281,25,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lbl_firstname" Content="Firstname" HorizontalAlignment="Left" Margin="281,56,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lbl_email" Content="E-Mail" HorizontalAlignment="Left" Margin="281,95,0,0" VerticalAlignment="Top"/>
