@@ -194,7 +194,7 @@ namespace DailyDoing
         public bool updateContact(MySqlConnection con, int cid, int uid, string name, string vorname, string mail)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "UPDATE tbl_contacts SET uid=" + uid + ", name=" + name + ", vorname=" + vorname + ", mail=" + mail + " WHERE cid=" + cid;
+            command.CommandText = "UPDATE tbl_contacts SET uid='" + uid + "', name='" + name + "', vorname='" + vorname + "', mail='" + mail + "' WHERE cid='" + cid +"'";
             MySqlDataReader Reader;
             con.Close();
             con.Open();
@@ -213,7 +213,7 @@ namespace DailyDoing
         public bool deleteContact(MySqlConnection con, int cid)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "DELETE FROM tbl_contacts WHERE cid=" + cid;
+            command.CommandText = "DELETE FROM tbl_contacts WHERE cid='" + cid + "'";
             MySqlDataReader Reader;
             con.Close();
             con.Open();
