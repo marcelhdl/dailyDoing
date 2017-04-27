@@ -72,8 +72,8 @@ namespace DailyDoing
                 lBox_Kontakte.Items.Add(contactName);
             }
         }
-        //Zeigen der Details eines Kontakts nach Doppelklick auf selbigen
-        private void lBox_Kontakte_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //Holen der Details eines Kontakts
+        private void getDetails()
         {
             if (lBox_Kontakte.SelectedItem != null)
             {
@@ -84,6 +84,7 @@ namespace DailyDoing
                 txt_email.Text = allInfo[4];
             }
         }
+
         //Suchen der Details eines Kontakts
         private List<string> searchInfoForSelectedContact()
         {
@@ -115,7 +116,7 @@ namespace DailyDoing
             UpdateContact update = new UpdateContact(allInfo[3], allInfo[2], allInfo[4], userID, Convert.ToInt32(allInfo[0]), this);
             update.Show();
         }
-        //Prüfen welcher Button aktiv sein soll
+        //Prüfen welcher Button aktiv sein soll und aktualisieren der Details bei Änderung der Auswahl
         private void lBox_Kontakte_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             btn_deleteContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
@@ -125,7 +126,10 @@ namespace DailyDoing
                 txt_Name.Clear();
                 txt_Firstname.Clear();
                 txt_email.Clear();
+                return;
             }
+            getDetails();
+
         }
         //Update nach SQL Verarbeitung
         public void updateAllContactsBox()
