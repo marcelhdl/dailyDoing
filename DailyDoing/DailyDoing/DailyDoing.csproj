@@ -59,12 +59,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreateContact.xaml.cs">
+      <DependentUpon>CreateContact.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdateContact.xaml.cs">
       <DependentUpon>UpdateContact.xaml</DependentUpon>
     </Compile>
     <Page Include="CreateContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
