@@ -12,10 +12,10 @@
                 <Grid Background="#FFE5E5E5" Margin="0,0,-29,-25">
                     <Label x:Name="lb_username" Content="Username" HorizontalAlignment="Left" Margin="63,60,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lb_passwd" Content="Password" HorizontalAlignment="Left" Margin="63,112,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txt_username" HorizontalAlignment="Left" Height="23" Margin="220,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" ToolTip="Insert Username"/>
-                    <TextBox x:Name="txt_password" HorizontalAlignment="Left" Height="23" Margin="220,112,0,0" VerticalAlignment="Top" Width="232" ToolTip="Insert Password" Foreground="White" KeyDown="txt_password_KeyDown"/>
+                    <TextBox x:Name="txt_username" HorizontalAlignment="Left" Height="26" Margin="220,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" ToolTip="Insert Username"/>
                     <Button x:Name="btn_login" Content="Login" HorizontalAlignment="Left" Margin="63,210,0,0" VerticalAlignment="Top" Width="75" Click="btn_login_Click"/>
                     <Button x:Name="btn_exit" Content="Exit" HorizontalAlignment="Left" Margin="377,210,0,0" VerticalAlignment="Top" Width="75"/>
+                    <PasswordBox x:Name="txt_password" HorizontalAlignment="Left" Margin="220,112,0,0" VerticalAlignment="Top" Width="232" Height="26"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tab_contacts" Header="Contacts">

@@ -24,18 +24,17 @@ namespace DailyDoing
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             username = txt_username.Text;
-            password = txt_password.Text;
+            password = txt_password.Password;
             checkLogin();
             
         }
         //Login prüfen mit EnterTaste
         private void txt_password_KeyDown(object sender, KeyEventArgs e)
         {
-
             if (e.Key == Key.Enter)
             {
                 username = txt_username.Text;
-                password = txt_password.Text;
+                password = txt_password.Password;
                 checkLogin();
             }
         }
