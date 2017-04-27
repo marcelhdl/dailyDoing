@@ -41,7 +41,7 @@ namespace DailyDoing
 
         #endregion
 
-        #region checkLogin
+    #region checkLogin
 
         public bool checkLogin(MySqlConnection con, string username, string pw)
         {
@@ -103,9 +103,9 @@ namespace DailyDoing
             con.Close();
             return false;
         }
-        #endregion
+    #endregion
 
-        #region methods for database requests
+    #region methods for database requests
         public List<string[]> getContacts(MySqlConnection con, int uid)
         {
             MySqlCommand command = con.CreateCommand();
@@ -172,6 +172,63 @@ namespace DailyDoing
             return contactinfo;
         }
 
+        public bool createContact(MySqlConnection con, int uid, string name, string vorname, string mail)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "INSERT INTO tbl_contacts (uid, name,vorname,mail) VALUES ('" + uid + "','" + name + "','" + vorname + "','" + mail + "')";
+            MySqlDataReader Reader;
+            con.Close();
+            con.Open();
+            Reader = command.ExecuteReader();
+
+            while (Reader.Read())
+            {
+                string row = "";
+                for (int i = 0; i < Reader.FieldCount; i++)
+                {
+                    row = Reader.GetValue(i).ToString() + ",";
+                }
+            }
+            return true;
+        }
+        public bool updateContact(MySqlConnection con, int cid, int uid, string name, string vorname, string mail)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "UPDATE tbl_contacts SET uid=" + uid + ", name=" + name + ", vorname=" + vorname + ", mail=" + mail + " WHERE cid=" + cid;
+            MySqlDataReader Reader;
+            con.Close();
+            con.Open();
+            Reader = command.ExecuteReader();
+
+            while (Reader.Read())
+            {
+                string row = "";
+                for (int i = 0; i < Reader.FieldCount; i++)
+                {
+                    row = Reader.GetValue(i).ToString() + ",";
+                }
+            }
+            return true;
+        }
+        public bool deleteContact(MySqlConnection con, int cid)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "DELETE FROM tbl_contacts WHERE cid=" + cid;
+            MySqlDataReader Reader;
+            con.Close();
+            con.Open();
+            Reader = command.ExecuteReader();
+
+            while (Reader.Read())
+            {
+                string row = "";
+                for (int i = 0; i < Reader.FieldCount; i++)
+                {
+                    row = Reader.GetValue(i).ToString() + ",";
+                }
+            }
+            return true;
+        }
 
 
         #endregion

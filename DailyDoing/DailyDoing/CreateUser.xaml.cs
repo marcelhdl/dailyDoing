@@ -33,7 +33,7 @@ namespace DailyDoing
             string firstname = txt_Firstname.Text;
             string name = txt_Name.Text;
             string email = txt_email.Text;
-            db.createNewContact(db.createconnectionstring(),userID, name, firstname, email);
+            db.createContact(db.createconnectionstring(),userID, name, firstname, email);
         }
     }
 }
