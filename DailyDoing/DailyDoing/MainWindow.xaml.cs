@@ -81,7 +81,7 @@ namespace DailyDoing
         private List<string> searchInfoForSelectedContact() {
             int cid = Convert.ToInt32(lBox_Kontakte.SelectedItem.ToString().Substring(0,1));
             InformationService infoService = new InformationService();
-            return infoService.getDetails(db.getContacts(db.createconnectionstring()),cid);
+            return infoService.getDetails(db.getDetailsFromContacts(db.createconnectionstring()),cid);
         }
         
     }

@@ -21,21 +21,13 @@ namespace DailyDoing
             return contacts;
 
         }
-        public List<string> getDetails(List<string[]> contactsPerUser, int cid)
+        public List<string> getDetails(string[] contactInfo, int cid)
         {
             List<string> details = new List<string>();
-            foreach (string[] contactInfo in contactsPerUser)
+
+            foreach (string info in contactInfo)
             {
-                if (cid == Convert.ToInt32(contactInfo[0]))
-                {
-
-                    foreach (string info in contactInfo)
-                    {
-                        details.Add(info);
-                    }
-
-                }
-
+                details.Add(info);
             }
             return details;
 
