@@ -28,7 +28,7 @@
                     <TextBox x:Name="txt_Firstname" HorizontalAlignment="Left" Height="23" Margin="363,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
                     <TextBox x:Name="txt_email" HorizontalAlignment="Left" Height="23" Margin="363,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
                     <Button x:Name="btn_createContact" Content="Create Contact" HorizontalAlignment="Left" Margin="266,164,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click"/>
-                    <Button x:Name="btn_deleteContact" Content="Delete Contact" HorizontalAlignment="Left" Margin="266,189,0,0" VerticalAlignment="Top" Width="90" Click="btn_updateContact_Click" IsEnabled="False"/>
+                    <Button x:Name="btn_deleteContact" Content="Delete Contact" HorizontalAlignment="Left" Margin="266,189,0,0" VerticalAlignment="Top" Width="90" Click="btn_deleteContact_Click" IsEnabled="False"/>
                     <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="266,214,0,0" VerticalAlignment="Top" Width="90" Click="btn_updateContact_Click" IsEnabled="False"/>
                 </Grid>
             </TabItem>

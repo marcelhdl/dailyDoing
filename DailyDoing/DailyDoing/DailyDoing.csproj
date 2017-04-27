@@ -62,7 +62,7 @@
     <Compile Include="UpdateContact.xaml.cs">
       <DependentUpon>UpdateContact.xaml</DependentUpon>
     </Compile>
-    <Page Include="CreateUser.xaml">
+    <Page Include="CreateContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -74,8 +74,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CreateUser.xaml.cs">
-      <DependentUpon>CreateUser.xaml</DependentUpon>
+    <Compile Include="CreateContact.xaml.cs">
+      <DependentUpon>CreateContact.xaml</DependentUpon>
     </Compile>
     <Compile Include="DBService.cs" />
     <Compile Include="InformationService.cs" />

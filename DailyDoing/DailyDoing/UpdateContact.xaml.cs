@@ -26,7 +26,8 @@ namespace DailyDoing
         DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
         int userID;
         int contactID;
-        public UpdateContact(string firstname, string name, string email, int userID, int contactID)
+        MainWindow main;
+        public UpdateContact(string firstname, string name, string email, int userID, int contactID, MainWindow main)
         {
             this.firstname = firstname;
             this.name = name;
@@ -37,11 +38,13 @@ namespace DailyDoing
             txt_Firstname.Text = firstname;
             txt_Name.Text = name;
             txt_email.Text = email;
+            this.main = main;
         }
 
         private void btn_createUpdate_Click(object sender, RoutedEventArgs e)
         {
-            db.updateContact(db.createconnectionstring(), contactID, userID, name, firstname, email);
+            db.updateContact(db.createconnectionstring(), contactID, userID, txt_Name.Text, txt_Firstname.Text, txt_email.Text);
+            main.updateAllContactsBox();
             Close();
         }
     }

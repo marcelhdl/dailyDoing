@@ -93,7 +93,7 @@ namespace DailyDoing
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
             int userID = db.getUserID(db.createconnectionstring(), username);
-            CreateContact create = new CreateContact(userID);
+            CreateContact create = new CreateContact(userID, this);
             create.Show();
         }
 
@@ -109,7 +109,7 @@ namespace DailyDoing
         {
             int userID = db.getUserID(db.createconnectionstring(), username);
             List<string> allInfo = searchInfoForSelectedContact();
-            UpdateContact update = new UpdateContact(allInfo[3], allInfo[2], allInfo[4], userID, Convert.ToInt32(allInfo[0]));
+            UpdateContact update = new UpdateContact(allInfo[3], allInfo[2], allInfo[4], userID, Convert.ToInt32(allInfo[0]),this);
             update.Show();
         }
 

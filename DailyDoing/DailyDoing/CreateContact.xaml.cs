@@ -22,10 +22,12 @@ namespace DailyDoing
         //DBService db = new DBService("sae", "sae123", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 3306); //8562
         DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
         int userID;
-        public CreateContact(int userID)
+        MainWindow main;
+        public CreateContact(int userID, MainWindow main)
         {
             InitializeComponent();
             this.userID = userID;
+            this.main = main;
         }
 
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
@@ -34,7 +36,9 @@ namespace DailyDoing
             string name = txt_Name.Text;
             string email = txt_email.Text;
             db.createContact(db.createconnectionstring(),userID, name, firstname, email);
+            main.updateAllContactsBox();
             Close();
+            
         }
     }
 }

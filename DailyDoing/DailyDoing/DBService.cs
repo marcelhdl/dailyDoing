@@ -125,7 +125,6 @@ namespace DailyDoing
                 }
                 String[] contactInfo = row.Split(',');
                 contacts.Add(contactInfo);
-                return contacts;
             }
             return contacts;
         }
