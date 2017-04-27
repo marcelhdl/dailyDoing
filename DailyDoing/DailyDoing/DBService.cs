@@ -149,6 +149,28 @@ namespace DailyDoing
             }
             return -1;
         }
+        public string[] getDetailsFromContacts(MySqlConnection con, int cid)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "SELECT * FROM tbl_contacts WHERE cid='" + cid + "'";
+            MySqlDataReader Reader;
+            con.Close();
+            con.Open();
+            Reader = command.ExecuteReader();
+            string[] contactinfo = new string[]();
+
+            while (Reader.Read())
+            {
+                string row = "";
+                for (int i = 0; i < Reader.FieldCount; i++)
+                {
+                    row += Reader.GetValue(i).ToString() + ",";
+                }
+                String[] contactInfo = row.Split(',');
+                return contactinfo;
+            }
+            return contactinfo;
+        }
 
 
 
