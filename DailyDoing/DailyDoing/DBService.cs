@@ -108,7 +108,7 @@ namespace DailyDoing
         }
     #endregion
 
-    #region methods for contacts requests
+    #region methods for contacts/user requests
 
         //Request all contacts for an specific user.
         public List<string[]> getContacts(MySqlConnection con, int uid)
@@ -262,10 +262,9 @@ namespace DailyDoing
             return true;
         }
 
-
         #endregion
 
-        #region methods for lending requests
+    #region methods for lending requests
 
         // Create a Lending in the Database Table
         // Please give DateTime.Date
@@ -342,8 +341,6 @@ namespace DailyDoing
             return true;
         }
 
-
-
-        #endregion
+    #endregion
     }
 }
