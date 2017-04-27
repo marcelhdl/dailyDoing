@@ -61,6 +61,7 @@ namespace DailyDoing
         }
         private void getInfo(DBService db, int userID)
         {
+            lBox_Kontakte.Items.Clear();
             tab_contacts.IsSelected = true;
             InformationService infoService = new InformationService();
             List<string> allcontacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring(), userID));
@@ -92,24 +93,34 @@ namespace DailyDoing
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
             int userID = db.getUserID(db.createconnectionstring(), username);
-            CreateUser create = new CreateUser(userID);
+            CreateContact create = new CreateContact(userID);
             create.Show();
         }
 
         private void btn_deleteContact_Click(object sender, RoutedEventArgs e)
         {
-
+            List<string> allInfo = searchInfoForSelectedContact();
+            db.deleteContact(db.createconnectionstring(), Convert.ToInt32(allInfo[0]));
+            MessageBox.Show("Contact successfully deleted!");
+            updateAllContactsBox();
         }
 
         private void btn_updateContact_Click(object sender, RoutedEventArgs e)
         {
-
+            int userID = db.getUserID(db.createconnectionstring(), username);
+            List<string> allInfo = searchInfoForSelectedContact();
+            UpdateContact update = new UpdateContact(allInfo[3], allInfo[2], allInfo[4], userID, Convert.ToInt32(allInfo[0]));
+            update.Show();
         }
 
         private void lBox_Kontakte_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             btn_deleteContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
             btn_updateContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
+        }
+        public void updateAllContactsBox() {
+            int userID = db.getUserID(db.createconnectionstring(), username);
+            getInfo(db, userID);
         }
     }
 }

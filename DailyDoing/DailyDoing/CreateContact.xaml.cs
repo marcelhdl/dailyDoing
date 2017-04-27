@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 namespace DailyDoing
 {
     /// <summary>
-    /// Interaktionslogik für CreateUser.xaml
+    /// Interaktionslogik für CreateContact.xaml
     /// </summary>
-    public partial class CreateUser : Window
+    public partial class CreateContact : Window
     {
         //DBService db = new DBService("sae", "sae123", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 3306); //8562
         DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
         int userID;
-        public CreateUser(int userID)
+        public CreateContact(int userID)
         {
             InitializeComponent();
             this.userID = userID;
