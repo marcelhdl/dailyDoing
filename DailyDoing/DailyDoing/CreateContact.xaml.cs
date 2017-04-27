@@ -29,7 +29,7 @@ namespace DailyDoing
             this.userID = userID;
             this.main = main;
         }
-
+        //Informationen aus Textboxen nehmen und daraus einen neuen Kontakt erzeugen
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
             string firstname = txt_Firstname.Text;

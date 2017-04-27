@@ -38,9 +38,10 @@ namespace DailyDoing
                 checkLogin();
             }
         }
+        //Plausibilätscheck für Login
         private void checkLogin()
         {
-            bool isCorrectLogin = db.checkLogin(db.createconnectionstring(), username, password); //Login prüfen
+            bool isCorrectLogin = db.checkLogin(db.createconnectionstring(), username, password);
             if (isCorrectLogin)
             {
                 int userID = db.getUserID(db.createconnectionstring(), username);
@@ -51,7 +52,7 @@ namespace DailyDoing
                 else
                 {
                     MessageBox.Show("Successfully logged in!");
-                    getInfo(db, userID);
+                    fillContactsToInListBox(db, userID);
                 }
             }
             else
@@ -59,7 +60,8 @@ namespace DailyDoing
                 MessageBox.Show("Incorrect Login! Please try again!");
             }
         }
-        private void getInfo(DBService db, int userID)
+        //List Box mit Übersicht der Kontakte befüllen
+        private void fillContactsToInListBox(DBService db, int userID)
         {
             lBox_Kontakte.Items.Clear();
             tab_contacts.IsSelected = true;
@@ -70,8 +72,7 @@ namespace DailyDoing
                 lBox_Kontakte.Items.Add(contactName);
             }
         }
-
-
+        //Zeigen der Details eines Kontakts nach Doppelklick auf selbigen
         private void lBox_Kontakte_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (lBox_Kontakte.SelectedItem != null)
@@ -83,13 +84,14 @@ namespace DailyDoing
                 txt_email.Text = allInfo[4];
             }
         }
+        //Suchen der Details eines Kontakts
         private List<string> searchInfoForSelectedContact()
         {
             int cid = Convert.ToInt32(lBox_Kontakte.SelectedItem.ToString().Substring(0, 1));
             InformationService infoService = new InformationService();
             return infoService.getDetails(db.getDetailsFromContacts(db.createconnectionstring(), cid));
         }
-
+        //Einsteigspunkt für das Erstellen eines Neuen Kontakts
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
             int userID = db.getUserID(db.createconnectionstring(), username);
@@ -97,6 +99,7 @@ namespace DailyDoing
             create.Show();
         }
 
+        //Löschen eines vorhandenen Kontakts
         private void btn_deleteContact_Click(object sender, RoutedEventArgs e)
         {
             List<string> allInfo = searchInfoForSelectedContact();
@@ -104,7 +107,7 @@ namespace DailyDoing
             MessageBox.Show("Contact successfully deleted!");
             updateAllContactsBox();
         }
-
+        //Einsteigspunkt für das Updaten eines vorhandenen Kontakts
         private void btn_updateContact_Click(object sender, RoutedEventArgs e)
         {
             int userID = db.getUserID(db.createconnectionstring(), username);
@@ -112,7 +115,7 @@ namespace DailyDoing
             UpdateContact update = new UpdateContact(allInfo[3], allInfo[2], allInfo[4], userID, Convert.ToInt32(allInfo[0]), this);
             update.Show();
         }
-
+        //Prüfen welcher Button aktiv sein soll
         private void lBox_Kontakte_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             btn_deleteContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
@@ -124,10 +127,11 @@ namespace DailyDoing
                 txt_email.Clear();
             }
         }
+        //Update nach SQL Verarbeitung
         public void updateAllContactsBox()
         {
             int userID = db.getUserID(db.createconnectionstring(), username);
-            getInfo(db, userID);
+            fillContactsToInListBox(db, userID);
         }
     }
 }

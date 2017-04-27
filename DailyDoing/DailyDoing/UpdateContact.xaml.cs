@@ -40,7 +40,7 @@ namespace DailyDoing
             txt_email.Text = email;
             this.main = main;
         }
-
+        //Informationen aus Textboxen nehmen und Kontakt updaten
         private void btn_createUpdate_Click(object sender, RoutedEventArgs e)
         {
             db.updateContact(db.createconnectionstring(), contactID, userID, txt_Name.Text, txt_Firstname.Text, txt_email.Text);
