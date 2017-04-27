@@ -12,6 +12,7 @@ namespace DailyDoing
     {
         string username = String.Empty;
         string password = String.Empty;
+        int userID;
 
         //DBService db = new DBService("sae", "sae123", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 3306); //8562
         DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
@@ -41,6 +42,7 @@ namespace DailyDoing
         private void checkLogin() {
             bool isCorrectLogin = db.checkLogin(db.createconnectionstring(),username,password); //Login prüfen
             if (isCorrectLogin) {
+                userID = db.getUserID(db.createconnectionstring(), username);
                 MessageBox.Show("Successfully logged in!");
                 getInfo(db);
             }
@@ -52,7 +54,7 @@ namespace DailyDoing
         private void getInfo(DBService db) {
             tab_contacts.IsSelected = true;
             InformationService infoService = new InformationService();
-            List<string> allcontacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring()));
+            List<string> allcontacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring()),userID);
             foreach (string contactName in allcontacts)
             {
                 lBox_Kontakte.Items.Add(contactName);
