@@ -106,10 +106,10 @@ namespace DailyDoing
         #endregion
 
         #region methods for database requests
-        public List<string[]> getContacts(MySqlConnection con)
+        public List<string[]> getContacts(MySqlConnection con, int uid)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "SELECT * FROM tbl_contacts";
+            command.CommandText = "SELECT * FROM tbl_contacts WHERE uid='"+uid+"'";
             MySqlDataReader Reader;
             con.Close();
             con.Open();
@@ -130,7 +130,25 @@ namespace DailyDoing
             return contacts;
         }
 
-
+        public int getUserID(MySqlConnection con, string username)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "SELECT uid FROM tbl_user WHERE username='" + username + "'";
+            MySqlDataReader Reader;
+            con.Close();
+            con.Open();
+            Reader = command.ExecuteReader();
+            while (Reader.Read())
+            {
+                string row = "";
+                for (int i = 0; i < Reader.FieldCount; i++)
+                {
+                    row = Reader.GetValue(i).ToString();
+                }
+                return Convert.ToInt32(row);
+            }
+            return -1;
+        }
 
 
 
