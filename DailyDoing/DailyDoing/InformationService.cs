@@ -21,7 +21,7 @@ namespace DailyDoing
             return contacts;
 
         }
-        public List<string> getDetails(string[] contactInfo, int cid)
+        public List<string> getDetails(string[] contactInfo)
         {
             List<string> details = new List<string>();
 
