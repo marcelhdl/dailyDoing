@@ -109,7 +109,7 @@ namespace DailyDoing
         {
             int userID = db.getUserID(db.createconnectionstring(), username);
             List<string> allInfo = searchInfoForSelectedContact();
-            UpdateContact update = new UpdateContact(allInfo[3], allInfo[2], allInfo[4], userID, Convert.ToInt32(allInfo[0]),this);
+            UpdateContact update = new UpdateContact(allInfo[3], allInfo[2], allInfo[4], userID, Convert.ToInt32(allInfo[0]), this);
             update.Show();
         }
 
@@ -117,8 +117,15 @@ namespace DailyDoing
         {
             btn_deleteContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
             btn_updateContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
+            if (lBox_Kontakte.SelectedItem == null)
+            {
+                txt_Name.Clear();
+                txt_Firstname.Clear();
+                txt_email.Clear();
+            }
         }
-        public void updateAllContactsBox() {
+        public void updateAllContactsBox()
+        {
             int userID = db.getUserID(db.createconnectionstring(), username);
             getInfo(db, userID);
         }
