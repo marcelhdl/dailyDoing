@@ -3,34 +3,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:local="clr-namespace:DailyDoing"
         mc:Ignorable="d"
         Title="DailyDoing v1.0" Height="350" Width="525" ResizeMode="NoResize">
     <Grid>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="299" VerticalAlignment="Top" Width="507" Margin="0,10,0,0" Background="#FF386A0D">
-            <TabItem x:Name="tab_login" Header="Login">
-                <TabItem.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                        <GradientStop Color="#FF386A0D" Offset="1"/>
-                    </LinearGradientBrush>
-                </TabItem.Background>
+        <dragablz:TabablzControl x:Name="tabControl" HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="507" Margin="0,0,0,0">
+            <dragablz:TabablzControl.InterTabController>
+                <dragablz:InterTabController />
+            </dragablz:TabablzControl.InterTabController>
+            <TabItem x:Name="tab_login" Header="LOGIN">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,1">
-                    <Label x:Name="lb_username" Content="Username" HorizontalAlignment="Left" Margin="63,60,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="lb_passwd" Content="Password" HorizontalAlignment="Left" Margin="63,112,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txt_username" HorizontalAlignment="Left" Height="26" Margin="220,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" ToolTip="Insert Username" KeyboardNavigation.TabIndex="0"/>
+                    <materialDesign:PackIcon Margin="94,60,0,0" Kind="Account" Height="37" Width="36"/>
+                    <materialDesign:PackIcon Margin="94,118,0,0" Kind="Key" Height="36" Width="36"/>
+                    <TextBox x:Name="txt_username" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  HorizontalAlignment="Left" Height="50" Margin="148,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" ToolTip="Insert Username" KeyboardNavigation.TabIndex="0"/>
+                    <PasswordBox x:Name="txt_password" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Left" Margin="148,104,0,0" VerticalAlignment="Top" Width="232" Height="50" KeyDown="txt_password_KeyDown" KeyboardNavigation.TabIndex="1"/>
                     <Button x:Name="btn_login" Content="Login" HorizontalAlignment="Left" Margin="63,210,0,0" VerticalAlignment="Top" Width="75" Click="btn_login_Click" KeyboardNavigation.TabIndex="2"/>
                     <Button x:Name="btn_exit" Content="Exit" HorizontalAlignment="Left" Margin="377,210,0,0" VerticalAlignment="Top" Width="75" KeyboardNavigation.TabIndex="3"/>
-                    <PasswordBox x:Name="txt_password" HorizontalAlignment="Left" Margin="220,112,0,0" VerticalAlignment="Top" Width="232" Height="26" KeyDown="txt_password_KeyDown" KeyboardNavigation.TabIndex="1"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tab_contacts" Header="Contacts">
-                <TabItem.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                        <GradientStop Color="#FF386A0D" Offset="1"/>
-                    </LinearGradientBrush>
-                </TabItem.Background>
+            <TabItem x:Name="tab_contacts" Header="CONTACTS">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,1">
                     <ListBox x:Name="lBox_Kontakte" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Kontakte_SelectionChanged" Margin="0,0,0,-1"/>
                     <Label x:Name="lbl_name" Content="Name" HorizontalAlignment="Left" Margin="281,25,0,0" VerticalAlignment="Top"/>
@@ -39,12 +32,16 @@
                     <TextBox x:Name="txt_Name" HorizontalAlignment="Left" Height="23" Margin="363,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
                     <TextBox x:Name="txt_Firstname" HorizontalAlignment="Left" Height="23" Margin="363,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
                     <TextBox x:Name="txt_email" HorizontalAlignment="Left" Height="23" Margin="363,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
-                    <Button x:Name="btn_createContact" Content="Create Contact" HorizontalAlignment="Left" Margin="266,164,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click"/>
-                    <Button x:Name="btn_deleteContact" Content="Delete Contact" HorizontalAlignment="Left" Margin="266,189,0,0" VerticalAlignment="Top" Width="90" Click="btn_deleteContact_Click" IsEnabled="False"/>
-                    <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="266,214,0,0" VerticalAlignment="Top" Width="90" Click="btn_updateContact_Click" IsEnabled="False"/>
+                    <Button x:Name="btn_createContact" Content="Create Contact" HorizontalAlignment="Left" Margin="281,138,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click"/>
+                    <Button x:Name="btn_deleteContact" Content="Delete Contact" HorizontalAlignment="Left" Margin="281,175,0,0" VerticalAlignment="Top" Width="90" Click="btn_deleteContact_Click" IsEnabled="False"/>
+                    <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="281,212,0,0" VerticalAlignment="Top" Width="90" Click="btn_updateContact_Click" IsEnabled="False"/>
                 </Grid>
             </TabItem>
-        </TabControl>
+            <TabItem Header="DESIGN">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Looks Quite Nice</TextBlock>
+            </TabItem>
+        </dragablz:TabablzControl>
+
 
     </Grid>
 </Window>
