@@ -137,5 +137,8 @@ namespace DailyDoing
             int userID = db.getUserID(db.createconnectionstring(), username);
             fillContactsToInListBox(db, userID);
         }
+        public void btn_exit_Click(object sender, RoutedEventArgs e) {
+            this.Close();
+        }
     }
 }

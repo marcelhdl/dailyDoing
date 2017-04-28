@@ -7,9 +7,9 @@
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:local="clr-namespace:DailyDoing"
         mc:Ignorable="d"
-        Title="DailyDoing v1.0" Height="350" Width="525" ResizeMode="NoResize">
+        Title="DailyDoing v1.0" Height="350" Width="600" ResizeMode="NoResize">
     <Grid>
-        <dragablz:TabablzControl x:Name="tabControl" HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="507" Margin="0,0,0,0">
+        <dragablz:TabablzControl x:Name="tabControl" HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="600" Margin="0,0,0,0">
             <dragablz:TabablzControl.InterTabController>
                 <dragablz:InterTabController />
             </dragablz:TabablzControl.InterTabController>
@@ -20,25 +20,22 @@
                     <TextBox x:Name="txt_username" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  HorizontalAlignment="Left" Height="50" Margin="148,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" ToolTip="Insert Username" KeyboardNavigation.TabIndex="0"/>
                     <PasswordBox x:Name="txt_password" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Left" Margin="148,104,0,0" VerticalAlignment="Top" Width="232" Height="50" KeyDown="txt_password_KeyDown" KeyboardNavigation.TabIndex="1"/>
                     <Button x:Name="btn_login" Content="Login" HorizontalAlignment="Left" Margin="63,210,0,0" VerticalAlignment="Top" Width="75" Click="btn_login_Click" KeyboardNavigation.TabIndex="2"/>
-                    <Button x:Name="btn_exit" Content="Exit" HorizontalAlignment="Left" Margin="377,210,0,0" VerticalAlignment="Top" Width="75" KeyboardNavigation.TabIndex="3"/>
+                    <Button x:Name="btn_exit" Content="Exit" HorizontalAlignment="Left" Margin="377,210,0,0" VerticalAlignment="Top" Width="75"  Click="btn_exit_Click" KeyboardNavigation.TabIndex="3"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tab_contacts" Header="CONTACTS">
-                <Grid Background="#FFE5E5E5" Margin="0,0,0,1">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
                     <ListBox x:Name="lBox_Kontakte" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Kontakte_SelectionChanged" Margin="0,0,0,-1"/>
-                    <Label x:Name="lbl_name" Content="Name" HorizontalAlignment="Left" Margin="281,25,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="lbl_firstname" Content="Firstname" HorizontalAlignment="Left" Margin="281,56,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="lbl_email" Content="E-Mail" HorizontalAlignment="Left" Margin="281,95,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txt_Name" HorizontalAlignment="Left" Height="23" Margin="363,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
-                    <TextBox x:Name="txt_Firstname" HorizontalAlignment="Left" Height="23" Margin="363,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
-                    <TextBox x:Name="txt_email" HorizontalAlignment="Left" Height="23" Margin="363,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
-                    <Button x:Name="btn_createContact" Content="Create Contact" HorizontalAlignment="Left" Margin="281,138,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click"/>
-                    <Button x:Name="btn_deleteContact" Content="Delete Contact" HorizontalAlignment="Left" Margin="281,175,0,0" VerticalAlignment="Top" Width="90" Click="btn_deleteContact_Click" IsEnabled="False"/>
-                    <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="281,212,0,0" VerticalAlignment="Top" Width="90" Click="btn_updateContact_Click" IsEnabled="False"/>
+                    <TextBox x:Name="txt_Name" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+                    <TextBox x:Name="txt_Firstname" materialDesign:HintAssist.Hint="Firstname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+                    <TextBox x:Name="txt_email" materialDesign:HintAssist.Hint="E-Mail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+                    <Button x:Name="btn_createContact" Content="Create Contact" HorizontalAlignment="Left" Margin="365,145,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click"/>
+                    <Button x:Name="btn_deleteContact" Content="Delete Contact" HorizontalAlignment="Left" Margin="365,182,0,0" VerticalAlignment="Top" Width="130" Click="btn_deleteContact_Click" IsEnabled="False"/>
+                    <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="365,219,0,0" VerticalAlignment="Top" Width="130" Click="btn_updateContact_Click" IsEnabled="False"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="DESIGN">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Looks Quite Nice</TextBlock>
+            <TabItem Header="Lendings">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">The Lendings per each User</TextBlock>
             </TabItem>
         </dragablz:TabablzControl>
 
