@@ -16,7 +16,7 @@ namespace DailyDoing
             foreach (string[] contactInfo in contactsPerUser)
             {
                 //Contact contact = new Contact(contactInfo[2], contactInfo[3], contactInfo[4], Convert.ToInt32(contactInfo[0]), Convert.ToInt32(contactInfo[1]));
-                contacts.Add(new Contact() { Name = contactInfo[2], Firstname = contactInfo[3], Email = contactInfo[4] });
+                contacts.Add(new Contact() { Name = contactInfo[2], Firstname = contactInfo[3], Email = contactInfo[4], Cid = Convert.ToInt32(contactInfo[0]), Uid = Convert.ToInt32(contactInfo[1]) });
                 //contacts.Add(contact);
             }
             return contacts;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows;
 using System.Windows.Input;
 
@@ -70,8 +71,15 @@ namespace DailyDoing
         //Suchen der Details eines Kontakts
         private List<string> searchInfoForSelectedContact()
         {
-            int cid = Convert.ToInt32(lBox_Kontakte.SelectedItem.ToString().Substring(0, 1));
+            //DataRowView d1 = lBox_Kontakte.SelectedItem as DataRowView;
+            //string first = d1["cid"].ToString();
+
+            Contact contact = (Contact)lBox_Kontakte.SelectedItem;
+            int cid = contact.Cid;
+
+            //int cid = Convert.ToInt32(lBox_Kontakte.SelectedItem.ToString().Substring(0, 1));
             InformationService infoService = new InformationService();
+            
             return infoService.getDetails(db.getDetailsFromContacts(db.createconnectionstring(), cid));
         }
         //Einsteigspunkt für das Erstellen eines Neuen Kontakts
