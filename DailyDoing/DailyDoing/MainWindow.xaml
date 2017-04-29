@@ -25,7 +25,14 @@
             </TabItem>
             <TabItem x:Name="tab_contacts" Header="CONTACTS">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
-                    <ListBox x:Name="lBox_Kontakte" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Kontakte_SelectionChanged" Margin="0,0,0,-1"/>
+                    <ListView x:Name="lBox_Kontakte" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Kontakte_SelectionChanged" Margin="0,0,0,-1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name"/>
+                                <GridViewColumn Header="Firstname"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                     <TextBox x:Name="txt_Name" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
                     <TextBox x:Name="txt_Firstname" materialDesign:HintAssist.Hint="Firstname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
                     <TextBox x:Name="txt_email" materialDesign:HintAssist.Hint="E-Mail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>

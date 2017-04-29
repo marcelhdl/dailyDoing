@@ -10,13 +10,12 @@ namespace DailyDoing
         {
 
         }
-        public List<string> getInfoForListBox(List<string[]> contactsPerUser) {
-            List<string> contacts = new List<string>();
-            string result = String.Empty;
+        public List<Contact> getInfoForListBox(List<string[]> contactsPerUser) {
+            List<Contact> contacts = new List<Contact>();
             foreach (string[] contactInfo in contactsPerUser)
             {
-                result = contactInfo[0] + "\t" + contactInfo[2] + ", " + contactInfo[3];
-                contacts.Add(result);
+                Contact contact = new Contact(contactInfo[2], contactInfo[3], contactInfo[4], Convert.ToInt32(contactInfo[0]), Convert.ToInt32(contactInfo[1]));
+                contacts.Add(contact);
             }
             return contacts;
 

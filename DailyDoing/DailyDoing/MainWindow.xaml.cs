@@ -50,10 +50,11 @@ namespace DailyDoing
             lBox_Kontakte.Items.Clear();
             tab_contacts.IsSelected = true;
             InformationService infoService = new InformationService();
-            List<string> allcontacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring(), userID));
-            foreach (string contactName in allcontacts)
+            List<Contact> allcontacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring(), userID));
+            foreach (Contact contact in allcontacts)
             {
-                lBox_Kontakte.Items.Add(contactName);
+                lBox_Kontakte.Items.Add(contact.Name+contact.Firstname);
+                
             }
         }
         //Holen der Details eines Kontakts
