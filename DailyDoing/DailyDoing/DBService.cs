@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 //using System.Data;
 //using System.Windows;
 //using System.Windows.Input;
+using System.IO;
 
 namespace DailyDoing
 {
@@ -21,13 +22,16 @@ namespace DailyDoing
 
         #region Constructor and StringBuilder
 
-        public DBService(string DBUser, string DBPass, string DBConnection, string DBName, int DBPort)
+        public DBService()
         {
-            this.DBConnection = DBConnection;
-            this.DBName = DBName;
-            this.DBPass = DBPass;
-            this.DBUser = DBUser;
-            this.DBPort = DBPort;
+            StreamReader reader = new StreamReader("C:" +Environment.ExpandEnvironmentVariables("%HOMEPATH%") + "\\.connectionDB_DailyDoing.cfg");
+            string connect =reader.ReadLine();
+            string[] allDataForDB = connect.Split(';');
+            this.DBConnection = allDataForDB[2];
+            this.DBName = allDataForDB[3];
+            this.DBPass = allDataForDB[1];
+            this.DBUser = allDataForDB[0];
+            this.DBPort = Convert.ToInt32(allDataForDB[4]);
         }
 
         public MySqlConnection createconnectionstring()
@@ -44,7 +48,7 @@ namespace DailyDoing
 
         #endregion
 
-    #region checkLogin
+        #region checkLogin
 
         public bool checkLogin(MySqlConnection con, string username, string pw)
         {
@@ -106,9 +110,9 @@ namespace DailyDoing
             con.Close();
             return false;
         }
-    #endregion
+        #endregion
 
-    #region methods for contacts/user requests
+        #region methods for contacts/user requests
 
         //Request all contacts for an specific user.
         public List<string[]> getContacts(MySqlConnection con, int uid)
@@ -116,7 +120,7 @@ namespace DailyDoing
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"SELECT * 
                                     FROM tbl_contacts 
-                                    WHERE uid='"+uid+"'";
+                                    WHERE uid='" + uid + "'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
             else { con.Open(); }
@@ -219,8 +223,8 @@ namespace DailyDoing
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"UPDATE tbl_contacts 
-                                    SET uid='" + uid + "', name='" + name + "', vorname='" + vorname + "', mail='" + mail + 
-                                    "' WHERE cid='" + cid +"'";
+                                    SET uid='" + uid + "', name='" + name + "', vorname='" + vorname + "', mail='" + mail +
+                                    "' WHERE cid='" + cid + "'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
             else { con.Open(); }
@@ -264,7 +268,7 @@ namespace DailyDoing
 
         #endregion
 
-    #region methods for lending requests
+        #region methods for lending requests
 
         // Create a Lending in the Database Table
         // Please give DateTime.Date
@@ -298,7 +302,7 @@ namespace DailyDoing
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"UPDATE tbl_contacts 
-                                    SET cid='" + cid + "', desc='" + desc + "', timestamp_lendback='" + date_lendback + 
+                                    SET cid='" + cid + "', desc='" + desc + "', timestamp_lendback='" + date_lendback +
                                     "' WHERE lid='" + lid + "'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
@@ -341,6 +345,6 @@ namespace DailyDoing
             return true;
         }
 
-    #endregion
+        #endregion
     }
 }

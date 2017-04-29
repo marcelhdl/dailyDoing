@@ -22,8 +22,7 @@ namespace DailyDoing
         string firstname = String.Empty;
         string name = String.Empty;
         string email = String.Empty;
-        DBService db = new DBService("sae", "", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 8562); //3306
-        //DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
+        DBService db = new DBService();
         int userID;
         int contactID;
         MainWindow main;

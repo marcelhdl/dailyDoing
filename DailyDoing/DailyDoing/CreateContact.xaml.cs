@@ -19,8 +19,7 @@ namespace DailyDoing
     /// </summary>
     public partial class CreateContact : Window
     {
-        DBService db = new DBService("sae", "", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 8562); //3306
-        //DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
+        DBService db = new DBService();
         int userID;
         MainWindow main;
         public CreateContact(int userID, MainWindow main)

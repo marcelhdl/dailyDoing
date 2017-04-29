@@ -12,9 +12,8 @@ namespace DailyDoing
     {
         string username = String.Empty;
         string password = String.Empty;
-
-        DBService db = new DBService("sae", "", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 8562); //3306
-        //DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
+        DBService db = new DBService();
+        LoginController loginController;
 
         public MainWindow()
         {
@@ -25,7 +24,16 @@ namespace DailyDoing
         {
             username = txt_username.Text;
             password = txt_password.Password;
-            checkLogin();
+            loginController = new LoginController(db, username, password);
+            if (loginController.isCorrectLogin())
+            {
+                MessageBox.Show("Successfully logged in!");
+                fillContactsInListBox(db, db.getUserID(db.createconnectionstring(),username));
+            }
+            else
+            {
+                MessageBox.Show("Incorrect Login! Please try again!");
+            }
 
         }
         //Login prüfen mit EnterTaste
@@ -33,35 +41,11 @@ namespace DailyDoing
         {
             if (e.Key == Key.Enter)
             {
-                username = txt_username.Text;
-                password = txt_password.Password;
-                checkLogin();
-            }
-        }
-        //Plausibilätscheck für Login
-        private void checkLogin()
-        {
-            bool isCorrectLogin = db.checkLogin(db.createconnectionstring(), username, password);
-            if (isCorrectLogin)
-            {
-                int userID = db.getUserID(db.createconnectionstring(), username);
-                if (userID == -1)
-                {
-                    MessageBox.Show("DB Error, please contact Admin");
-                }
-                else
-                {
-                    MessageBox.Show("Successfully logged in!");
-                    fillContactsToInListBox(db, userID);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Incorrect Login! Please try again!");
+                btn_login_Click(sender, e);
             }
         }
         //List Box mit Übersicht der Kontakte befüllen
-        private void fillContactsToInListBox(DBService db, int userID)
+        private void fillContactsInListBox(DBService db, int userID)
         {
             lBox_Kontakte.Items.Clear();
             tab_contacts.IsSelected = true;
@@ -135,9 +119,10 @@ namespace DailyDoing
         public void updateAllContactsBox()
         {
             int userID = db.getUserID(db.createconnectionstring(), username);
-            fillContactsToInListBox(db, userID);
+            fillContactsInListBox(db, userID);
         }
-        public void btn_exit_Click(object sender, RoutedEventArgs e) {
+        public void btn_exit_Click(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }
