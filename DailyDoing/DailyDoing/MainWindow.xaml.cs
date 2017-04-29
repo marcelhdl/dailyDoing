@@ -28,7 +28,7 @@ namespace DailyDoing
             if (loginController.isCorrectLogin())
             {
                 MessageBox.Show("Successfully logged in!");
-                fillContactsInListBox(db, db.getUserID(db.createconnectionstring(),username));
+                fillContactsInListBox(db, db.getUserID(db.createconnectionstring(), username));
             }
             else
             {
@@ -51,11 +51,8 @@ namespace DailyDoing
             tab_contacts.IsSelected = true;
             InformationService infoService = new InformationService();
             List<Contact> allcontacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring(), userID));
-            foreach (Contact contact in allcontacts)
-            {
-                lBox_Kontakte.Items.Add(contact.Name+contact.Firstname);
-                
-            }
+            lBox_Kontakte.ItemsSource = allcontacts;
+
         }
         //Holen der Details eines Kontakts
         private void getDetails()

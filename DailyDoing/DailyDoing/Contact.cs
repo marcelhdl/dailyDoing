@@ -79,13 +79,13 @@ namespace DailyDoing
             }
         }
 
-        public Contact(string name, string firstname, string email, int cid, int uid)
+        public Contact()//(string name, string firstname, string email, int cid, int uid)
         {
-            this.name = name;
-            this.firstname = firstname;
-            this.email = email;
-            this.cid = cid;
-            this.uid = uid;
+            //this.name = name;
+            //this.firstname = firstname;
+            //this.email = email;
+            //this.cid = cid;
+            //this.uid = uid;
         }
     }
 }

@@ -25,11 +25,12 @@
             </TabItem>
             <TabItem x:Name="tab_contacts" Header="CONTACTS">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
-                    <ListView x:Name="lBox_Kontakte" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Kontakte_SelectionChanged" Margin="0,0,0,-1">
+                    <ListView Name="lBox_Kontakte" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Kontakte_SelectionChanged" Margin="0,0,0,-1">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Name"/>
-                                <GridViewColumn Header="Firstname"/>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                                <GridViewColumn Header="Firstname" DisplayMemberBinding="{Binding Firstname}"/>
+                                <GridViewColumn Header="E-Mail" DisplayMemberBinding="{Binding Email}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
