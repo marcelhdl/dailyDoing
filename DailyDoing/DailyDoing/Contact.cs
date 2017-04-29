@@ -13,79 +13,34 @@ namespace DailyDoing
         string email;
         int cid;
         int uid;
+        public Contact(){}
 
+ #region getter/setter
         public string Name
         {
-            get
-            {
-                return name;
-            }
-
-            set
-            {
-                name = value;
-            }
+            get {return name;}
+            set{name = value;}
         }
-
         public string Firstname
         {
-            get
-            {
-                return firstname;
-            }
-
-            set
-            {
-                firstname = value;
-            }
+            get{return firstname;}
+            set{firstname = value;}
         }
-
         public string Email
         {
-            get
-            {
-                return email;
-            }
-
-            set
-            {
-                email = value;
-            }
+            get{return email;}
+            set{email = value;}
         }
-
         public int Cid
         {
-            get
-            {
-                return cid;
-            }
-
-            set
-            {
-                cid = value;
-            }
+            get{return cid;}
+            set{cid = value;}
         }
-
         public int Uid
         {
-            get
-            {
-                return uid;
-            }
-
-            set
-            {
-                uid = value;
-            }
+            get{return uid;}
+            set{uid = value;}
         }
-
-        public Contact()//(string name, string firstname, string email, int cid, int uid)
-        {
-            //this.name = name;
-            //this.firstname = firstname;
-            //this.email = email;
-            //this.cid = cid;
-            //this.uid = uid;
-        }
+#endregion
     }
 }

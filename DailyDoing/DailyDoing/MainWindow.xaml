@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="DailyDoing v1.0" Height="350" Width="600" ResizeMode="NoResize">
     <Grid>
-        <dragablz:TabablzControl x:Name="tabControl" HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="600" Margin="0,0,0,0">
+        <dragablz:TabablzControl x:Name="tabControl" HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="600" Margin="0,0,0,0" KeyDown="mainwindow_KeyDown">
             <dragablz:TabablzControl.InterTabController>
                 <dragablz:InterTabController />
             </dragablz:TabablzControl.InterTabController>
@@ -25,7 +25,7 @@
             </TabItem>
             <TabItem x:Name="tab_contacts" Header="CONTACTS">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
-                    <ListView Name="lBox_Kontakte" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Kontakte_SelectionChanged" Margin="0,0,0,-1">
+                    <ListView Name="lBox_Kontakte" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Kontakte_SelectionChanged" Margin="0,0,0,-1">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
@@ -34,9 +34,9 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <TextBox x:Name="txt_Name" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-                    <TextBox x:Name="txt_Firstname" materialDesign:HintAssist.Hint="Firstname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-                    <TextBox x:Name="txt_email" materialDesign:HintAssist.Hint="E-Mail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+                    <TextBox x:Name="txt_Name" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,5,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
+                    <TextBox x:Name="txt_Firstname" materialDesign:HintAssist.Hint="Firstname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,45,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
+                    <TextBox x:Name="txt_email" materialDesign:HintAssist.Hint="E-Mail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,85,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
                     <Button x:Name="btn_createContact" Content="Create Contact" HorizontalAlignment="Left" Margin="365,145,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click"/>
                     <Button x:Name="btn_deleteContact" Content="Delete Contact" HorizontalAlignment="Left" Margin="365,182,0,0" VerticalAlignment="Top" Width="130" Click="btn_deleteContact_Click" IsEnabled="False"/>
                     <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="365,219,0,0" VerticalAlignment="Top" Width="130" Click="btn_updateContact_Click" IsEnabled="False"/>

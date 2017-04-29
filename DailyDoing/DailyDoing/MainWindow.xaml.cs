@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace DailyDoing
@@ -48,7 +51,6 @@ namespace DailyDoing
         //List Box mit Übersicht der Kontakte befüllen
         private void fillContactsInListBox(DBService db, int userID)
         {
-            lBox_Kontakte.Items.Clear();
             tab_contacts.IsSelected = true;
             InformationService infoService = new InformationService();
             List<Contact> allcontacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring(), userID));
@@ -122,6 +124,7 @@ namespace DailyDoing
 
         }
         //Update nach SQL Verarbeitung
+        
         public void updateAllContactsBox()
         {
             int userID = db.getUserID(db.createconnectionstring(), username);
@@ -130,6 +133,14 @@ namespace DailyDoing
         public void btn_exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void mainwindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                lBox_Kontakte.SelectedIndex = -1;
+            }
         }
     }
 }
