@@ -270,13 +270,91 @@ namespace DailyDoing
 
         #region methods for lending requests
 
+        public List<string[]> getallLendings(MySqlConnection con, int uid)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = @"SELECT * 
+                                    FROM tbl_lendings_new 
+                                    WHERE uid='" + uid + "'";
+            MySqlDataReader Reader;
+            if (con.State.ToString() == "Open") { }
+            else { con.Open(); }
+            Reader = command.ExecuteReader();
+            List<string[]> lendings = new List<string[]>();
+
+            while (Reader.Read())
+            {
+                string row = "";
+                for (int i = 0; i < Reader.FieldCount; i++)
+                {
+                    row += Reader.GetValue(i).ToString() + ",";
+                }
+                String[] contactInfo = row.Split(',');
+                lendings.Add(contactInfo);
+            }
+            con.Close();
+            return lendings;
+        }
+
+        public List<string[]> getrecentLendings(MySqlConnection con, int uid)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = @"SELECT * 
+                                    FROM tbl_lendings_new 
+                                    WHERE uid='" + uid + "' AND get_back='no'";
+            MySqlDataReader Reader;
+            if (con.State.ToString() == "Open") { }
+            else { con.Open(); }
+            Reader = command.ExecuteReader();
+            List<string[]> lendings = new List<string[]>();
+
+            while (Reader.Read())
+            {
+                string row = "";
+                for (int i = 0; i < Reader.FieldCount; i++)
+                {
+                    row += Reader.GetValue(i).ToString() + ",";
+                }
+                String[] contactInfo = row.Split(',');
+                lendings.Add(contactInfo);
+            }
+            con.Close();
+            return lendings;
+        }
+        public List<string[]> getoldLendings(MySqlConnection con, int uid)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = @"SELECT * 
+                                    FROM tbl_lendings_new 
+                                    WHERE uid='" + uid + "' AND get_back='yes'";
+            MySqlDataReader Reader;
+            if (con.State.ToString() == "Open") { }
+            else { con.Open(); }
+            Reader = command.ExecuteReader();
+            List<string[]> lendings = new List<string[]>();
+
+            while (Reader.Read())
+            {
+                string row = "";
+                for (int i = 0; i < Reader.FieldCount; i++)
+                {
+                    row += Reader.GetValue(i).ToString() + ",";
+                }
+                String[] contactInfo = row.Split(',');
+                lendings.Add(contactInfo);
+            }
+            con.Close();
+            return lendings;
+        }
+
+
         // Create a Lending in the Database Table
         // Please give DateTime.Date
         public bool createLending(MySqlConnection con, int uid, int cid, string desc, DateTime date_lendback)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"INSERT INTO
-                                    tbl_lendings
+                                    tbl_lendings_new
                                     (uid, cid, desc, timestamp_lendback) 
                                     VALUES
                                     ('" + uid + "','" + cid + "','" + desc + "','" + date_lendback + "')";
@@ -301,7 +379,7 @@ namespace DailyDoing
         public bool updateLending(MySqlConnection con, int lid, int cid, string desc, DateTime date_lendback)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = @"UPDATE tbl_contacts 
+            command.CommandText = @"UPDATE tbl_lendings_new 
                                     SET cid='" + cid + "', desc='" + desc + "', timestamp_lendback='" + date_lendback +
                                     "' WHERE lid='" + lid + "'";
             MySqlDataReader Reader;
@@ -326,7 +404,7 @@ namespace DailyDoing
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"DELETE FROM 
-                                        tbl_lendings 
+                                        tbl_lendings_new 
                                         WHERE lid='" + lid + "'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
