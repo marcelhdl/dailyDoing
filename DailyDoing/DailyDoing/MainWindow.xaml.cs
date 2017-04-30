@@ -33,6 +33,8 @@ namespace DailyDoing
             {
                 MessageBox.Show("Successfully logged in!");
                 fillContactsInListBox(db, db.getUserID(db.createconnectionstring(), username));
+                fillLendingsInListBox(db, db.getUserID(db.createconnectionstring(), username));
+
             }
             else
             {
@@ -53,8 +55,15 @@ namespace DailyDoing
         {
             tab_contacts.IsSelected = true;
             InformationService infoService = new InformationService();
-            List<Contact> allcontacts = infoService.getInfoForListBox(db.getContacts(db.createconnectionstring(), userID));
+            List<Contact> allcontacts = infoService.contact_getInfoForListBox(db.getContacts(db.createconnectionstring(), userID));
             lBox_Kontakte.ItemsSource = allcontacts;
+
+        }
+        private void fillLendingsInListBox(DBService db, int userID)
+        {
+            InformationService infoService = new InformationService();
+            List<Lending> alllendings = infoService.lending_getInfoForListBox(db.getallLendings(db.createconnectionstring(), userID));
+            lb_lendings.ItemsSource = alllendings;
 
         }
         //Holen der Details eines Kontakts
@@ -82,7 +91,7 @@ namespace DailyDoing
             //int cid = Convert.ToInt32(lBox_Kontakte.SelectedItem.ToString().Substring(0, 1));
             InformationService infoService = new InformationService();
             
-            return infoService.getDetails(db.getDetailsFromContacts(db.createconnectionstring(), cid));
+            return infoService.contact_getDetails(db.getDetailsFromContacts(db.createconnectionstring(), cid));
         }
         //Einsteigspunkt für das Erstellen eines Neuen Kontakts
         private void btn_createContact_Click(object sender, RoutedEventArgs e)

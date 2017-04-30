@@ -72,6 +72,7 @@
     <Compile Include="CreateContact.xaml.cs">
       <DependentUpon>CreateContact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Lending.cs" />
     <Compile Include="LoginController.cs" />
     <Compile Include="UpdateContact.xaml.cs">
       <DependentUpon>UpdateContact.xaml</DependentUpon>

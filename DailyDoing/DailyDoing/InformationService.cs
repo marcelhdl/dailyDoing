@@ -8,7 +8,7 @@ namespace DailyDoing
 
         public InformationService(){}
 
-        public List<Contact> getInfoForListBox(List<string[]> contactsPerUser)
+        public List<Contact> contact_getInfoForListBox(List<string[]> contactsPerUser)
         {
             List<Contact> contacts = new List<Contact>();
             foreach (string[] contactInfo in contactsPerUser)
@@ -17,7 +17,7 @@ namespace DailyDoing
             }
             return contacts;
         }
-        public List<string> getDetails(string[] contactInfo)
+        public List<string> contact_getDetails(string[] contactInfo)
         {
             List<string> details = new List<string>();
             foreach (string info in contactInfo)
@@ -25,8 +25,17 @@ namespace DailyDoing
                 details.Add(info);
             }
             return details;
-
         }
+        public List<Lending> lending_getInfoForListBox(List<string[]> lendingsPerUser)
+        {
+            List<Lending> lendings = new List<Lending>();
+            foreach (string[] lendingInfo in lendingsPerUser)
+            {
+                lendings.Add(new Lending() { Desc = lendingInfo[3], Timestamp_lend = lendingInfo[6]});
+            }
+            return lendings;
+        }
+
 
     }
 }
