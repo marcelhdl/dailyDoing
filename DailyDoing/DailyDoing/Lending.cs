@@ -11,6 +11,7 @@ namespace DailyDoing
         int lid;
         int cid;
         int uid;
+        string title;
         string desc;
         string category;
         string priority;
@@ -29,5 +30,6 @@ namespace DailyDoing
         public string Timestamp_lend { get => timestamp_lend; set => timestamp_lend = value; }
         public string Timestamp_lendback { get => timestamp_lendback; set => timestamp_lendback = value; }
         public bool Getback { get => getback; set => getback = value; }
+        public string Title { get => title; set => title = value; }
     }
 }

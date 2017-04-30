@@ -346,11 +346,36 @@ namespace DailyDoing
             con.Close();
             return lendings;
         }
+        public string[] getDetailsFromLending(MySqlConnection con, int lid)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = @"SELECT * 
+                                    FROM tbl_lendings_new 
+                                    WHERE lid='" + lid + "'";
+            MySqlDataReader Reader;
+            if (con.State.ToString() == "Open") { }
+            else { con.Open(); }
+            Reader = command.ExecuteReader();
+            string[] lendinginfo = new string[6];
 
+            while (Reader.Read())
+            {
+                string row = "";
+                for (int i = 0; i < Reader.FieldCount; i++)
+                {
+                    row += Reader.GetValue(i).ToString() + ",";
+                }
+                lendinginfo = row.Split(',');
+                con.Close();
+                return lendinginfo;
+            }
+            con.Close();
+            return lendinginfo;
+        }
 
         // Create a Lending in the Database Table
         // Please give DateTime.Date
-        public bool createLending(MySqlConnection con, int uid, int cid, string desc, DateTime date_lendback)
+        public bool createLending(MySqlConnection con, int uid, int cid, string title, string desc, string category, string priority, string date_lendback)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"INSERT INTO
@@ -376,11 +401,16 @@ namespace DailyDoing
         }
 
         //Update a specific landing.
-        public bool updateLending(MySqlConnection con, int lid, int cid, string desc, DateTime date_lendback)
+        public bool updateLending(MySqlConnection con, int lid, int cid, string title, string desc, string category, string priority, string date_lendback,string getback)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"UPDATE tbl_lendings_new 
-                                    SET cid='" + cid + "', desc='" + desc + "', timestamp_lendback='" + date_lendback +
+                                    SET cid='" + cid + "'," +
+                                    " title='"+ title + "'," +
+                                    " desc='" + desc + "'," +
+                                    " category='"+ category + "'," +
+                                    " priority='" + priority + "'," +
+                                    " timestamp_lendback='" + date_lendback +
                                     "' WHERE lid='" + lid + "'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }

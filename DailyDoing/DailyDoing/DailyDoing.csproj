@@ -72,15 +72,25 @@
     <Compile Include="CreateContact.xaml.cs">
       <DependentUpon>CreateContact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreateLending.xaml.cs">
+      <DependentUpon>CreateLending.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Lending.cs" />
     <Compile Include="LoginController.cs" />
     <Compile Include="UpdateContact.xaml.cs">
       <DependentUpon>UpdateContact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateLending.xaml.cs">
+      <DependentUpon>UpdateLending.xaml</DependentUpon>
+    </Compile>
     <Page Include="CreateContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CreateLending.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -97,6 +107,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UpdateContact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateLending.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

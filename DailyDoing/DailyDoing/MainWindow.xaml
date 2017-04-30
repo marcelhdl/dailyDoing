@@ -34,9 +34,9 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <TextBox x:Name="txt_Name" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,5,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
-                    <TextBox x:Name="txt_Firstname" materialDesign:HintAssist.Hint="Firstname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,45,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
-                    <TextBox x:Name="txt_email" materialDesign:HintAssist.Hint="E-Mail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,85,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
+                    <TextBox IsReadOnly="true" x:Name="txt_Name" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,0,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
+                    <TextBox IsReadOnly="true" x:Name="txt_Firstname" materialDesign:HintAssist.Hint="Firstname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,40,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
+                    <TextBox IsReadOnly="true" x:Name="txt_email" materialDesign:HintAssist.Hint="E-Mail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,80,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
                     <Button x:Name="btn_createContact" Content="Create Contact" HorizontalAlignment="Left" Margin="365,145,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click"/>
                     <Button x:Name="btn_deleteContact" Content="Delete Contact" HorizontalAlignment="Left" Margin="365,182,0,0" VerticalAlignment="Top" Width="130" Click="btn_deleteContact_Click" IsEnabled="False"/>
                     <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="365,219,0,0" VerticalAlignment="Top" Width="130" Click="btn_updateContact_Click" IsEnabled="False"/>
@@ -45,20 +45,31 @@
             <TabItem x:Name="tab_lendings" Header="LENDINGS">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="200" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <ListView Grid.Column="0" Name="lb_lendings" >
+                    <ListView Grid.Column="0" Name="lb_lendings" SelectionChanged="lb_lendings_SelectionChanged" >
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Desc}"/>
+                                <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}"/>
                                 <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Timestamp_lend}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
 
-                    <Button Grid.Column="1">Button 2</Button>
+                    <TextBox IsReadOnly="true" Grid.Column="1" x:Name="txt_Name_Lending" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="5,0,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="150"/>
+                    <TextBox IsReadOnly="true" Grid.Column="1" x:Name="txt_Firstname_Lending" materialDesign:HintAssist.Hint="Firstname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="5,40,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="150"/>
+                    <TextBox IsReadOnly="true" Grid.Column="1" x:Name="txt_Desc_lending" materialDesign:HintAssist.Hint="Description" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="5,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                    <TextBox IsReadOnly="true" Grid.Column="1" x:Name="txt_Category_lending" materialDesign:HintAssist.Hint="Category" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="5,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                    <TextBox IsReadOnly="true" Grid.Column="1" x:Name="txt_lendtime_Lending" materialDesign:HintAssist.Hint="LendTime" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="160,0,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="150"/>
+                    <TextBox IsReadOnly="true" Grid.Column="1" x:Name="txt_lendback_Lending" materialDesign:HintAssist.Hint="LendTime Back" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="160,40,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="150"/>
+                    <TextBox IsReadOnly="true" Grid.Column="1" x:Name="txt_getback_lending" materialDesign:HintAssist.Hint="Get Back?" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="160,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                    <TextBox IsReadOnly="true" Grid.Column="1" x:Name="txt_priority_lending" materialDesign:HintAssist.Hint="Priority" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="160,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                    <Button Grid.Column="1" x:Name="btn_createLending" Content="Create Lending" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Width="104" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click" FontSize="10"/>
+                    <Button Grid.Column="1" x:Name="btn_deleteLending" Content="Delete Lending" HorizontalAlignment="Left" Margin="120,235,0,0" VerticalAlignment="Top" Width="104" Click="btn_deleteContact_Click" IsEnabled="False" FontSize="10"/>
+                    <Button Grid.Column="1" x:Name="btn_updateLending" Content="Update Lending" HorizontalAlignment="Left" Margin="230,235,0,0" VerticalAlignment="Top" Width="104" Click="btn_updateContact_Click" IsEnabled="False" FontSize="10"/>
+
 
                 </Grid>
             </TabItem>

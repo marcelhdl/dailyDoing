@@ -67,7 +67,7 @@ namespace DailyDoing
 
         }
         //Holen der Details eines Kontakts
-        private void getDetails()
+        private void contact_getDetails()
         {
             if (lBox_Kontakte.SelectedItem != null)
             {
@@ -78,20 +78,38 @@ namespace DailyDoing
                 txt_email.Text = allInfo[4];
             }
         }
+        private void lending_getDetails()
+        {
+            if (lb_lendings.SelectedItem != null)
+            {
+                List<string> allInfo = searchInfoForSelectedLending();
+
+                txt_Desc_lending.Text = allInfo[4];
+                txt_Firstname_Lending.Text = "needjoin";
+                txt_Name_Lending.Text = "needjoin";
+                txt_lendback_Lending.Text = allInfo[8];
+                txt_lendtime_Lending.Text = allInfo[7];
+                txt_getback_lending.Text = allInfo[9];
+                txt_Category_lending.Text = allInfo[5];
+                txt_priority_lending.Text = allInfo[6];
+            }
+        }
 
         //Suchen der Details eines Kontakts
         private List<string> searchInfoForSelectedContact()
         {
-            //DataRowView d1 = lBox_Kontakte.SelectedItem as DataRowView;
-            //string first = d1["cid"].ToString();
-
             Contact contact = (Contact)lBox_Kontakte.SelectedItem;
             int cid = contact.Cid;
-
-            //int cid = Convert.ToInt32(lBox_Kontakte.SelectedItem.ToString().Substring(0, 1));
             InformationService infoService = new InformationService();
-            
             return infoService.contact_getDetails(db.getDetailsFromContacts(db.createconnectionstring(), cid));
+        }
+        private List<string> searchInfoForSelectedLending()
+        {
+
+            Lending lending = (Lending)lb_lendings.SelectedItem;
+            int lid = lending.Lid;
+            InformationService infoService = new InformationService();
+            return infoService.lending_getDetails(db.getDetailsFromLending(db.createconnectionstring(), lid));
         }
         //Einsteigspunkt für das Erstellen eines Neuen Kontakts
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
@@ -129,15 +147,39 @@ namespace DailyDoing
                 txt_email.Clear();
                 return;
             }
-            getDetails();
+            contact_getDetails();
 
         }
+        private void lb_lendings_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btn_deleteLending.IsEnabled = (lb_lendings.SelectedItem != null);
+            btn_updateLending.IsEnabled = (lb_lendings.SelectedItem != null);
+            if (lb_lendings.SelectedItem == null)
+            {
+                txt_Desc_lending.Clear();
+                txt_Firstname_Lending.Clear();
+                txt_Name_Lending.Clear();
+                txt_lendback_Lending.Clear();
+                txt_lendtime_Lending.Clear();
+                txt_getback_lending.Clear();
+                txt_Category_lending.Clear();
+                txt_priority_lending.Clear();
+                return;
+            }
+            lending_getDetails();
+        }
+
         //Update nach SQL Verarbeitung
-        
+
         public void updateAllContactsBox()
         {
             int userID = db.getUserID(db.createconnectionstring(), username);
             fillContactsInListBox(db, userID);
+        }
+        public void updateAllLendingsBox()
+        {
+            int userID = db.getUserID(db.createconnectionstring(), username);
+            fillLendingsInListBox(db, userID);
         }
         public void btn_exit_Click(object sender, RoutedEventArgs e)
         {
@@ -149,7 +191,10 @@ namespace DailyDoing
             if (e.Key == Key.Escape)
             {
                 lBox_Kontakte.SelectedIndex = -1;
+                lb_lendings.SelectedIndex = -1;
             }
         }
+
+
     }
 }
