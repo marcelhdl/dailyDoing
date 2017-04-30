@@ -84,9 +84,11 @@ namespace DailyDoing
             {
                 List<string> allInfo = searchInfoForSelectedLending();
 
+                InformationService infoService = new InformationService();
+                List<string> contactinfo = infoService.contact_getDetails(db.getDetailsFromContacts(db.createconnectionstring(), Convert.ToInt32(allInfo[2])));
                 txt_Desc_lending.Text = allInfo[4];
-                txt_Firstname_Lending.Text = "needjoin";
-                txt_Name_Lending.Text = "needjoin";
+                txt_Firstname_Lending.Text = contactinfo[2];
+                txt_Name_Lending.Text = contactinfo[3];
                 txt_lendback_Lending.Text = allInfo[8];
                 txt_lendtime_Lending.Text = allInfo[7];
                 txt_getback_lending.Text = allInfo[9];
