@@ -11,36 +11,160 @@ namespace DailyDoing
         string name;
         string firstname;
         string email;
+        string street;
+        int houseNumber;
+        int postCode;
+        string city;
+        string phoneNumber;
+        string mobileNumber;
         int cid;
         int uid;
-        public Contact(){}
 
- #region getter/setter
+        #region getter/setter
         public string Name
         {
-            get {return name;}
-            set{name = value;}
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+            }
         }
+
         public string Firstname
         {
-            get{return firstname;}
-            set{firstname = value;}
+            get
+            {
+                return firstname;
+            }
+
+            set
+            {
+                firstname = value;
+            }
         }
+
         public string Email
         {
-            get{return email;}
-            set{email = value;}
+            get
+            {
+                return email;
+            }
+
+            set
+            {
+                email = value;
+            }
         }
+
+        public string Street
+        {
+            get
+            {
+                return street;
+            }
+
+            set
+            {
+                street = value;
+            }
+        }
+
+        public int HouseNumber
+        {
+            get
+            {
+                return houseNumber;
+            }
+
+            set
+            {
+                houseNumber = value;
+            }
+        }
+
+        public int PostCode
+        {
+            get
+            {
+                return postCode;
+            }
+
+            set
+            {
+                postCode = value;
+            }
+        }
+
+        public string City
+        {
+            get
+            {
+                return city;
+            }
+
+            set
+            {
+                city = value;
+            }
+        }
+
+        public string PhoneNumber
+        {
+            get
+            {
+                return phoneNumber;
+            }
+
+            set
+            {
+                phoneNumber = value;
+            }
+        }
+
+        public string MobileNumber
+        {
+            get
+            {
+                return mobileNumber;
+            }
+
+            set
+            {
+                mobileNumber = value;
+            }
+        }
+
         public int Cid
         {
-            get{return cid;}
-            set{cid = value;}
+            get
+            {
+                return cid;
+            }
+
+            set
+            {
+                cid = value;
+            }
         }
+
         public int Uid
         {
-            get{return uid;}
-            set{uid = value;}
+            get
+            {
+                return uid;
+            }
+
+            set
+            {
+                uid = value;
+            }
         }
+
+        public Contact(){}
 #endregion
     }
 }

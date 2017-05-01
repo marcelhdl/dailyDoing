@@ -34,7 +34,13 @@ namespace DailyDoing
             string firstname = txt_Firstname.Text;
             string name = txt_Name.Text;
             string email = txt_email.Text;
-            db.createContact(db.createconnectionstring(),userID, name, firstname, email);
+            string street = txt_street.Text;
+            int houseno = Convert.ToInt32(txt_House_No.Text);
+            int postCode = Convert.ToInt32(txt_postcode.Text);
+            string city = txt_city.Text;
+            string tel = txt_phonenumber.Text;
+            string mobile = txt_mobilePhone.Text;
+            db.createContact(db.createconnectionstring(),userID, name, firstname, email, street,houseno,postCode,city,tel,mobile);
             main.updateAllContactsBox();
             Close();
             

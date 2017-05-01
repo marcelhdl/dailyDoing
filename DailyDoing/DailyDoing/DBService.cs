@@ -201,7 +201,7 @@ namespace DailyDoing
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"INSERT INTO
-                                    tbl_contacts_new (uid, name,vorname,mail,adress,housenr.plz,city,tel,mobile)
+                                    tbl_contacts_new (uid, name,vorname,mail,adress,housenr,plz,city,tel,mobile)
                                     VALUES ('" 
                                     + uid + "','" 
                                     + name + "','" 

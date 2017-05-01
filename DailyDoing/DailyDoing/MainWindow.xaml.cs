@@ -72,6 +72,7 @@ namespace DailyDoing
                 txt_Name.Clear();
                 txt_Firstname.Clear();
                 txt_email.Clear();
+                
                 return;
             }
             contact_getDetails((Contact)lBox_Kontakte.SelectedItem);
@@ -94,9 +95,10 @@ namespace DailyDoing
         {
             if (lBox_Kontakte.SelectedItem != null)
             {
-                txt_Name.Text = contact.Name;
-                txt_Firstname.Text = contact.Firstname;
-                txt_email.Text = contact.Email;
+                
+                //txt_Name.Text = contact.Name;
+                //txt_Firstname.Text = contact.Firstname;
+                //txt_email.Text = contact.Email;
             }
         }
         //List Box mit Übersicht der Kontakte befüllen

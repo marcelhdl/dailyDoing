@@ -3,18 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:DailyDoing"
         mc:Ignorable="d"
-        Title="UpdateContact" Height="300" Width="300" ResizeMode="NoResize">
+        Title="UpdateContact" Height="350" Width="600" ResizeMode="NoResize">
     <Grid>
         <Grid>
-            <Label x:Name="lbl_name" Content="Name" HorizontalAlignment="Left" Margin="42,25,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="lbl_firstname" Content="Firstname" HorizontalAlignment="Left" Margin="42,56,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="lbl_email" Content="E-Mail" HorizontalAlignment="Left" Margin="42,95,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="txt_Name" HorizontalAlignment="Left" Height="23" Margin="124,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
-            <TextBox x:Name="txt_Firstname" HorizontalAlignment="Left" Height="23" Margin="124,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
-            <TextBox x:Name="txt_email" HorizontalAlignment="Left" Height="23" Margin="124,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
-            <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="80,200,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.371,0.386" Click="btn_createUpdate_Click"/>
+            <TextBox x:Name="txt_Name" HorizontalAlignment="Left" Height="50" Margin="40,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"  materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <TextBox x:Name="txt_Firstname" HorizontalAlignment="Left" Height="50" Margin="224,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" materialDesign:HintAssist.Hint="Firstname" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <TextBox x:Name="txt_email" HorizontalAlignment="Left" Height="50" Margin="40,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" materialDesign:HintAssist.Hint="E-Mail" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <TextBox x:Name="txt_street" HorizontalAlignment="Left" Height="50" Margin="40,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" materialDesign:HintAssist.Hint="Street" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <TextBox x:Name="txt_House_No" HorizontalAlignment="Left" Height="50" Margin="224,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" materialDesign:HintAssist.Hint="House No" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <TextBox x:Name="txt_postcode" HorizontalAlignment="Left" Height="50" Margin="422,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" materialDesign:HintAssist.Hint="Postcode" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <TextBox x:Name="txt_city" HorizontalAlignment="Left" Height="50" Margin="422,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" materialDesign:HintAssist.Hint="City" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <TextBox x:Name="txt_phonenumber" HorizontalAlignment="Left" Height="50" Margin="226,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" materialDesign:HintAssist.Hint="Phonenumber" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <TextBox x:Name="txt_mobilePhone" HorizontalAlignment="Left" Height="50" Margin="422,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" materialDesign:HintAssist.Hint="MobilPhone" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="224,258,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.371,0.386" Click="btn_createUpdate_Click"/>
 
         </Grid>
 
