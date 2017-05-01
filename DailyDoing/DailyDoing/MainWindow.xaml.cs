@@ -95,10 +95,7 @@ namespace DailyDoing
         {
             if (lBox_Kontakte.SelectedItem != null)
             {
-                
-                //txt_Name.Text = contact.Name;
-                //txt_Firstname.Text = contact.Firstname;
-                //txt_email.Text = contact.Email;
+                DetailView.DataContext = contact;
             }
         }
         //List Box mit Übersicht der Kontakte befüllen
