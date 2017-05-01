@@ -42,14 +42,6 @@ namespace DailyDoing
             }
 
         }
-        //Login prüfen mit EnterTaste
-        private void txt_password_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                btn_login_Click(sender, e);
-            }
-        }
         //List Box mit Übersicht der Kontakte befüllen
         private void fillContactsInListBox(DBService db, int userID)
         {
@@ -67,15 +59,13 @@ namespace DailyDoing
 
         }
         //Holen der Details eines Kontakts
-        private void contact_getDetails()
+        private void contact_getDetails(Contact contact)
         {
             if (lBox_Kontakte.SelectedItem != null)
             {
-                List<string> allInfo = searchInfoForSelectedContact();
-
-                txt_Name.Text = allInfo[2];
-                txt_Firstname.Text = allInfo[3];
-                txt_email.Text = allInfo[4];
+                txt_Name.Text = contact.Name;
+                txt_Firstname.Text = contact.Firstname;
+                txt_email.Text = contact.Email;
             }
         }
         private void lending_getDetails()
@@ -149,7 +139,7 @@ namespace DailyDoing
                 txt_email.Clear();
                 return;
             }
-            contact_getDetails();
+            contact_getDetails((Contact)lBox_Kontakte.SelectedItem);
 
         }
         private void lb_lendings_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -190,10 +180,22 @@ namespace DailyDoing
 
         private void mainwindow_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Escape)
+            //Disslected Contact/Lending with ESC
+            if (tab_contacts.IsSelected || tab_lendings.IsSelected)
             {
-                lBox_Kontakte.SelectedIndex = -1;
-                lb_lendings.SelectedIndex = -1;
+                if (e.Key == Key.Escape)
+                {
+                    lBox_Kontakte.SelectedIndex = -1;
+                    lb_lendings.SelectedIndex = -1;
+                }
+            }
+            //Login prüfen mit ENTER
+            if (tab_login.IsSelected)
+            {
+                if (e.Key == Key.Enter)
+                {
+                    btn_login_Click(sender, e);
+                }
             }
         }
 
