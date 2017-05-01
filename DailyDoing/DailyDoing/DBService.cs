@@ -112,36 +112,6 @@ namespace DailyDoing
         }
         #endregion
 
-        #region methods for contacts/user requests
-
-        //Request all contacts for an specific user.
-        public List<string[]> getContacts(MySqlConnection con, int uid)
-        {
-            MySqlCommand command = con.CreateCommand();
-            command.CommandText = @"SELECT * 
-                                    FROM tbl_contacts 
-                                    WHERE uid='" + uid + "'";
-            MySqlDataReader Reader;
-            if (con.State.ToString() == "Open") { }
-            else { con.Open(); }
-            Reader = command.ExecuteReader();
-            List<string[]> contacts = new List<string[]>();
-
-            while (Reader.Read())
-            {
-                string row = "";
-                for (int i = 0; i < Reader.FieldCount; i++)
-                {
-                    row += Reader.GetValue(i).ToString() + ",";
-                }
-                String[] contactInfo = row.Split(',');
-                contacts.Add(contactInfo);
-            }
-            con.Close();
-            return contacts;
-        }
-
-        //Request the userID of a specific user.
         public int getUserID(MySqlConnection con, string username)
         {
             MySqlCommand command = con.CreateCommand();
@@ -166,12 +136,44 @@ namespace DailyDoing
             return -1;
         }
 
+        #region methods for contacts/user requests
+
+        //Request all contacts for an specific user.
+        public List<string[]> getContacts(MySqlConnection con, int uid)
+        {
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = @"SELECT * 
+                                    FROM tbl_contacts_new 
+                                    WHERE uid='" + uid + "'";
+            MySqlDataReader Reader;
+            if (con.State.ToString() == "Open") { }
+            else { con.Open(); }
+            Reader = command.ExecuteReader();
+            List<string[]> contacts = new List<string[]>();
+
+            while (Reader.Read())
+            {
+                string row = "";
+                for (int i = 0; i < Reader.FieldCount; i++)
+                {
+                    row += Reader.GetValue(i).ToString() + ",";
+                }
+                String[] contactInfo = row.Split(',');
+                contacts.Add(contactInfo);
+            }
+            con.Close();
+            return contacts;
+        }
+
+        //Request the userID of a specific user.
+
+
         //Request the details of a specific contact.
         public string[] getDetailsFromContacts(MySqlConnection con, int cid)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"SELECT * 
-                                    FROM tbl_contacts 
+                                    FROM tbl_contacts_new 
                                     WHERE cid='" + cid + "'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
@@ -195,12 +197,22 @@ namespace DailyDoing
         }
 
         //Creates a contact for a specific user.
-        public bool createContact(MySqlConnection con, int uid, string name, string vorname, string mail)
+        public bool createContact(MySqlConnection con, int uid, string name, string vorname, string mail, string adress, int housenr, int plz, string city, string tel, string mobile)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"INSERT INTO
-                                    tbl_contacts (uid, name,vorname,mail)
-                                    VALUES ('" + uid + "','" + name + "','" + vorname + "','" + mail + "')";
+                                    tbl_contacts_new (uid, name,vorname,mail,adress,housenr.plz,city,tel,mobile)
+                                    VALUES ('" 
+                                    + uid + "','" 
+                                    + name + "','" 
+                                    + vorname + "','" 
+                                    + mail + "','" 
+                                    + adress + "','" 
+                                    + housenr + "','" 
+                                    + plz + "','" 
+                                    + city + "','" 
+                                    + tel + "','" 
+                                    + mobile + "')";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
             else { con.Open(); }
@@ -219,11 +231,20 @@ namespace DailyDoing
         }
 
         //Updates an existing contact.
-        public bool updateContact(MySqlConnection con, int cid, int uid, string name, string vorname, string mail)
+        public bool updateContact(MySqlConnection con, int cid, int uid, string name, string vorname, string mail,string adress, int housenr, int plz, string city, string tel, string mobile)
         {
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = @"UPDATE tbl_contacts 
-                                    SET uid='" + uid + "', name='" + name + "', vorname='" + vorname + "', mail='" + mail +
+            command.CommandText = @"UPDATE tbl_contacts_new 
+                                    SET uid='" + uid +
+                                    "', name='" + name +
+                                    "', vorname='" + vorname +
+                                    "', mail='" + mail +
+                                    "', adress='" + adress +
+                                    "', housenr='" + housenr +
+                                    "', plz='" + plz +
+                                    "', city='" + city +
+                                    "', tel='" + tel +
+                                    "', mobile='" + mobile +
                                     "' WHERE cid='" + cid + "'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
@@ -247,7 +268,7 @@ namespace DailyDoing
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"DELETE FROM 
-                                        tbl_contacts 
+                                        tbl_contacts_new 
                                         WHERE cid='" + cid + "'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
@@ -301,7 +322,7 @@ namespace DailyDoing
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"SELECT * 
                                     FROM tbl_lendings_new 
-                                    WHERE uid='" + uid + "' AND get_back='no'";
+                                    WHERE uid='" + uid + "' AND get_back='faöse'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
             else { con.Open(); }
@@ -326,7 +347,7 @@ namespace DailyDoing
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"SELECT * 
                                     FROM tbl_lendings_new 
-                                    WHERE uid='" + uid + "' AND get_back='yes'";
+                                    WHERE uid='" + uid + "' AND get_back='true'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
             else { con.Open(); }
