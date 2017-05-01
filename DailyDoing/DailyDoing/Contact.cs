@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DailyDoing
 {
-    class Contact
+    public class Contact
     {
         string name;
         string firstname;

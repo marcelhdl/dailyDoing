@@ -18,7 +18,7 @@
                     <materialDesign:PackIcon Margin="94,60,0,0" Kind="Account" Height="37" Width="36"/>
                     <materialDesign:PackIcon Margin="94,118,0,0" Kind="Key" Height="36" Width="36"/>
                     <TextBox x:Name="txt_username" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  HorizontalAlignment="Left" Height="50" Margin="148,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" ToolTip="Insert Username" KeyboardNavigation.TabIndex="0"/>
-                    <PasswordBox x:Name="txt_password" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Left" Margin="148,104,0,0" VerticalAlignment="Top" Width="232" Height="50" KeyDown="txt_password_KeyDown" KeyboardNavigation.TabIndex="1"/>
+                    <PasswordBox x:Name="txt_password" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Left" Margin="148,104,0,0" VerticalAlignment="Top" Width="232" Height="50" KeyboardNavigation.TabIndex="1"/>
                     <Button x:Name="btn_login" Content="Login" HorizontalAlignment="Left" Margin="63,210,0,0" VerticalAlignment="Top" Width="75" Click="btn_login_Click" KeyboardNavigation.TabIndex="2"/>
                     <Button x:Name="btn_exit" Content="Exit" HorizontalAlignment="Left" Margin="377,210,0,0" VerticalAlignment="Top" Width="75"  Click="btn_exit_Click" KeyboardNavigation.TabIndex="3"/>
                 </Grid>
@@ -37,9 +37,9 @@
                     <TextBox IsReadOnly="true" x:Name="txt_Name" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,0,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
                     <TextBox IsReadOnly="true" x:Name="txt_Firstname" materialDesign:HintAssist.Hint="Firstname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,40,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
                     <TextBox IsReadOnly="true" x:Name="txt_email" materialDesign:HintAssist.Hint="E-Mail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="50" Margin="325,80,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200"/>
-                    <Button x:Name="btn_createContact" Content="Create Contact" HorizontalAlignment="Left" Margin="365,145,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click"/>
-                    <Button x:Name="btn_deleteContact" Content="Delete Contact" HorizontalAlignment="Left" Margin="365,182,0,0" VerticalAlignment="Top" Width="130" Click="btn_deleteContact_Click" IsEnabled="False"/>
-                    <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="365,219,0,0" VerticalAlignment="Top" Width="130" Click="btn_updateContact_Click" IsEnabled="False"/>
+                    <Button x:Name="btn_createContact" Content="Create Contact" HorizontalAlignment="Left" Margin="370,145,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click"/>
+                    <Button x:Name="btn_deleteContact" Content="Delete Contact" HorizontalAlignment="Left" Margin="370,182,0,0" VerticalAlignment="Top" Width="130" Click="btn_deleteContact_Click" IsEnabled="False"/>
+                    <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="370,219,0,0" VerticalAlignment="Top" Width="130" Click="btn_updateContact_Click" IsEnabled="False"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tab_lendings" Header="LENDINGS">

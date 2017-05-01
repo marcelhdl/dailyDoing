@@ -19,30 +19,22 @@ namespace DailyDoing
     /// </summary>
     public partial class UpdateContact : Window
     {
-        string firstname = String.Empty;
-        string name = String.Empty;
-        string email = String.Empty;
+        Contact contact;
         DBService db = new DBService();
-        int userID;
-        int contactID;
         MainWindow main;
-        public UpdateContact(string firstname, string name, string email, int userID, int contactID, MainWindow main)
+        public UpdateContact(Contact contact, MainWindow main)
         {
-            this.firstname = firstname;
-            this.name = name;
-            this.email = email;
-            this.userID = userID;
-            this.contactID = contactID;
+            this.contact = contact;
             InitializeComponent();
-            txt_Firstname.Text = firstname;
-            txt_Name.Text = name;
-            txt_email.Text = email;
+            txt_Firstname.Text = contact.Firstname;
+            txt_Name.Text = contact.Name;
+            txt_email.Text = contact.Email;
             this.main = main;
         }
         //Informationen aus Textboxen nehmen und Kontakt updaten
         private void btn_createUpdate_Click(object sender, RoutedEventArgs e)
         {
-            db.updateContact(db.createconnectionstring(), contactID, userID, txt_Name.Text, txt_Firstname.Text, txt_email.Text);
+            db.updateContact(db.createconnectionstring(), contact.Cid, contact.Uid, txt_Name.Text, txt_Firstname.Text, txt_email.Text);
             main.updateAllContactsBox();
             Close();
         }
