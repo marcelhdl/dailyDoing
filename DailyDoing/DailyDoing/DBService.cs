@@ -322,11 +322,8 @@ namespace DailyDoing
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"SELECT * 
                                     FROM tbl_lendings_new 
-<<<<<<< HEAD
-                                    WHERE uid='" + uid + "' AND get_back='faöse'";
-=======
                                     WHERE uid='" + uid + "' AND get_back='false'";
->>>>>>> 4a5f1d9140b01e0b35ee7bf190ffe4a6377e801a
+
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
             else { con.Open(); }
