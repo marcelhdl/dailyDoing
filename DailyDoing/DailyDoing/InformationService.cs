@@ -5,7 +5,7 @@ namespace DailyDoing
 {
     class InformationService
     {
-
+        
         public InformationService(){}
 
         public List<Contact> contact_getInfoForListBox(List<string[]> contactsPerUser)

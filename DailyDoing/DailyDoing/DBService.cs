@@ -301,7 +301,7 @@ namespace DailyDoing
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"SELECT * 
                                     FROM tbl_lendings_new 
-                                    WHERE uid='" + uid + "' AND get_back='no'";
+                                    WHERE uid='" + uid + "' AND get_back='false'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
             else { con.Open(); }
@@ -326,7 +326,7 @@ namespace DailyDoing
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"SELECT * 
                                     FROM tbl_lendings_new 
-                                    WHERE uid='" + uid + "' AND get_back='yes'";
+                                    WHERE uid='" + uid + "' AND get_back='true'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
             else { con.Open(); }

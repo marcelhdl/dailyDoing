@@ -18,6 +18,7 @@ namespace DailyDoing
         string password = String.Empty;
         DBService db = new DBService();
         LoginController loginController;
+        Contact contact;
 
         public MainWindow()
         {
@@ -34,7 +35,6 @@ namespace DailyDoing
                 MessageBox.Show("Successfully logged in!");
                 fillContactsInListBox(db, db.getUserID(db.createconnectionstring(), username));
                 fillLendingsInListBox(db, db.getUserID(db.createconnectionstring(), username));
-
             }
             else
             {
@@ -42,20 +42,51 @@ namespace DailyDoing
             }
 
         }
-        //List Box mit Übersicht der Kontakte befüllen
+        private void mainwindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Disslected Contact/Lending with ESC
+            if (tab_contacts.IsSelected || tab_lendings.IsSelected)
+            {
+                if (e.Key == Key.Escape)
+                {
+                    lBox_Kontakte.SelectedIndex = -1;
+                    lb_lendings.SelectedIndex = -1;
+                }
+            }
+            //Login prüfen mit ENTER
+            if (tab_login.IsSelected)
+            {
+                if (e.Key == Key.Enter)
+                {
+                    btn_login_Click(sender, e);
+                }
+            }
+        }
+        //Prüfen welcher Button aktiv sein soll und aktualisieren der Details bei Änderung der Auswahl
+        private void lBox_Kontakte_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            btn_deleteContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
+            btn_updateContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
+            if (lBox_Kontakte.SelectedItem == null)
+            {
+                txt_Name.Clear();
+                txt_Firstname.Clear();
+                txt_email.Clear();
+                return;
+            }
+            contact_getDetails((Contact)lBox_Kontakte.SelectedItem);
+
+        }
+        public void btn_exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
         private void fillContactsInListBox(DBService db, int userID)
         {
             tab_contacts.IsSelected = true;
             InformationService infoService = new InformationService();
             List<Contact> allcontacts = infoService.contact_getInfoForListBox(db.getContacts(db.createconnectionstring(), userID));
             lBox_Kontakte.ItemsSource = allcontacts;
-
-        }
-        private void fillLendingsInListBox(DBService db, int userID)
-        {
-            InformationService infoService = new InformationService();
-            List<Lending> alllendings = infoService.lending_getInfoForListBox(db.getallLendings(db.createconnectionstring(), userID));
-            lb_lendings.ItemsSource = alllendings;
 
         }
         //Holen der Details eines Kontakts
@@ -68,6 +99,15 @@ namespace DailyDoing
                 txt_email.Text = contact.Email;
             }
         }
+        //List Box mit Übersicht der Kontakte befüllen
+        private void fillLendingsInListBox(DBService db, int userID)
+        {
+            InformationService infoService = new InformationService();
+            List<Lending> alllendings = infoService.lending_getInfoForListBox(db.getallLendings(db.createconnectionstring(), userID));
+            lb_lendings.ItemsSource = alllendings;
+
+        }
+        
         private void lending_getDetails()
         {
             if (lb_lendings.SelectedItem != null)
@@ -87,14 +127,7 @@ namespace DailyDoing
             }
         }
 
-        //Suchen der Details eines Kontakts
-        private List<string> searchInfoForSelectedContact()
-        {
-            Contact contact = (Contact)lBox_Kontakte.SelectedItem;
-            int cid = contact.Cid;
-            InformationService infoService = new InformationService();
-            return infoService.contact_getDetails(db.getDetailsFromContacts(db.createconnectionstring(), cid));
-        }
+       
         private List<string> searchInfoForSelectedLending()
         {
 
@@ -114,8 +147,8 @@ namespace DailyDoing
         //Löschen eines vorhandenen Kontakts
         private void btn_deleteContact_Click(object sender, RoutedEventArgs e)
         {
-            List<string> allInfo = searchInfoForSelectedContact();
-            db.deleteContact(db.createconnectionstring(), Convert.ToInt32(allInfo[0]));
+            contact = (Contact)lBox_Kontakte.SelectedItem;
+            db.deleteContact(db.createconnectionstring(), contact.Cid);
             MessageBox.Show("Contact successfully deleted!");
             updateAllContactsBox();
         }
@@ -123,25 +156,11 @@ namespace DailyDoing
         private void btn_updateContact_Click(object sender, RoutedEventArgs e)
         {
             int userID = db.getUserID(db.createconnectionstring(), username);
-            List<string> allInfo = searchInfoForSelectedContact();
-            UpdateContact update = new UpdateContact(allInfo[3], allInfo[2], allInfo[4], userID, Convert.ToInt32(allInfo[0]), this);
+            contact = (Contact)lBox_Kontakte.SelectedItem;
+            UpdateContact update = new UpdateContact(contact, this);
             update.Show();
         }
-        //Prüfen welcher Button aktiv sein soll und aktualisieren der Details bei Änderung der Auswahl
-        private void lBox_Kontakte_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            btn_deleteContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
-            btn_updateContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
-            if (lBox_Kontakte.SelectedItem == null)
-            {
-                txt_Name.Clear();
-                txt_Firstname.Clear();
-                txt_email.Clear();
-                return;
-            }
-            contact_getDetails((Contact)lBox_Kontakte.SelectedItem);
 
-        }
         private void lb_lendings_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btn_deleteLending.IsEnabled = (lb_lendings.SelectedItem != null);
@@ -173,32 +192,5 @@ namespace DailyDoing
             int userID = db.getUserID(db.createconnectionstring(), username);
             fillLendingsInListBox(db, userID);
         }
-        public void btn_exit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void mainwindow_KeyDown(object sender, KeyEventArgs e)
-        {
-            //Disslected Contact/Lending with ESC
-            if (tab_contacts.IsSelected || tab_lendings.IsSelected)
-            {
-                if (e.Key == Key.Escape)
-                {
-                    lBox_Kontakte.SelectedIndex = -1;
-                    lb_lendings.SelectedIndex = -1;
-                }
-            }
-            //Login prüfen mit ENTER
-            if (tab_login.IsSelected)
-            {
-                if (e.Key == Key.Enter)
-                {
-                    btn_login_Click(sender, e);
-                }
-            }
-        }
-
-
     }
 }
