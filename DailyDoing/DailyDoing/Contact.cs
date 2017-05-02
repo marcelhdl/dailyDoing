@@ -12,8 +12,8 @@ namespace DailyDoing
         string firstname;
         string email;
         string street;
-        int houseNumber;
-        int postCode;
+        string houseNumber;
+        string postCode;
         string city;
         string phoneNumber;
         string mobileNumber;
@@ -73,7 +73,7 @@ namespace DailyDoing
             }
         }
 
-        public int HouseNumber
+        public string HouseNumber
         {
             get
             {
@@ -86,7 +86,7 @@ namespace DailyDoing
             }
         }
 
-        public int PostCode
+        public string PostCode
         {
             get
             {
