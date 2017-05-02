@@ -197,19 +197,19 @@ namespace DailyDoing
         }
 
         //Creates a contact for a specific user.
-        public bool createContact(MySqlConnection con, int uid, string name, string vorname, string mail, string adress, int housenr, int plz, string city, string tel, string mobile)
+        public bool createContact(MySqlConnection con, int uid, string name, string firstname, string mail, string adress, int housenr, int PostCode, string city, string tel, string mobile)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"INSERT INTO
-                                    tbl_contacts_new (uid, name,vorname,mail,adress,housenr,plz,city,tel,mobile)
+                                    tbl_contacts_new (uid, name,firstname,mail,adress,housenr,postcode,city,tel,mobile)
                                     VALUES ('" 
                                     + uid + "','" 
                                     + name + "','" 
-                                    + vorname + "','" 
+                                    + firstname + "','" 
                                     + mail + "','" 
                                     + adress + "','" 
                                     + housenr + "','" 
-                                    + plz + "','" 
+                                    + PostCode + "','" 
                                     + city + "','" 
                                     + tel + "','" 
                                     + mobile + "')";
@@ -231,21 +231,21 @@ namespace DailyDoing
         }
 
         //Updates an existing contact.
-        public bool updateContact(MySqlConnection con, int cid, int uid, string name, string vorname, string mail,string adress, int housenr, int plz, string city, string tel, string mobile)
+        public bool updateContact(MySqlConnection con, Contact contact)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"UPDATE tbl_contacts_new 
-                                    SET uid='" + uid +
-                                    "', name='" + name +
-                                    "', vorname='" + vorname +
-                                    "', mail='" + mail +
-                                    "', adress='" + adress +
-                                    "', housenr='" + housenr +
-                                    "', plz='" + plz +
-                                    "', city='" + city +
-                                    "', tel='" + tel +
-                                    "', mobile='" + mobile +
-                                    "' WHERE cid='" + cid + "'";
+                                    SET uid='" + contact.Uid +
+                                    "', name='" + contact.Name +
+                                    "', firstname='" + contact.Firstname +
+                                    "', mail='" + contact.Email +
+                                    "', adress='" + contact.Street +
+                                    "', housenr='" + contact.HouseNumber +
+                                    "', postcode='" + contact.PostCode +
+                                    "', city='" + contact.City +
+                                    "', tel='" + contact.PhoneNumber +
+                                    "', mobile='" + contact.MobileNumber +
+                                    "' WHERE cid='" + contact.Cid + "'";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
             else { con.Open(); }
