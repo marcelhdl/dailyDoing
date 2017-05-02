@@ -22,25 +22,20 @@ namespace DailyDoing
         DBService db = new DBService();
         int userID;
         MainWindow main;
+        Contact newContact = new Contact();
+
         public CreateContact(int userID, MainWindow main)
         {
             InitializeComponent();
+            
+            NewContactInfo.DataContext = newContact;
             this.userID = userID;
             this.main = main;
         }
         //Informationen aus Textboxen nehmen und daraus einen neuen Kontakt erzeugen
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
-            string firstname = txt_Firstname.Text;
-            string name = txt_Name.Text;
-            string email = txt_email.Text;
-            string street = txt_street.Text;
-            int houseno = Convert.ToInt32(txt_House_No.Text);
-            int postCode = Convert.ToInt32(txt_postcode.Text);
-            string city = txt_city.Text;
-            string tel = txt_phonenumber.Text;
-            string mobile = txt_mobilePhone.Text;
-            db.createContact(db.createconnectionstring(),userID, name, firstname, email, street,houseno,postCode,city,tel,mobile);
+            db.createContact(db.createconnectionstring(), newContact);
             main.updateAllContactsBox();
             Close();
             

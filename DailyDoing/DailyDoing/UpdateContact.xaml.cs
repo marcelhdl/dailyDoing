@@ -32,15 +32,10 @@ namespace DailyDoing
         //Informationen aus Textboxen nehmen und Kontakt updaten
         private void btn_createUpdate_Click(object sender, RoutedEventArgs e)
         {
-            //updateContactInfo(contact);
             db.updateContact(db.createconnectionstring(), contact);
             main.updateAllContactsBox();
             main.updateAllLendingsBox();
             Close();
-        }
-        private Contact updateContactInfo(Contact newContact) {
-            
-            return newContact;
         }
     }
 }
