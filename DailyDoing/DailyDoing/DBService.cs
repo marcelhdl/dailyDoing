@@ -197,22 +197,22 @@ namespace DailyDoing
         }
 
         //Creates a contact for a specific user.
-        public bool createContact(MySqlConnection con, int uid, string name, string firstname, string mail, string adress, int housenr, int PostCode, string city, string tel, string mobile)
+        public bool createContact(MySqlConnection con, Contact contact, int uid)
         {
             MySqlCommand command = con.CreateCommand();
             command.CommandText = @"INSERT INTO
-                                    tbl_contacts_new (uid, name,firstname,mail,adress,housenr,postcode,city,tel,mobile)
+                                    tbl_contacts_new (uid, name,firstname,mail,street,housenr,postcode,city,tel,mobile)
                                     VALUES ('" 
                                     + uid + "','" 
-                                    + name + "','" 
-                                    + firstname + "','" 
-                                    + mail + "','" 
-                                    + adress + "','" 
-                                    + housenr + "','" 
-                                    + PostCode + "','" 
-                                    + city + "','" 
-                                    + tel + "','" 
-                                    + mobile + "')";
+                                    + contact.Name + "','" 
+                                    + contact.Firstname + "','" 
+                                    + contact.Email + "','" 
+                                    + contact.Street + "','" 
+                                    + contact.HouseNumber + "','" 
+                                    + contact.PostCode + "','" 
+                                    + contact.City + "','" 
+                                    + contact.PhoneNumber + "','" 
+                                    + contact.MobileNumber + "')";
             MySqlDataReader Reader;
             if (con.State.ToString() == "Open") { }
             else { con.Open(); }
@@ -239,7 +239,7 @@ namespace DailyDoing
                                     "', name='" + contact.Name +
                                     "', firstname='" + contact.Firstname +
                                     "', mail='" + contact.Email +
-                                    "', adress='" + contact.Street +
+                                    "', street='" + contact.Street +
                                     "', housenr='" + contact.HouseNumber +
                                     "', postcode='" + contact.PostCode +
                                     "', city='" + contact.City +
