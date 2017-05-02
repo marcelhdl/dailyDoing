@@ -23,6 +23,7 @@ namespace DailyDoing
         public MainWindow()
         {
             InitializeComponent();
+            txt_username.Focus();
         }
         //Login prüfen mit Klick auf "Login"
         private void btn_login_Click(object sender, RoutedEventArgs e)
