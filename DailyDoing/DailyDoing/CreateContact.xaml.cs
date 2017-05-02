@@ -35,7 +35,8 @@ namespace DailyDoing
         //Informationen aus Textboxen nehmen und daraus einen neuen Kontakt erzeugen
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
-            db.createContact(db.createconnectionstring(), newContact);
+            newContact.Uid = userID;
+            db.createContact(db.createconnectionstring(), newContact, userID);
             main.updateAllContactsBox();
             Close();
             
