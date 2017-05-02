@@ -33,6 +33,8 @@ namespace DailyDoing
             if (loginController.isCorrectLogin())
             {
                 MessageBox.Show("Successfully logged in!");
+                btn_login.Visibility = Visibility.Hidden;
+                btn_logout.Visibility = Visibility.Visible;
                 fillContactsInListBox(db, db.getUserID(db.createconnectionstring(), username));
                 fillLendingsInListBox(db, db.getUserID(db.createconnectionstring(), username));
             }
@@ -40,6 +42,21 @@ namespace DailyDoing
             {
                 MessageBox.Show("Incorrect Login! Please try again!");
             }
+
+        }
+        //Logout and Reset all
+        private void btn_logout_Click(object sender, RoutedEventArgs e)
+        {
+            btn_login.Visibility = Visibility.Visible;
+            btn_logout.Visibility = Visibility.Hidden;
+            resetContactInfo();
+            resetLendingInfo();
+            lb_lendings.ItemsSource = null;
+            lBox_Kontakte.ItemsSource = null;
+            lb_lendings.Items.Clear();
+            lBox_Kontakte.Items.Clear();
+            txt_password.Clear();
+            txt_username.Clear();
 
         }
         private void mainwindow_KeyDown(object sender, KeyEventArgs e)
@@ -69,15 +86,26 @@ namespace DailyDoing
             btn_updateContact.IsEnabled = (lBox_Kontakte.SelectedItem != null);
             if (lBox_Kontakte.SelectedItem == null)
             {
-                txt_Name.Clear();
-                txt_Firstname.Clear();
-                txt_email.Clear();
-                
+                resetContactInfo();
                 return;
             }
             contact_getDetails((Contact)lBox_Kontakte.SelectedItem);
 
         }
+
+        private void resetContactInfo()
+        {
+            txt_Name.Clear();
+            txt_Firstname.Clear();
+            txt_email.Clear();
+            txt_city.Clear();
+            txt_House_No.Clear();
+            txt_mobilePhone.Clear();
+            txt_phonenumber.Clear();
+            txt_postcode.Clear();
+            txt_street.Clear();
+        }
+
         public void btn_exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -166,17 +194,22 @@ namespace DailyDoing
             btn_updateLending.IsEnabled = (lb_lendings.SelectedItem != null);
             if (lb_lendings.SelectedItem == null)
             {
-                txt_Desc_lending.Clear();
-                txt_Firstname_Lending.Clear();
-                txt_Name_Lending.Clear();
-                txt_lendback_Lending.Clear();
-                txt_lendtime_Lending.Clear();
-                txt_getback_lending.Clear();
-                txt_Category_lending.Clear();
-                txt_priority_lending.Clear();
+                resetLendingInfo();
                 return;
             }
             lending_getDetails();
+        }
+
+        private void resetLendingInfo()
+        {
+            txt_Desc_lending.Clear();
+            txt_Firstname_Lending.Clear();
+            txt_Name_Lending.Clear();
+            txt_lendback_Lending.Clear();
+            txt_lendtime_Lending.Clear();
+            txt_getback_lending.Clear();
+            txt_Category_lending.Clear();
+            txt_priority_lending.Clear();
         }
 
         //Update nach SQL Verarbeitung
@@ -191,5 +224,7 @@ namespace DailyDoing
             int userID = db.getUserID(db.createconnectionstring(), username);
             fillLendingsInListBox(db, userID);
         }
+
+        
     }
 }
