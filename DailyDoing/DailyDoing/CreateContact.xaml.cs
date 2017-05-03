@@ -27,7 +27,7 @@ namespace DailyDoing
         public CreateContact(int userID, MainWindow main)
         {
             InitializeComponent();
-            
+            txt_Name.Focus();
             NewContactInfo.DataContext = newContact;
             this.userID = userID;
             this.main = main;

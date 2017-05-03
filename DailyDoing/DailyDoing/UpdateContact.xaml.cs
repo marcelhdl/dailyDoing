@@ -26,6 +26,7 @@ namespace DailyDoing
         {
             this.contact = contact;
             InitializeComponent();
+            txt_Name.Focus();
             DetailView.DataContext = contact;
             this.main = main;
         }
