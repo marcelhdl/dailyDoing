@@ -36,7 +36,7 @@ namespace DailyDoing
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
             newContact.Uid = userID;
-            db.createContact(db.createconnectionstring(), newContact, userID);
+            db.createContact(newContact, userID);
             main.updateAllContactsBox();
             Close();
             

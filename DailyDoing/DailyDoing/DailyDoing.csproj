@@ -83,6 +83,7 @@
     <Compile Include="gui\UpdateLending.xaml.cs">
       <DependentUpon>UpdateLending.xaml</DependentUpon>
     </Compile>
+    <Compile Include="classes\ServerManager.cs" />
     <Page Include="gui\CreateContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

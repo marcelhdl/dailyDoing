@@ -47,7 +47,7 @@ namespace DailyDoing
         }
         private void btn_createUpdate_Click(object sender, RoutedEventArgs e)
         {
-            db.updateLending(db.createconnectionstring(),lid,cid,txt_Title_Lending.Text,txt_Desc_lending.Text,txt_Category_lending.Text,txt_Category_lending.Text,txt_lendback_Lending.Text,txt_getback_lending.Text);
+            db.updateLending(lid,cid,txt_Title_Lending.Text,txt_Desc_lending.Text,txt_Category_lending.Text,txt_Category_lending.Text,txt_lendback_Lending.Text,txt_getback_lending.Text);
             main.updateAllContactsBox();
             Close();
         }

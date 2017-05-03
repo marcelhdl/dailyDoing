@@ -48,7 +48,7 @@ namespace DailyDoing
             string firstname = txt_Firstname.Text;
             string name = txt_Name.Text;
             string email = txt_email.Text;
-            db.createLending(db.createconnectionstring(),userID,cid,title,desc,category,priority,timestamp_lendback);
+            db.createLending(userID,cid,title,desc,category,priority,timestamp_lendback);
             main.updateAllLendingsBox();
             Close();
 

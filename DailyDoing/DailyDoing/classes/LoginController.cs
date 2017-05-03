@@ -19,10 +19,10 @@ namespace DailyDoing
             this.pw = pw;
         }
         public bool isCorrectLogin() {
-            if (db.getUserID(db.createconnectionstring(), username) == -1) {
+            if (db.getUserID(username) == -1) {
                 return false;
             }
-            return db.checkLogin(db.createconnectionstring(), username, pw);
+            return db.checkLogin(username, pw);
         }
     }
 }

@@ -38,8 +38,8 @@ namespace DailyDoing
                 btn_login.Visibility = Visibility.Hidden;
                 btn_logout.Visibility = Visibility.Visible;
                 btn_createContact.IsEnabled = true;
-                fillContactsInListBox(db, db.getUserID(db.createconnectionstring(), username));
-                fillLendingsInListBox(db, db.getUserID(db.createconnectionstring(), username));
+                fillContactsInListBox(db, db.getUserID(username));
+                fillLendingsInListBox(db, db.getUserID(username));
             }
             else
             {
@@ -117,7 +117,7 @@ namespace DailyDoing
         {
             tab_contacts.IsSelected = true;
             InformationService infoService = new InformationService();
-            List<Contact> allcontacts = infoService.contact_getInfoForListBox(db.getContacts(db.createconnectionstring(), userID));
+            List<Contact> allcontacts = infoService.contact_getInfoForListBox(db.getContacts(userID));
             lBox_Kontakte.ItemsSource = allcontacts;
 
         }
@@ -133,7 +133,7 @@ namespace DailyDoing
         private void fillLendingsInListBox(DBService db, int userID)
         {
             InformationService infoService = new InformationService();
-            List<Lending> alllendings = infoService.lending_getInfoForListBox(db.getallLendings(db.createconnectionstring(), userID));
+            List<Lending> alllendings = infoService.lending_getInfoForListBox(db.getallLendings(userID));
             lb_lendings.ItemsSource = alllendings;
 
         }
@@ -145,7 +145,7 @@ namespace DailyDoing
                 List<string> allInfo = searchInfoForSelectedLending();
 
                 InformationService infoService = new InformationService();
-                List<string> contactinfo = infoService.contact_getDetails(db.getDetailsFromContacts(db.createconnectionstring(), Convert.ToInt32(allInfo[2])));
+                List<string> contactinfo = infoService.contact_getDetails(db.getDetailsFromContacts(Convert.ToInt32(allInfo[2])));
                 txt_Desc_lending.Text = allInfo[4];
                 txt_Firstname_Lending.Text = contactinfo[2];
                 txt_Name_Lending.Text = contactinfo[3];
@@ -164,12 +164,12 @@ namespace DailyDoing
             Lending lending = (Lending)lb_lendings.SelectedItem;
             int lid = lending.Lid;
             InformationService infoService = new InformationService();
-            return infoService.lending_getDetails(db.getDetailsFromLending(db.createconnectionstring(), lid));
+            return infoService.lending_getDetails(db.getDetailsFromLending(lid));
         }
         //Einsteigspunkt für das Erstellen eines Neuen Kontakts
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
-            int userID = db.getUserID(db.createconnectionstring(), username);
+            int userID = db.getUserID(username);
             CreateContact create = new CreateContact(userID, this);
             create.Show();
         }
@@ -178,14 +178,14 @@ namespace DailyDoing
         private void btn_deleteContact_Click(object sender, RoutedEventArgs e)
         {
             contact = (Contact)lBox_Kontakte.SelectedItem;
-            db.deleteContact(db.createconnectionstring(), contact.Cid);
+            db.deleteContact(contact.Cid);
             MessageBox.Show("Contact successfully deleted!");
             updateAllContactsBox();
         }
         //Einsteigspunkt für das Updaten eines vorhandenen Kontakts
         private void btn_updateContact_Click(object sender, RoutedEventArgs e)
         {
-            int userID = db.getUserID(db.createconnectionstring(), username);
+            int userID = db.getUserID(username);
             contact = (Contact)lBox_Kontakte.SelectedItem;
             UpdateContact update = new UpdateContact(contact, this);
             update.Show();
@@ -219,12 +219,12 @@ namespace DailyDoing
 
         public void updateAllContactsBox()
         {
-            int userID = db.getUserID(db.createconnectionstring(), username);
+            int userID = db.getUserID(username);
             fillContactsInListBox(db, userID);
         }
         public void updateAllLendingsBox()
         {
-            int userID = db.getUserID(db.createconnectionstring(), username);
+            int userID = db.getUserID(username);
             fillLendingsInListBox(db, userID);
         }
 
