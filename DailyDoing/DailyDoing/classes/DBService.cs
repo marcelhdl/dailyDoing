@@ -20,22 +20,8 @@ namespace DailyDoing
         }
 
         #region User
-        public bool checkLogin(string username, string pw)
-        {
-            bool success;
-            success = checkUsername(username);
-            success = checkPassword(username, pw);
-            return success;
-        }
-        private bool checkUsername(string username)
-        {
-            sql = @"SELECT username 
-                    FROM tbl_user 
-                    WHERE username='" + username + "'";
-
-            return sm.checkUsername(sql,username);
-        }
-        private bool checkPassword(string username, string pw)
+      
+        public bool checkPassword(string username, string pw)
         {
             sql = @"SELECT password
                   FROM tbl_user

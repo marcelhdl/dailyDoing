@@ -45,33 +45,6 @@ namespace DailyDoing
         
 
         #region User
-        public bool checkUsername(string sql, string username)
-        {
-            Con = createconnectionstring();
-            Command = Con.CreateCommand();
-            Command.CommandText = sql;
-            if (Con.State.ToString() == "Open") { }
-            else { Con.Open(); }
-            Reader = Command.ExecuteReader(); 
-            while (Reader.Read()) 
-            {
-                string row = "";
-                for (int i = 0; i < Reader.FieldCount; i++)
-                    row += Reader.GetValue(i).ToString(); 
-                if (row == username)
-                {
-                    Con.Close(); 
-                    return true; 
-                }
-                else
-                {
-                    Con.Close();
-                    return false;
-                }
-            }
-            Con.Close();
-            return false;
-        }
 
         public bool checkPassword(string sql, string username, string pw)
         {

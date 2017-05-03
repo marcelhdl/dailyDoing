@@ -9,8 +9,8 @@ namespace DailyDoing
     class LoginController
     {
         DBService db;
-        string username;
-        string pw;
+        protected string username;
+        protected string pw;
 
         public LoginController(DBService db, string username, string pw)
         {
@@ -22,7 +22,7 @@ namespace DailyDoing
             if (db.getUserID(username) == -1) {
                 return false;
             }
-            return db.checkLogin(username, pw);
+            return db.checkPassword(username, pw);
         }
     }
 }
