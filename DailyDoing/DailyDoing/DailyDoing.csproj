@@ -68,27 +68,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Contact.cs" />
-    <Compile Include="CreateContact.xaml.cs">
+    <Compile Include="classes\Contact.cs" />
+    <Compile Include="classes\Encryption.cs" />
+    <Compile Include="gui\CreateContact.xaml.cs">
       <DependentUpon>CreateContact.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateLending.xaml.cs">
+    <Compile Include="gui\CreateLending.xaml.cs">
       <DependentUpon>CreateLending.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lending.cs" />
-    <Compile Include="LoginController.cs" />
-    <Compile Include="UpdateContact.xaml.cs">
+    <Compile Include="classes\Lending.cs" />
+    <Compile Include="classes\LoginController.cs" />
+    <Compile Include="gui\UpdateContact.xaml.cs">
       <DependentUpon>UpdateContact.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UpdateLending.xaml.cs">
+    <Compile Include="gui\UpdateLending.xaml.cs">
       <DependentUpon>UpdateLending.xaml</DependentUpon>
     </Compile>
-    <Page Include="CreateContact.xaml">
+    <Page Include="gui\CreateContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CreateLending.xaml">
+    <Page Include="gui\CreateLending.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -100,17 +101,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DBService.cs" />
-    <Compile Include="InformationService.cs" />
+    <Compile Include="classes\DBService.cs" />
+    <Compile Include="classes\InformationService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UpdateContact.xaml">
+    <Page Include="gui\UpdateContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UpdateLending.xaml">
+    <Page Include="gui\UpdateLending.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
