@@ -24,6 +24,7 @@ namespace DailyDoing
         {
             InitializeComponent();
             txt_username.Focus();
+            btn_createContact.IsEnabled = false;
         }
         //Login prüfen mit Klick auf "Login"
         private void btn_login_Click(object sender, RoutedEventArgs e)
@@ -36,6 +37,7 @@ namespace DailyDoing
                 MessageBox.Show("Successfully logged in!");
                 btn_login.Visibility = Visibility.Hidden;
                 btn_logout.Visibility = Visibility.Visible;
+                btn_createContact.IsEnabled = true;
                 fillContactsInListBox(db, db.getUserID(db.createconnectionstring(), username));
                 fillLendingsInListBox(db, db.getUserID(db.createconnectionstring(), username));
             }
