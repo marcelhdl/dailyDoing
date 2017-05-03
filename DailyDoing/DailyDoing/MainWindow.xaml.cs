@@ -24,7 +24,6 @@ namespace DailyDoing
         {
             InitializeComponent();
             txt_username.Focus();
-            btn_createContact.IsEnabled = false;
         }
         //Login prüfen mit Klick auf "Login"
         private void btn_login_Click(object sender, RoutedEventArgs e)
@@ -52,6 +51,7 @@ namespace DailyDoing
         {
             btn_login.Visibility = Visibility.Visible;
             btn_logout.Visibility = Visibility.Hidden;
+            btn_createContact.IsEnabled = false;
             resetContactInfo();
             resetLendingInfo();
             lb_lendings.ItemsSource = null;
