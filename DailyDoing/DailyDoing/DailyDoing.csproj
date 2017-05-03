@@ -69,7 +69,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="classes\Contact.cs" />
-    <Compile Include="classes\Encryption.cs" />
     <Compile Include="gui\CreateContact.xaml.cs">
       <DependentUpon>CreateContact.xaml</DependentUpon>
     </Compile>
