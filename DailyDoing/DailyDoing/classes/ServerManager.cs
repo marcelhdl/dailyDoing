@@ -1,11 +1,13 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace DailyDoing
 {
@@ -82,20 +84,32 @@ namespace DailyDoing
             Command.CommandText = sql;
 
             if (Con.State.ToString() == "Open") { }
-            else { Con.Open(); }
-            Reader = Command.ExecuteReader();
-            while (Reader.Read())
-            {
-                string row = "";
-                for (int i = 0; i < Reader.FieldCount; i++)
+            else {
+                try
                 {
-                    row = Reader.GetValue(i).ToString();
+                    Con.Open();
+                    Reader = Command.ExecuteReader();
+                    while (Reader.Read())
+                    {
+                        string row = "";
+                        for (int i = 0; i < Reader.FieldCount; i++)
+                        {
+                            row = Reader.GetValue(i).ToString();
+                        }
+                        Con.Close();
+                        return Convert.ToInt32(row);
+                    }
+                    Con.Close();
+                    return -1;
                 }
-                Con.Close();
-                return Convert.ToInt32(row);
+                catch (MySqlException e)
+                {
+                    DBException dbex = new DBException(e.Number);
+                                       
+                }
             }
-            Con.Close();
-            return -1;
+            return -2;
+
         }
         #endregion
 
