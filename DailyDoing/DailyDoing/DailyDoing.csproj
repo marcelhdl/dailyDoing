@@ -69,29 +69,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="classes\Contact.cs" />
+    <Compile Include="classes\DBException.cs" />
     <Compile Include="gui\CreateContact.xaml.cs">
       <DependentUpon>CreateContact.xaml</DependentUpon>
     </Compile>
-    <Compile Include="gui\CreateLending.xaml.cs">
-      <DependentUpon>CreateLending.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="classes\Lending.cs" />
     <Compile Include="classes\LoginController.cs" />
     <Compile Include="gui\UpdateContact.xaml.cs">
       <DependentUpon>UpdateContact.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="gui\UpdateLending.xaml.cs">
-      <DependentUpon>UpdateLending.xaml</DependentUpon>
     </Compile>
     <Compile Include="classes\ServerManager.cs" />
     <Page Include="gui\CreateContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="gui\CreateLending.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -108,10 +98,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="gui\UpdateContact.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="gui\UpdateLending.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

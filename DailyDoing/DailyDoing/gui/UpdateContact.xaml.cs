@@ -35,7 +35,6 @@ namespace DailyDoing
         {
             db.updateContact(contact);
             main.updateAllContactsBox();
-            main.updateAllLendingsBox();
             Close();
         }
     }

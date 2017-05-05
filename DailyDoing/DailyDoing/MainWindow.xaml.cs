@@ -39,7 +39,6 @@ namespace DailyDoing
                 btn_logout.Visibility = Visibility.Visible;
                 btn_createContact.IsEnabled = true;
                 fillContactsInListBox(db, db.getUserID(username));
-                fillLendingsInListBox(db, db.getUserID(username));
             }
             else
             {
@@ -53,10 +52,7 @@ namespace DailyDoing
             btn_login.Visibility = Visibility.Visible;
             btn_logout.Visibility = Visibility.Hidden;
             resetContactInfo();
-            resetLendingInfo();
-            lb_lendings.ItemsSource = null;
             lBox_Kontakte.ItemsSource = null;
-            lb_lendings.Items.Clear();
             lBox_Kontakte.Items.Clear();
             txt_password.Clear();
             txt_username.Clear();
@@ -65,12 +61,11 @@ namespace DailyDoing
         private void mainwindow_KeyDown(object sender, KeyEventArgs e)
         {
             //Disslected Contact/Lending with ESC
-            if (tab_contacts.IsSelected || tab_lendings.IsSelected)
+            if (tab_contacts.IsSelected)
             {
                 if (e.Key == Key.Escape)
                 {
                     lBox_Kontakte.SelectedIndex = -1;
-                    lb_lendings.SelectedIndex = -1;
                 }
             }
             //Login prüfen mit ENTER
@@ -96,7 +91,7 @@ namespace DailyDoing
 
         }
 
-        private void resetContactInfo()
+        private void resetContactInfo() //geht das auch über ItemSource = null ?
         {
             txt_Name.Clear();
             txt_Firstname.Clear();
@@ -129,43 +124,8 @@ namespace DailyDoing
                 DetailView.DataContext = contact;
             }
         }
-        //List Box mit Übersicht der Kontakte befüllen
-        private void fillLendingsInListBox(DBService db, int userID)
-        {
-            InformationService infoService = new InformationService();
-            List<Lending> alllendings = infoService.lending_getInfoForListBox(db.getallLendings(userID));
-            lb_lendings.ItemsSource = alllendings;
-
-        }
-        
-        private void lending_getDetails()
-        {
-            if (lb_lendings.SelectedItem != null)
-            {
-                List<string> allInfo = searchInfoForSelectedLending();
-
-                InformationService infoService = new InformationService();
-                List<string> contactinfo = infoService.contact_getDetails(db.getDetailsFromContacts(Convert.ToInt32(allInfo[2])));
-                txt_Desc_lending.Text = allInfo[4];
-                txt_Firstname_Lending.Text = contactinfo[2];
-                txt_Name_Lending.Text = contactinfo[3];
-                txt_lendback_Lending.Text = allInfo[8];
-                txt_lendtime_Lending.Text = allInfo[7];
-                txt_getback_lending.Text = allInfo[9];
-                txt_Category_lending.Text = allInfo[5];
-                txt_priority_lending.Text = allInfo[6];
-            }
-        }
-
        
-        private List<string> searchInfoForSelectedLending()
-        {
-
-            Lending lending = (Lending)lb_lendings.SelectedItem;
-            int lid = lending.Lid;
-            InformationService infoService = new InformationService();
-            return infoService.lending_getDetails(db.getDetailsFromLending(lid));
-        }
+        
         //Einsteigspunkt für das Erstellen eines Neuen Kontakts
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
@@ -191,30 +151,6 @@ namespace DailyDoing
             update.Show();
         }
 
-        private void lb_lendings_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            btn_deleteLending.IsEnabled = (lb_lendings.SelectedItem != null);
-            btn_updateLending.IsEnabled = (lb_lendings.SelectedItem != null);
-            if (lb_lendings.SelectedItem == null)
-            {
-                resetLendingInfo();
-                return;
-            }
-            lending_getDetails();
-        }
-
-        private void resetLendingInfo()
-        {
-            txt_Desc_lending.Clear();
-            txt_Firstname_Lending.Clear();
-            txt_Name_Lending.Clear();
-            txt_lendback_Lending.Clear();
-            txt_lendtime_Lending.Clear();
-            txt_getback_lending.Clear();
-            txt_Category_lending.Clear();
-            txt_priority_lending.Clear();
-        }
-
         //Update nach SQL Verarbeitung
 
         public void updateAllContactsBox()
@@ -222,12 +158,6 @@ namespace DailyDoing
             int userID = db.getUserID(username);
             fillContactsInListBox(db, userID);
         }
-        public void updateAllLendingsBox()
-        {
-            int userID = db.getUserID(username);
-            fillLendingsInListBox(db, userID);
-        }
 
-        
     }
 }

@@ -28,15 +28,7 @@ namespace DailyDoing
             }
             return contact_details;
         }
-        public List<Lending> lending_getInfoForListBox(List<string[]> lendingsPerUser)
-        {
-            List<Lending> lendings = new List<Lending>();
-            foreach (string[] lendingInfo in lendingsPerUser)
-            {
-                lendings.Add(new Lending() { Title = lendingInfo[3], Timestamp_lend = lendingInfo[7], Lid = Convert.ToInt32(lendingInfo[0]), Cid = Convert.ToInt32(lendingInfo[2])});
-            }
-            return lendings;
-        }
+
         public List<string> lending_getDetails(string[] lendingInfo)
         {
             List<string> lending_details = new List<string>();
