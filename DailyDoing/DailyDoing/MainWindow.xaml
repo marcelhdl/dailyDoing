@@ -53,11 +53,35 @@
             </TabItem>
             <TabItem x:Name="tab_lendings" Header="LENDINGS">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
-                    
+                    <ListView Name="lBox_Lendings" SelectedItem="{Binding SelectedLending}" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Lendings_SelectionChanged" Margin="0,0,0,-1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Name="DetailViewLendings">
+                        <TextBox x:Name="txt_TitleLending" Text="{Binding Title}" IsReadOnly="True" HorizontalAlignment="Left" Height="50" Margin="270,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"  materialDesign:HintAssist.Hint="Title" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        <TextBox x:Name="txt_description"  Text="{Binding Description}" HorizontalAlignment="Left" Margin="270,70,0,0" Height="50" Width="600" IsReadOnly="True" RenderTransformOrigin="0.483,1.152" TextDecorations="{x:Null}" materialDesign:HintAssist.Hint="Description" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        <DatePicker x:Name="datePicker_start" SelectedDate="{Binding Start}" Width="100" HorizontalAlignment="Left" Margin="425 60 0 0" materialDesign:HintAssist.Hint="Start Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <DatePicker x:Name="datePicker_end" SelectedDate="{Binding End}" Width="100" HorizontalAlignment="Left" Margin="560 60 0 0" materialDesign:HintAssist.Hint="End Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <CheckBox x:Name="cBox_allreadyBack" IsChecked="{Binding Path=AllreadyBack}" Style="{StaticResource MaterialDesignCheckBox}" Margin="720 -135 0 0" VerticalAlignment="Center">
+                            Allready back?
+                        </CheckBox>
+                        <ComboBox SelectedValue="{Binding Path=Category}" SelectedValuePath="Content" Margin="-220 0 0 0" Width="138"  materialDesign:HintAssist.Hint="Catagory" IsEditable="True">
+                            <ComboBoxItem>DVD</ComboBoxItem>
+                            <ComboBoxItem>Pornos</ComboBoxItem>
+                            <ComboBoxItem>Schulunterlagen</ComboBoxItem>
+                            <ComboBoxItem>Kasette</ComboBoxItem>
+                            <ComboBoxItem>Sonstiges</ComboBoxItem>
+                        </ComboBox>
+                        <TextBox x:Name="txt_Priority" Text="{Binding Priority}" IsReadOnly="True" HorizontalAlignment="Left" Height="50" Margin="270,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"  materialDesign:HintAssist.Hint="Priority" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        
+                    </Grid>
                 </Grid>
             </TabItem>
         </dragablz:TabablzControl>
-        
+
 
 
     </Grid>

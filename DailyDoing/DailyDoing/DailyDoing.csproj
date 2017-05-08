@@ -70,6 +70,7 @@
     </ApplicationDefinition>
     <Compile Include="classes\Contact.cs" />
     <Compile Include="classes\DBException.cs" />
+    <Compile Include="classes\Lending.cs" />
     <Compile Include="gui\CreateContact.xaml.cs">
       <DependentUpon>CreateContact.xaml</DependentUpon>
     </Compile>

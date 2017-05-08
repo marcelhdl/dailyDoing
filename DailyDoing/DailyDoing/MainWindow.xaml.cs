@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DailyDoing.classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MySql.Data;
 
 namespace DailyDoing
 {
@@ -39,6 +41,7 @@ namespace DailyDoing
                 btn_logout.Visibility = Visibility.Visible;
                 btn_createContact.IsEnabled = true;
                 fillContactsInListBox(db, db.getUserID(username));
+                fillLendingsInListBox(db, db.getUserID(username));
             }
             else
             {
@@ -46,6 +49,30 @@ namespace DailyDoing
             }
 
         }
+
+        private void fillLendingsInListBox(DBService db, int userID)
+        {
+            List<Lending> lendings = new List<Lending>();
+            foreach (string[] lendingInfo in db.getallLendings(userID))
+            {
+                lendings.Add(new Lending()
+                {
+                    Lid = Convert.ToInt32(lendingInfo[0]),
+                    Uid = Convert.ToInt32(lendingInfo[1]),
+                    Cid = Convert.ToInt32(lendingInfo[2]),
+                    Title = lendingInfo[3],
+                    Description = lendingInfo[4],
+                    Category = lendingInfo[5],
+                    Priority = lendingInfo[6],
+                    Start = Convert.ToDateTime(lendingInfo[7]),
+                    End = Convert.ToDateTime(lendingInfo[8]),
+                    AllreadyBack = Convert.ToBoolean(lendingInfo[9])
+                });
+            }
+            lBox_Lendings.ItemsSource = lendings;
+
+        }
+
         //Logout and Reset all
         private void btn_logout_Click(object sender, RoutedEventArgs e)
         {
@@ -124,8 +151,18 @@ namespace DailyDoing
                 DetailView.DataContext = contact;
             }
         }
-       
-        
+        //Details für Lending
+        private void lBox_Lendings_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lBox_Lendings.SelectedItem != null)
+            { 
+                
+                //DetailViewLendings.DataContext = null;
+                DetailViewLendings.DataContext = (Lending)lBox_Lendings.SelectedItem;
+            }
+        }
+
+
         //Einsteigspunkt für das Erstellen eines Neuen Kontakts
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
@@ -159,5 +196,6 @@ namespace DailyDoing
             fillContactsInListBox(db, userID);
         }
 
+        
     }
 }
