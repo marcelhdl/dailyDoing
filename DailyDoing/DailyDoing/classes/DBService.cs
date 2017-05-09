@@ -8,6 +8,7 @@ using MySql.Data.MySqlClient;
 //using System.Windows;
 //using System.Windows.Input;
 using System.IO;
+using DailyDoing.classes;
 
 namespace DailyDoing
 {
@@ -149,32 +150,42 @@ namespace DailyDoing
 
         // Create a Lending in the Database Table
         // Please give DateTime.Date
-        public bool createLending(int uid, int cid, string title, string desc, string category, string priority, string date_lendback)
+        public bool createLending(int uid, Contact contact ,Lending lending)
         {
            sql = @"INSERT INTO tbl_lendings_new
-                   (uid, cid, desc, timestamp_lendback) 
+                   (uid, cid, title, description, category, priority, timestamp_lend, timestamp_lendback, get_back) 
                    VALUES
-                   ('" + uid + "','" + cid + "','" + desc + "','" + date_lendback + "')";
+                   ('" + uid + 
+                   "','" + contact.Cid +
+                   "','" + lending.Title +
+                   "','" + lending.Description +
+                   "','" + lending.Category +
+                   "','" + lending.Priority + 
+                   "','" + lending.Start +
+                   "','" + lending.End +
+                   "','" + lending.AllreadyBack + "')";
 
             return sm.Lending(sql);
         }
 
         //Update a specific landing.
-        public bool updateLending(int lid, int cid, string title, string desc, string category, string priority, string date_lendback,string getback)
+        public bool updateLending(Lending lending)
         {
             sql = @"UPDATE tbl_lendings_new 
-                    SET cid='" + cid + "'," +
-                    " title='"+ title + "'," +
-                    " desc='" + desc + "'," +
-                    " category='"+ category + "'," +
-                    " priority='" + priority + "'," +
-                    " timestamp_lendback='" + date_lendback +
-                    "' WHERE lid='" + lid + "'";
+                    SET cid='" + lending.Cid + "'," +
+                    " title='"+ lending.Title + "'," +
+                    " description='" + lending.Description + "'," +
+                    " category='"+ lending.Category + "'," +
+                    " priority='" + lending.Priority + "'," +
+                    " timestamp_lend='" + lending.Start + "'," +
+                    " timestamp_lendback='" + lending.End + "'," +
+                    " get_back='" + lending.AllreadyBack +
+                    "' WHERE lid='" + lending.Lid + "'";
             return sm.Lending(sql);
         }
 
         //Delete a specific landing.
-        public bool deleteLending(MySqlConnection con, int lid)
+        public bool deleteLending(int lid)
         {
             sql = @"DELETE FROM 
                     tbl_lendings_new 

@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MySql.Data;
+using System.Linq;
 
 namespace DailyDoing
 {
@@ -21,6 +22,9 @@ namespace DailyDoing
         DBService db = new DBService();
         LoginController loginController;
         Contact contact;
+        Lending newLending;
+        InformationService infoService = new InformationService();
+        Lending selectedLending;
 
         public MainWindow()
         {
@@ -69,8 +73,8 @@ namespace DailyDoing
                     AllreadyBack = Convert.ToBoolean(lendingInfo[9])
                 });
             }
+            lendings = lendings.OrderBy(lending => lending.Title).ToList();
             lBox_Lendings.ItemsSource = lendings;
-
         }
 
         //Logout and Reset all
@@ -78,12 +82,19 @@ namespace DailyDoing
         {
             btn_login.Visibility = Visibility.Visible;
             btn_logout.Visibility = Visibility.Hidden;
+            btn_createContact.IsEnabled = false;
             resetContactInfo();
             lBox_Kontakte.ItemsSource = null;
             lBox_Kontakte.Items.Clear();
+            lBox_Lendings.ItemsSource = null;
+            lBox_Lendings.Items.Clear();
+            DetailViewLendings.DataContext = null;
+            ContactInLending.DataContext = null;
+            btn_createLending.IsEnabled = false;
+            btn_updateLending.IsEnabled = false;
+            btn_deleteLending.IsEnabled = false;
             txt_password.Clear();
             txt_username.Clear();
-
         }
         private void mainwindow_KeyDown(object sender, KeyEventArgs e)
         {
@@ -118,17 +129,9 @@ namespace DailyDoing
 
         }
 
-        private void resetContactInfo() //geht das auch über ItemSource = null ?
+        private void resetContactInfo()
         {
-            txt_Name.Clear();
-            txt_Firstname.Clear();
-            txt_email.Clear();
-            txt_city.Clear();
-            txt_House_No.Clear();
-            txt_mobilePhone.Clear();
-            txt_phonenumber.Clear();
-            txt_postcode.Clear();
-            txt_street.Clear();
+            DetailView.DataContext = null;
         }
 
         public void btn_exit_Click(object sender, RoutedEventArgs e)
@@ -139,8 +142,8 @@ namespace DailyDoing
         {
             tab_contacts.IsSelected = true;
             InformationService infoService = new InformationService();
-            List<Contact> allcontacts = infoService.contact_getInfoForListBox(db.getContacts(userID));
-            lBox_Kontakte.ItemsSource = allcontacts;
+            List<Contact> allContacts = infoService.contact_getInfoForListBox(db.getContacts(userID)).OrderBy(contact => contact.Name).ToList();
+            lBox_Kontakte.ItemsSource = allContacts;
 
         }
         //Holen der Details eines Kontakts
@@ -155,10 +158,15 @@ namespace DailyDoing
         private void lBox_Lendings_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lBox_Lendings.SelectedItem != null)
-            { 
-                
-                //DetailViewLendings.DataContext = null;
+            {
                 DetailViewLendings.DataContext = (Lending)lBox_Lendings.SelectedItem;
+                //searchContactForLendingOverID
+                selectedLending = (Lending)lBox_Lendings.SelectedItem;
+                contact = infoService.createContact(db.getDetailsFromContacts(selectedLending.Cid));
+                ContactInLending.DataContext = contact;
+                btn_createLending.IsEnabled = false;
+                btn_deleteLending.IsEnabled = true;
+                btn_updateLending.IsEnabled = true;
             }
         }
 
@@ -187,15 +195,55 @@ namespace DailyDoing
             UpdateContact update = new UpdateContact(contact, this);
             update.Show();
         }
-
         //Update nach SQL Verarbeitung
-
         public void updateAllContactsBox()
         {
             int userID = db.getUserID(username);
             fillContactsInListBox(db, userID);
         }
+        private void lBox_Kontakte_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lBox_Kontakte.SelectedItem != null)
+            {
+                DetailViewLendings.DataContext = null;
+                ContactInLending.DataContext = null;
+                contact = (Contact)lBox_Kontakte.SelectedItem;
+                newLending = new Lending();
+                ContactInLending.DataContext = contact;
+                newLending.Start = DateTime.Today;
+                newLending.End = DateTime.Today;
+                DetailViewLendings.DataContext = newLending;
+                btn_createLending.IsEnabled = true;
+                btn_deleteLending.IsEnabled = false;
+                btn_updateLending.IsEnabled = false;
+                tab_lendings.IsSelected = true;
+            }
+            
+        }
 
-        
+        private void btn_createLending_Click(object sender, RoutedEventArgs e)
+        {
+            db.createLending(db.getUserID(username),contact, newLending);
+            fillLendingsInListBox(db, db.getUserID(username));
+            DetailViewLendings.DataContext = null;
+            ContactInLending.DataContext = null;
+
+        }
+
+        private void btn_deleteLending_Click(object sender, RoutedEventArgs e)
+        {
+                db.deleteLending(selectedLending.Lid);
+                fillLendingsInListBox(db, db.getUserID(username));
+                DetailViewLendings.DataContext = null;
+                ContactInLending.DataContext = null;
+        }
+
+        private void btn_updateLending_Click(object sender, RoutedEventArgs e)
+        {
+            db.updateLending(selectedLending);
+            fillLendingsInListBox(db, db.getUserID(username));
+            DetailViewLendings.DataContext = null;
+            ContactInLending.DataContext = null;
+        }
     }
 }
