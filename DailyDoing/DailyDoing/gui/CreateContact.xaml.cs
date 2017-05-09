@@ -19,23 +19,24 @@ namespace DailyDoing
     /// </summary>
     public partial class CreateContact : Window
     {
-        DBService db = new DBService("sae", "", "d7hevxduyf6mbuax.myfritz.net", "db_dailydoing", 8562); //3306
-        //DBService db = new DBService("root", "", "localhost", "dailydoing", 3306);
+        DBService db = new DBService();
         int userID;
         MainWindow main;
+        Contact newContact = new Contact();
+
         public CreateContact(int userID, MainWindow main)
         {
             InitializeComponent();
+            txt_Name.Focus();
+            NewContactInfo.DataContext = newContact;
             this.userID = userID;
             this.main = main;
         }
         //Informationen aus Textboxen nehmen und daraus einen neuen Kontakt erzeugen
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
-            string firstname = txt_Firstname.Text;
-            string name = txt_Name.Text;
-            string email = txt_email.Text;
-            db.createContact(db.createconnectionstring(),userID, name, firstname, email);
+            newContact.Uid = userID;
+            db.createContact(newContact, userID);
             main.updateAllContactsBox();
             Close();
             
