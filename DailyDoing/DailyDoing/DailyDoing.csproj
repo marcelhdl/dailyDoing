@@ -69,7 +69,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="classes\Contact.cs" />
+    <Compile Include="classes\ContactDAO.cs" />
     <Compile Include="classes\DBException.cs" />
+    <Compile Include="classes\GUIService.cs" />
+    <Compile Include="classes\LendingDAO.cs" />
     <Compile Include="classes\Lending.cs" />
     <Compile Include="gui\CreateContact.xaml.cs">
       <DependentUpon>CreateContact.xaml</DependentUpon>
@@ -93,7 +96,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="classes\DBService.cs" />
-    <Compile Include="classes\InformationService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

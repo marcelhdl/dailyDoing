@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DailyDoing.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace DailyDoing
         DBService db = new DBService();
         int userID;
         MainWindow main;
+        ContactDAO contactService;
         Contact newContact = new Contact();
 
         public CreateContact(int userID, MainWindow main)
@@ -31,13 +33,14 @@ namespace DailyDoing
             NewContactInfo.DataContext = newContact;
             this.userID = userID;
             this.main = main;
+            contactService = new ContactDAO(userID, main);
         }
         //Informationen aus Textboxen nehmen und daraus einen neuen Kontakt erzeugen
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
             newContact.Uid = userID;
             db.createContact(newContact, userID);
-            main.updateAllContactsBox();
+            contactService.fillContactsInListBox();
             Close();
             
         }

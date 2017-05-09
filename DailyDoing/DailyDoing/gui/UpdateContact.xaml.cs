@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DailyDoing.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,22 +20,26 @@ namespace DailyDoing
     /// </summary>
     public partial class UpdateContact : Window
     {
-        Contact contact;
+        int userID;
+        Contact selectedContact;
         DBService db = new DBService();
         MainWindow main;
-        public UpdateContact(Contact contact, MainWindow main)
+        ContactDAO contactService;
+        public UpdateContact(MainWindow main, int userID)
         {
-            this.contact = contact;
             InitializeComponent();
+            this.userID = userID;
             txt_Name.Focus();
-            DetailView.DataContext = contact;
             this.main = main;
+            contactService = new ContactDAO(userID, main);
+            selectedContact = contactService.getSelectedContact();
+            DetailView.DataContext = selectedContact;
         }
         //Informationen aus Textboxen nehmen und Kontakt updaten
         private void btn_createUpdate_Click(object sender, RoutedEventArgs e)
         {
-            db.updateContact(contact);
-            main.updateAllContactsBox();
+            db.updateContact(selectedContact);
+            contactService.fillContactsInListBox();
             Close();
         }
     }

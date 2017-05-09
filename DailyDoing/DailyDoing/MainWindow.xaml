@@ -19,7 +19,7 @@
                     <materialDesign:PackIcon Margin="94,118,0,0" Kind="Key" Height="36" Width="36"/>
                     <TextBox x:Name="txt_username" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  HorizontalAlignment="Left" Height="50" Margin="148,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" ToolTip="Insert Username" KeyboardNavigation.TabIndex="0"/>
                     <PasswordBox x:Name="txt_password" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Left" Margin="148,104,0,0" VerticalAlignment="Top" Width="232" Height="50" KeyboardNavigation.TabIndex="1"/>
-                    <Button x:Name="btn_login" Content="Login" HorizontalAlignment="Left" Margin="63,210,0,0" VerticalAlignment="Top" Width="80" Click="btn_login_Click" KeyboardNavigation.TabIndex="2"/>
+                    <Button x:Name="btn_login" Content="Login" HorizontalAlignment="Left" Margin="63,210,0,0" VerticalAlignment="Top" Width="80" Click="tryToLogIn" KeyboardNavigation.TabIndex="2"/>
                     <Button x:Name="btn_logout" Content="Logout" HorizontalAlignment="Left" Margin="63,210,0,0" VerticalAlignment="Top" Width="80" Click="btn_logout_Click" KeyboardNavigation.TabIndex="2" Visibility="Hidden"/>
                     <Button x:Name="btn_exit" Content="Exit" HorizontalAlignment="Left" Margin="377,210,0,0" VerticalAlignment="Top" Width="80"  Click="btn_exit_Click" KeyboardNavigation.TabIndex="3"/>
                     <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="570,51,0,0" Text="Welcome to The Amazing Daily Service!" VerticalAlignment="Top" Height="212" Width="300" RenderTransformOrigin="0.483,1.152" LineHeight="64" FontWeight="Bold" TextDecorations="{x:Null}" FontSize="29.333" TextAlignment="Center" TextWrapping="Wrap"/>
@@ -27,7 +27,7 @@
             </TabItem>
             <TabItem x:Name="tab_contacts" Header="CONTACTS">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
-                    <ListView Name="lBox_Kontakte" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Kontakte_SelectionChanged" MouseDoubleClick="lBox_Kontakte_MouseDoubleClick" Margin="0,0,0,-1">
+                    <ListView Name="lBox_Contacts" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Left" Height="271" VerticalAlignment="Top" Width="250" SelectionChanged="lBox_Kontakte_SelectionChanged" MouseDoubleClick="lBox_Kontakte_MouseDoubleClick" Margin="0,0,0,-1">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
@@ -45,7 +45,7 @@
                         <TextBox x:Name="txt_city" Text="{Binding City}" IsReadOnly="True" HorizontalAlignment="Left" Height="50" Margin="690,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" materialDesign:HintAssist.Hint="City" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                         <TextBox x:Name="txt_phonenumber" Text="{Binding PhoneNumber}" IsReadOnly="True" HorizontalAlignment="Left" Height="50" Margin="530,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" materialDesign:HintAssist.Hint="Phonenumber" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                         <TextBox x:Name="txt_mobilePhone" Text="{Binding MobileNumber}" IsReadOnly="True" HorizontalAlignment="Left" Height="50" Margin="690,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" materialDesign:HintAssist.Hint="MobilPhone" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                        <Button x:Name="btn_createContact" Content="Create Contact" HorizontalAlignment="Left" Margin="370,219,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click"/>
+                        <Button x:Name="btn_createContact" Content="Create Contact" HorizontalAlignment="Left" Margin="370,219,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.371,0.386" Click="btn_createContact_Click" IsEnabled="False"/>
                         <Button x:Name="btn_deleteContact" Content="Delete Contact" HorizontalAlignment="Left" Margin="690,219,0,0" VerticalAlignment="Top" Width="140" Click="btn_deleteContact_Click" IsEnabled="False"/>
                         <Button x:Name="btn_updateContact" Content="Update Contact" HorizontalAlignment="Left" Margin="530,219,0,0" VerticalAlignment="Top" Width="140" Click="btn_updateContact_Click" IsEnabled="False"/>
                     </Grid>
@@ -61,7 +61,7 @@
                                         <Setter Property="Background" Value="#FF015B01" />
                                         <Setter Property="Foreground" Value="White"/>
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding AllreadyBack}" Value="False">
+                                    <DataTrigger Binding="{Binding AllreadyBack}" Value="false">
                                         <Setter Property="Background" Value="#FFFD4141" />
                                         <Setter Property="Foreground" Value="White"/>
                                     </DataTrigger>
