@@ -75,10 +75,10 @@
     <Compile Include="classes\GUIService.cs" />
     <Compile Include="classes\LendingDAO.cs" />
     <Compile Include="classes\Lending.cs" />
+    <Compile Include="classes\User.cs" />
     <Compile Include="gui\CreateContact.xaml.cs">
       <DependentUpon>CreateContact.xaml</DependentUpon>
     </Compile>
-    <Compile Include="classes\LoginController.cs" />
     <Compile Include="gui\UpdateContact.xaml.cs">
       <DependentUpon>UpdateContact.xaml</DependentUpon>
     </Compile>

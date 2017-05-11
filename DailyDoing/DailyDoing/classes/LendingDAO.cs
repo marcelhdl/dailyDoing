@@ -6,23 +6,24 @@ using System.Threading.Tasks;
 
 namespace DailyDoing.classes
 {
+    /// <summary>
+    /// Gets, Manipulates and Sets Data from and to DataBase for Lending
+    /// </summary>
     class LendingDAO
     {
-        int userID;
         DBService db;
         MainWindow main;
         ContactDAO contactService;
-        public LendingDAO(int userID, MainWindow main)
+        public LendingDAO(MainWindow main, ContactDAO contactService)
         {
-            this.userID = userID;
             this.main = main;
             db = new DBService();
-            contactService = new ContactDAO(userID, main);
+            this.contactService = contactService;
         }
         public void fillLendingsInListBox()
         {
             List<Lending> lendings = new List<Lending>();
-            foreach (string[] lendingInfo in db.getallLendings(userID))
+            foreach (string[] lendingInfo in db.getallLendings(main.getCurrentUserID()))
             {
                 lendings.Add(new Lending()
                 {
@@ -54,6 +55,21 @@ namespace DailyDoing.classes
         {
             main.DetailViewLendings.DataContext = getSelectedLending();
             main.ContactInLending.DataContext = contactService.getContact(getSelectedLending().Cid);
+        }
+
+        internal void createLending(Contact contactForNewLending, Lending lendingToCreate)
+        {
+            db.createLending(main.getCurrentUserID(), contactForNewLending, lendingToCreate);
+        }
+
+        internal void deleteLending()
+        {
+            db.deleteLending(getSelectedLending().Lid);
+        }
+
+        internal void updateLending()
+        {
+            db.updateLending(getSelectedLending());
         }
     }
 }

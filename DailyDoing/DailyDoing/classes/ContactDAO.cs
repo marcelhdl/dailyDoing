@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace DailyDoing.classes
 {
+    /// <summary>
+    /// Gets, Manipulates and Sets Data from and to DataBase for Contacts
+    /// </summary>
     class ContactDAO
     {
-        int userID;
         DBService db;
         MainWindow main;
-        public ContactDAO(int userID, MainWindow main)
+        public ContactDAO(MainWindow main)
         {
-            this.userID = userID;
             this.main = main;
             db = new DBService();
         }
@@ -48,7 +49,7 @@ namespace DailyDoing.classes
         public void fillContactsInListBox()
         {
             main.tab_contacts.IsSelected = true;
-            List<Contact> allContacts = getAllContactsForUser(db.getContacts(userID)).OrderBy(contact => contact.Name).ToList();
+            List<Contact> allContacts = getAllContactsForUser(db.getContacts(main.getCurrentUserID())).OrderBy(contact => contact.Name).ToList();
             main.lBox_Contacts.ItemsSource = allContacts;
 
         }

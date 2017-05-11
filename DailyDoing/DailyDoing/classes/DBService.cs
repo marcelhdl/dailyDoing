@@ -64,12 +64,12 @@ namespace DailyDoing
         }
 
         //Creates a contact for a specific user.
-        public bool createContact(Contact contact, int uid)
+        public bool createContact(Contact contact)
         {
             sql = @"INSERT INTO
                     tbl_contacts_new (uid, name,firstname,mail,street,housenr,postcode,city,tel,mobile)
                     VALUES ('" 
-                    + uid + "','" 
+                    + contact.Uid + "','" 
                     + contact.Name + "','" 
                     + contact.Firstname + "','" 
                     + contact.Email + "','" 
