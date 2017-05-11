@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DailyDoing.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace DailyDoing
 {
@@ -56,7 +58,19 @@ namespace DailyDoing
 
             set
             {
-                email = value;
+                if (value == String.Empty || value == null)
+                {
+                    email = String.Empty;
+                    return;
+                }
+                if (EmailValidator.isValidEmail(value)) {
+                    email = value;
+                }
+                else
+                {
+                    MessageBox.Show("No Valid Email Format, please give an correct Email!","Wrong Email Format",MessageBoxButton.OK,MessageBoxImage.Error);
+                }
+                
             }
         }
 

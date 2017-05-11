@@ -69,9 +69,5 @@ namespace DailyDoing.classes
         public void deleteContactFromDB() {
             db.deleteContact(getSelectedContact().Cid);
         }
-        public List<Contact> searchContactsInDB() {
-            List<Contact> foundedContacts = new List<Contact>();
-            return foundedContacts;
-        }
     }
 }

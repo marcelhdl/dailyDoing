@@ -14,7 +14,7 @@ using System.Security.Authentication;
 namespace DailyDoing
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// MainController for DailyDoing
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -94,7 +94,7 @@ namespace DailyDoing
             }
         }
         //Close
-        public void btn_exit_Click(object sender, RoutedEventArgs e)
+        private void btn_exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
