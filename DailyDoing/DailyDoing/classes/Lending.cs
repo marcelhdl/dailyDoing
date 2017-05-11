@@ -7,6 +7,9 @@ using System.Windows;
 
 namespace DailyDoing.classes
 {
+    /// <summary>
+    /// DataBaseObject for Lending
+    /// </summary>
     public class Lending
     {
         int lid;

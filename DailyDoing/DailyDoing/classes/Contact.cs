@@ -8,6 +8,9 @@ using System.Windows;
 
 namespace DailyDoing
 {
+    /// <summary>
+    /// DataBaseObject Contact
+    /// </summary>
     public class Contact
     {
         string name;

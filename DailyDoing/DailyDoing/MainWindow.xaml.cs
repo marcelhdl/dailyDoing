@@ -34,7 +34,7 @@ namespace DailyDoing
             guiService = new GUIService(this);
         }
         //Login prüfen mit Klick auf "Login"
-        private void tryToLogIn(object sender, RoutedEventArgs e)
+        private void tryToLogin(object sender, RoutedEventArgs e)
         {
             username = txt_username.Text;
             loginController = new LoginController(username, txt_password.Password);
@@ -89,7 +89,7 @@ namespace DailyDoing
             {
                 if (e.Key == Key.Enter)
                 {
-                    tryToLogIn(sender, e);
+                    tryToLogin(sender, e);
                 }
             }
         }
