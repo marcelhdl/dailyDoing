@@ -11,7 +11,7 @@ namespace DailyDoing.classes
     /// </summary>
     class ContactDAO
     {
-        DBService db;
+        public DBService db;
         MainWindow main;
         public ContactDAO(MainWindow main)
         {

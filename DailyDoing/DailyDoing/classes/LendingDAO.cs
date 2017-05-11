@@ -11,19 +11,17 @@ namespace DailyDoing.classes
     /// </summary>
     class LendingDAO
     {
-        DBService db;
         MainWindow main;
         ContactDAO contactService;
         public LendingDAO(MainWindow main, ContactDAO contactService)
         {
             this.main = main;
-            db = new DBService();
             this.contactService = contactService;
         }
         public void fillLendingsInListBox()
         {
             List<Lending> lendings = new List<Lending>();
-            foreach (string[] lendingInfo in db.getallLendings(main.getCurrentUserID()))
+            foreach (string[] lendingInfo in contactService.db.getallLendings(main.getCurrentUserID()))
             {
                 lendings.Add(new Lending()
                 {
@@ -59,17 +57,17 @@ namespace DailyDoing.classes
 
         internal void createLending(Contact contactForNewLending, Lending lendingToCreate)
         {
-            db.createLending(main.getCurrentUserID(), contactForNewLending, lendingToCreate);
+            contactService.db.createLending(main.getCurrentUserID(), contactForNewLending, lendingToCreate);
         }
 
         internal void deleteLending()
         {
-            db.deleteLending(getSelectedLending().Lid);
+            contactService.db.deleteLending(getSelectedLending().Lid);
         }
 
         internal void updateLending()
         {
-            db.updateLending(getSelectedLending());
+            contactService.db.updateLending(getSelectedLending());
         }
     }
 }
