@@ -41,6 +41,7 @@ namespace DailyDoing
                     contactService = new ContactDAO(this);
                     lendingService = new LendingDAO(this, contactService);
                     getInitialData();
+                    setContext();
                 }
             }
             catch (InvalidCredentialException)
@@ -49,6 +50,14 @@ namespace DailyDoing
                 MessageBox.Show("Incorrect Login! Please try again!");
             }
         }
+
+        private void setContext()
+        {
+            DetailView.DataContext = new Contact();
+            DetailViewLendings.DataContext = new Lending();
+            ContactInLending.DataContext = new Contact();
+        }
+
         private void getInitialData()
         {
             contactService.fillContactsInListBox();
@@ -122,8 +131,11 @@ namespace DailyDoing
         //Einsteigspunkt für das Erstellen eines Neuen Kontakts
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
-            CreateContact create = new CreateContact(this);
-            create.Show();
+            if (!contactService.createNewContactforUserInDB((Contact)DetailView.DataContext))
+            {
+                return;
+            }
+            contactService.fillContactsInListBox();
         }
 
         //Löschen eines vorhandenen Kontakts
@@ -136,8 +148,11 @@ namespace DailyDoing
         //Einstiegspunkt für das Updaten eines vorhandenen Kontakts
         private void btn_updateContact_Click(object sender, RoutedEventArgs e)
         {
-            UpdateContact update = new UpdateContact(this);
-            update.Show();
+            if (!contactService.updateSelectedContact((Contact)DetailView.DataContext))
+            {
+                return;
+            }
+            contactService.fillContactsInListBox();
         }
         //Doppel Klick auf Kontakt zum Erstellen eines Lendings für diesen
         private void lBox_Kontakte_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -83,6 +83,7 @@ namespace DailyDoing.classes
 
         internal void setButtonsForContact(bool itemSelected)
         {
+            main.btn_createContact.IsEnabled = !itemSelected;
             main.btn_deleteContact.IsEnabled = itemSelected;
             main.btn_updateContact.IsEnabled = itemSelected;
         }
