@@ -64,6 +64,7 @@ namespace DailyDoing.classes
             if (hasMandatoryFieldsError(newContact)) {
                 return false;
             }
+            newContact.Uid = main.getCurrentUserID();
             db.createContact(newContact);
             return true;
         }
@@ -88,7 +89,7 @@ namespace DailyDoing.classes
         }
         public void resetContactInfo()
         {
-            main.DetailView.DataContext = null;
+            main.DetailView.DataContext = new Contact();
         }
         public void getDetailsForSelectedContact()
         {
