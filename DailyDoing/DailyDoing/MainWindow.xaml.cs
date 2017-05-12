@@ -14,19 +14,14 @@ using System.Security.Authentication;
 namespace DailyDoing
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// MainController for DailyDoing
     /// </summary>
     public partial class MainWindow : Window
     {
-        string username = String.Empty;
-        int userID;
-        bool isLoggedIn = false;
-        DBService db = new DBService();
-        LoginController loginController;
-        Lending newLending;
         ContactDAO contactService;
         LendingDAO lendingService;
         GUIService guiService;
+        User user;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,18 +29,19 @@ namespace DailyDoing
             guiService = new GUIService(this);
         }
         //Login prüfen mit Klick auf "Login"
-        private void tryToLogIn(object sender, RoutedEventArgs e)
+        private void tryToLogin(object sender, RoutedEventArgs e)
         {
-            username = txt_username.Text;
-            loginController = new LoginController(username, txt_password.Password);
+            user = new User(txt_username.Text);
             try
             {
-                isLoggedIn = loginController.authenticate();
-                userID = db.getUserID(username);
-                guiService.switchBetweenLoggedInAndLoggedOut(isLoggedIn);
-                contactService = new ContactDAO(userID, this);
-                lendingService = new LendingDAO(userID, this);
-                getInitialData();
+                if (user.authenticate(txt_password.Password))
+                {
+                    user.IsLoggedIn = true;
+                    guiService.switchBetweenLoggedInAndLoggedOut(user.IsLoggedIn);
+                    contactService = new ContactDAO(this);
+                    lendingService = new LendingDAO(this, contactService);
+                    getInitialData();
+                }
             }
             catch (InvalidCredentialException)
             {
@@ -61,8 +57,8 @@ namespace DailyDoing
         //Logout and Reset all
         private void btn_logout_Click(object sender, RoutedEventArgs e)
         {
-            isLoggedIn = false;
-            guiService.switchBetweenLoggedInAndLoggedOut(isLoggedIn);
+            user.IsLoggedIn = false;
+            guiService.switchBetweenLoggedInAndLoggedOut(user.IsLoggedIn);
             contactService.resetContactInfo();
             lendingService.resetLendingInfo();
         }
@@ -89,12 +85,12 @@ namespace DailyDoing
             {
                 if (e.Key == Key.Enter)
                 {
-                    tryToLogIn(sender, e);
+                    tryToLogin(sender, e);
                 }
             }
         }
         //Close
-        public void btn_exit_Click(object sender, RoutedEventArgs e)
+        private void btn_exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -126,8 +122,7 @@ namespace DailyDoing
         //Einsteigspunkt für das Erstellen eines Neuen Kontakts
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
-            int userID = db.getUserID(username);
-            CreateContact create = new CreateContact(userID, this);
+            CreateContact create = new CreateContact(this);
             create.Show();
         }
 
@@ -141,8 +136,7 @@ namespace DailyDoing
         //Einstiegspunkt für das Updaten eines vorhandenen Kontakts
         private void btn_updateContact_Click(object sender, RoutedEventArgs e)
         {
-            int userID = db.getUserID(username);
-            UpdateContact update = new UpdateContact(this, userID);
+            UpdateContact update = new UpdateContact(this);
             update.Show();
         }
         //Doppel Klick auf Kontakt zum Erstellen eines Lendings für diesen
@@ -152,11 +146,10 @@ namespace DailyDoing
             {
                 bool itemSeleted = false;
                 lendingService.resetLendingInfo();
-                newLending = new Lending();
                 ContactInLending.DataContext = contactService.getSelectedContact();
-                newLending.Start = DateTime.Today;
-                newLending.End = DateTime.Today;
-                DetailViewLendings.DataContext = newLending;
+                DetailViewLendings.DataContext = new Lending();
+                datePicker_end.SelectedDate = DateTime.Today;
+                datePicker_start.SelectedDate = DateTime.Today;
                 guiService.setButtonsForLending(itemSeleted);
                 tab_lendings.IsSelected = true;
             }
@@ -170,28 +163,34 @@ namespace DailyDoing
                 tab_contacts.IsSelected = true;
                 return;
             }
-            MessageBoxResult result = MessageBox.Show("Are all Important fiels filled out?", "Check Fields", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
-            if (result == MessageBoxResult.Yes)
-            {
-                db.createLending(db.getUserID(username), (Contact)ContactInLending.DataContext, newLending);
-                lendingService.fillLendingsInListBox();
-                lendingService.resetLendingInfo();
+            if (!lendingService.createLending((Contact)ContactInLending.DataContext,(Lending)DetailViewLendings.DataContext)) {
                 return;
             }
+            lendingService.fillLendingsInListBox();
+            lendingService.resetLendingInfo();
+            return;
+
         }
         //Löscht vorhandenes Lending
         private void btn_deleteLending_Click(object sender, RoutedEventArgs e)
         {
-            db.deleteLending(lendingService.getSelectedLending().Lid);
+            lendingService.deleteLending();
             lendingService.fillLendingsInListBox();
             lendingService.resetLendingInfo();
         }
         //Updated ein vorhandenes Lending
         private void btn_updateLending_Click(object sender, RoutedEventArgs e)
         {
-            db.updateLending(lendingService.getSelectedLending());
+            if (!lendingService.updateLending())
+            {
+                return;
+            }
             lendingService.fillLendingsInListBox();
             lendingService.resetLendingInfo();
+        }
+        public int getCurrentUserID()
+        {
+            return user.UserID;
         }
     }
 }

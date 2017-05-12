@@ -20,25 +20,24 @@ namespace DailyDoing
     /// </summary>
     public partial class UpdateContact : Window
     {
-        int userID;
         Contact selectedContact;
-        DBService db = new DBService();
         MainWindow main;
         ContactDAO contactService;
-        public UpdateContact(MainWindow main, int userID)
+        public UpdateContact(MainWindow main)
         {
             InitializeComponent();
-            this.userID = userID;
             txt_Name.Focus();
             this.main = main;
-            contactService = new ContactDAO(userID, main);
+            contactService = new ContactDAO(main);
             selectedContact = contactService.getSelectedContact();
             DetailView.DataContext = selectedContact;
         }
         //Informationen aus Textboxen nehmen und Kontakt updaten
         private void btn_createUpdate_Click(object sender, RoutedEventArgs e)
         {
-            db.updateContact(selectedContact);
+            if(!contactService.updateSelectedContact(selectedContact)){
+                return;
+            }
             contactService.fillContactsInListBox();
             Close();
         }

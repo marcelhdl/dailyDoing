@@ -1,28 +1,29 @@
-﻿using System;
+﻿using DailyDoing.classes.ErrorHandlers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace DailyDoing.classes
 {
+    /// <summary>
+    /// Gets, Manipulates and Sets Data from and to DataBase for Lending
+    /// </summary>
     class LendingDAO
     {
-        int userID;
-        DBService db;
         MainWindow main;
         ContactDAO contactService;
-        public LendingDAO(int userID, MainWindow main)
+        public LendingDAO(MainWindow main, ContactDAO contactService)
         {
-            this.userID = userID;
             this.main = main;
-            db = new DBService();
-            contactService = new ContactDAO(userID, main);
+            this.contactService = contactService;
         }
         public void fillLendingsInListBox()
         {
             List<Lending> lendings = new List<Lending>();
-            foreach (string[] lendingInfo in db.getallLendings(userID))
+            foreach (string[] lendingInfo in contactService.db.getallLendings(main.getCurrentUserID()))
             {
                 lendings.Add(new Lending()
                 {
@@ -54,6 +55,43 @@ namespace DailyDoing.classes
         {
             main.DetailViewLendings.DataContext = getSelectedLending();
             main.ContactInLending.DataContext = contactService.getContact(getSelectedLending().Cid);
+        }
+
+        internal bool createLending(Contact contactForNewLending, Lending lendingToCreate)
+        {
+            lendingToCreate.Cid = contactForNewLending.Cid;
+            if (hasMandatoryFieldsError(lendingToCreate))
+            {
+                return false;
+            }
+            contactService.db.createLending(main.getCurrentUserID(), contactForNewLending, lendingToCreate);
+            return true;
+        }
+
+        private bool hasMandatoryFieldsError(Lending lendingToCheck)
+        {
+            if (String.IsNullOrEmpty(lendingToCheck.Title) || lendingToCheck.Start == null)
+            {
+                LendingError error = new LendingError();
+                error.showErrorBox();
+                return true;
+            }
+            return false;
+        }
+
+        internal void deleteLending()
+        {
+            contactService.db.deleteLending(getSelectedLending().Lid);
+        }
+
+        internal bool updateLending()
+        {
+            if (hasMandatoryFieldsError(getSelectedLending()))
+            {
+                return false;
+            }
+            contactService.db.updateLending(getSelectedLending());
+            return true;
         }
     }
 }

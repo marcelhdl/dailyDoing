@@ -7,6 +7,9 @@ using System.Windows;
 
 namespace DailyDoing.classes
 {
+    /// <summary>
+    /// Controlls GUI Appearance
+    /// </summary>
     class GUIService
     {
         MainWindow main;

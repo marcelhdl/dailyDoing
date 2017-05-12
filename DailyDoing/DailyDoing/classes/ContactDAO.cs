@@ -1,19 +1,22 @@
-﻿using System;
+﻿using DailyDoing.classes.ErrorHandlers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace DailyDoing.classes
 {
+    /// <summary>
+    /// Gets, Manipulates and Sets Data from and to DataBase for Contacts
+    /// </summary>
     class ContactDAO
     {
-        int userID;
-        DBService db;
+        public DBService db;
         MainWindow main;
-        public ContactDAO(int userID, MainWindow main)
+        public ContactDAO(MainWindow main)
         {
-            this.userID = userID;
             this.main = main;
             db = new DBService();
         }
@@ -45,10 +48,41 @@ namespace DailyDoing.classes
             };
             return contact;
         }
+
+        internal bool updateSelectedContact(Contact selectedContact)
+        {
+            if (hasMandatoryFieldsError(selectedContact))
+            {
+                return false;
+            }
+            db.updateContact(selectedContact);
+            return true;        
+        }
+
+        internal bool createNewContactforUserInDB(Contact newContact)
+        {
+            if (hasMandatoryFieldsError(newContact)) {
+                return false;
+            }
+            db.createContact(newContact);
+            return true;
+        }
+
+        private bool hasMandatoryFieldsError(Contact newContact)
+        {
+            if (String.IsNullOrEmpty(newContact.Name) || String.IsNullOrEmpty(newContact.Firstname))
+            {
+                ContactError error = new ContactError();
+                error.showErrorBox();
+                return true;
+            }
+            return false;
+        }
+
         public void fillContactsInListBox()
         {
             main.tab_contacts.IsSelected = true;
-            List<Contact> allContacts = getAllContactsForUser(db.getContacts(userID)).OrderBy(contact => contact.Name).ToList();
+            List<Contact> allContacts = getAllContactsForUser(db.getContacts(main.getCurrentUserID())).OrderBy(contact => contact.Name).ToList();
             main.lBox_Contacts.ItemsSource = allContacts;
 
         }
@@ -68,10 +102,6 @@ namespace DailyDoing.classes
         }
         public void deleteContactFromDB() {
             db.deleteContact(getSelectedContact().Cid);
-        }
-        public List<Contact> searchContactsInDB() {
-            List<Contact> foundedContacts = new List<Contact>();
-            return foundedContacts;
         }
     }
 }
