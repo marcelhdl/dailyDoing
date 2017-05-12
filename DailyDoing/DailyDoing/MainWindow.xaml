@@ -19,6 +19,9 @@
                     <materialDesign:PackIcon Margin="94,118,0,0" Kind="Key" Height="36" Width="36"/>
                     <TextBox x:Name="txt_username" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  HorizontalAlignment="Left" Height="50" Margin="148,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" ToolTip="Insert Username" KeyboardNavigation.TabIndex="0"/>
                     <PasswordBox x:Name="txt_password" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Left" Margin="148,104,0,0" VerticalAlignment="Top" Width="232" Height="50" KeyboardNavigation.TabIndex="1"/>
+                    <Label x:Name="lbl_settings" Margin="400,130,0,0">
+                        <Hyperlink Click="forgotPassword_Click">Forgot your Password?</Hyperlink>
+                    </Label>
                     <Button x:Name="btn_login" Content="Login" HorizontalAlignment="Left" Margin="63,210,0,0" VerticalAlignment="Top" Width="80" Click="tryToLogin" KeyboardNavigation.TabIndex="2"/>
                     <Button x:Name="btn_logout" Content="Logout" HorizontalAlignment="Left" Margin="63,210,0,0" VerticalAlignment="Top" Width="80" Click="btn_logout_Click" KeyboardNavigation.TabIndex="2" Visibility="Hidden"/>
                     <Button x:Name="btn_exit" Content="Exit" HorizontalAlignment="Left" Margin="377,210,0,0" VerticalAlignment="Top" Width="80"  Click="btn_exit_Click" KeyboardNavigation.TabIndex="3"/>
