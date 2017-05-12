@@ -72,6 +72,9 @@
     <Compile Include="classes\ContactDAO.cs" />
     <Compile Include="classes\DBException.cs" />
     <Compile Include="classes\EmailValidator.cs" />
+    <Compile Include="classes\ErrorHandlers\ContactError.cs" />
+    <Compile Include="classes\ErrorHandlers\ErrorHandler.cs" />
+    <Compile Include="classes\ErrorHandlers\LendingError.cs" />
     <Compile Include="classes\GUIService.cs" />
     <Compile Include="classes\LendingDAO.cs" />
     <Compile Include="classes\Lending.cs" />

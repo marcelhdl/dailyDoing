@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DailyDoing.classes.ErrorHandlers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -71,7 +72,8 @@ namespace DailyDoing.classes
         {
             if (String.IsNullOrEmpty(newContact.Name) || String.IsNullOrEmpty(newContact.Firstname))
             {
-                MessageBox.Show("Name and Firstname are mandatory fields, please give some Information.", "Information Missing!", MessageBoxButton.OK, MessageBoxImage.Error);
+                ContactError error = new ContactError();
+                error.showErrorBox();
                 return true;
             }
             return false;
