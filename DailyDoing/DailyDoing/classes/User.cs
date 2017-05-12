@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DailyDoing.classes
 {
+    /// <summary>
+    /// Object for Current User
+    /// </summary>
     public class User
     {
         string username;
