@@ -36,6 +36,7 @@ namespace DailyDoing
             set
             {
                 name = value;
+                
             }
         }
 
@@ -72,6 +73,7 @@ namespace DailyDoing
                 else
                 {
                     MessageBox.Show("No Valid Email Format, please give an correct Email!","Wrong Email Format",MessageBoxButton.OK,MessageBoxImage.Error);
+                    return;
                 }
                 
             }

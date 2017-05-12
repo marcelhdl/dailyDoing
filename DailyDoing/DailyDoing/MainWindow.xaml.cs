@@ -163,15 +163,13 @@ namespace DailyDoing
                 tab_contacts.IsSelected = true;
                 return;
             }
-            MessageBoxResult result = MessageBox.Show("Are all Important fiels filled out?", "Check Fields", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
-            if (result == MessageBoxResult.Yes)
-            {
-                Lending newLending = (Lending)DetailViewLendings.DataContext;
-                lendingService.createLending((Contact)ContactInLending.DataContext, newLending);
-                lendingService.fillLendingsInListBox();
-                lendingService.resetLendingInfo();
+            if (!lendingService.createLending((Contact)ContactInLending.DataContext,(Lending)DetailViewLendings.DataContext)) {
                 return;
             }
+            lendingService.fillLendingsInListBox();
+            lendingService.resetLendingInfo();
+            return;
+
         }
         //Löscht vorhandenes Lending
         private void btn_deleteLending_Click(object sender, RoutedEventArgs e)
@@ -183,7 +181,10 @@ namespace DailyDoing
         //Updated ein vorhandenes Lending
         private void btn_updateLending_Click(object sender, RoutedEventArgs e)
         {
-            lendingService.updateLending();
+            if (!lendingService.updateLending())
+            {
+                return;
+            }
             lendingService.fillLendingsInListBox();
             lendingService.resetLendingInfo();
         }

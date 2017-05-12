@@ -21,7 +21,6 @@ namespace DailyDoing
     public partial class UpdateContact : Window
     {
         Contact selectedContact;
-        DBService db = new DBService();
         MainWindow main;
         ContactDAO contactService;
         public UpdateContact(MainWindow main)
@@ -36,7 +35,9 @@ namespace DailyDoing
         //Informationen aus Textboxen nehmen und Kontakt updaten
         private void btn_createUpdate_Click(object sender, RoutedEventArgs e)
         {
-            db.updateContact(selectedContact);
+            if(!contactService.updateSelectedContact(selectedContact)){
+                return;
+            }
             contactService.fillContactsInListBox();
             Close();
         }

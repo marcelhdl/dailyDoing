@@ -20,7 +20,6 @@ namespace DailyDoing
     /// </summary>
     public partial class CreateContact : Window
     {
-        DBService db = new DBService();
         MainWindow main;
         ContactDAO contactService;
         Contact newContact = new Contact();
@@ -37,7 +36,10 @@ namespace DailyDoing
         private void btn_createContact_Click(object sender, RoutedEventArgs e)
         {
             newContact.Uid = main.getCurrentUserID();
-            db.createContact(newContact);
+            if (!contactService.createNewContactforUserInDB(newContact))
+            {
+                return;
+            }
             contactService.fillContactsInListBox();
             Close();
             

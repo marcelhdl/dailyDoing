@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace DailyDoing.classes
 {
@@ -55,9 +56,25 @@ namespace DailyDoing.classes
             main.ContactInLending.DataContext = contactService.getContact(getSelectedLending().Cid);
         }
 
-        internal void createLending(Contact contactForNewLending, Lending lendingToCreate)
+        internal bool createLending(Contact contactForNewLending, Lending lendingToCreate)
         {
+            lendingToCreate.Cid = contactForNewLending.Cid;
+            if (hasMandatoryFieldsError(lendingToCreate))
+            {
+                return false;
+            }
             contactService.db.createLending(main.getCurrentUserID(), contactForNewLending, lendingToCreate);
+            return true;
+        }
+
+        private bool hasMandatoryFieldsError(Lending lendingToCheck)
+        {
+            if (String.IsNullOrEmpty(lendingToCheck.Title) || lendingToCheck.Start == null)
+            {
+                MessageBox.Show("Title and the StartDate are mandatory fields, please give some Information.", "Information Missing!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+            return false;
         }
 
         internal void deleteLending()
@@ -65,9 +82,14 @@ namespace DailyDoing.classes
             contactService.db.deleteLending(getSelectedLending().Lid);
         }
 
-        internal void updateLending()
+        internal bool updateLending()
         {
+            if (hasMandatoryFieldsError(getSelectedLending()))
+            {
+                return false;
+            }
             contactService.db.updateLending(getSelectedLending());
+            return true;
         }
     }
 }

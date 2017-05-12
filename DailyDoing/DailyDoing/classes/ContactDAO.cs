@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace DailyDoing.classes
 {
@@ -46,6 +47,36 @@ namespace DailyDoing.classes
             };
             return contact;
         }
+
+        internal bool updateSelectedContact(Contact selectedContact)
+        {
+            if (hasMandatoryFieldsError(selectedContact))
+            {
+                return false;
+            }
+            db.updateContact(selectedContact);
+            return true;        
+        }
+
+        internal bool createNewContactforUserInDB(Contact newContact)
+        {
+            if (hasMandatoryFieldsError(newContact)) {
+                return false;
+            }
+            db.createContact(newContact);
+            return true;
+        }
+
+        private bool hasMandatoryFieldsError(Contact newContact)
+        {
+            if (String.IsNullOrEmpty(newContact.Name) || String.IsNullOrEmpty(newContact.Firstname))
+            {
+                MessageBox.Show("Name and Firstname are mandatory fields, please give some Information.", "Information Missing!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+            return false;
+        }
+
         public void fillContactsInListBox()
         {
             main.tab_contacts.IsSelected = true;
