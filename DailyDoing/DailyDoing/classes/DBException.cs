@@ -22,29 +22,42 @@ namespace DailyDoing
             switch(errorcode)
             {
                 case 0:
-                   MessageBox.Show("Cannot contact MySQL Server ");//MessageBox.Show("Cannot connect to server.  Contact administrator");
+                    caption = "Connection failed";
+                    message = "Cannot connect to server.\nContact Administrator!";
+                    prepbox(0,caption, message);
                    break;
 
                 case 1045:
-                    MessageBox.Show("Invalid username/password for DB-User, please try again");
+                    caption = "Connection failed";
+                    message = "Cannot connect to server.\nInvalid username or password.";
+                    prepbox(0,caption, message);
                     break;
 
                 case 1042:
                     caption = "Connection failed";
                     message = "Cannot connect to server.\nUnable to resolve DNS.\nCheck your internet connection and your DNS-settings\nReload?";
-                    prepbox(caption, message);
+                    prepbox(1,caption, message);
                     break;
                 default:
-                    MessageBox.Show("Can't connect to MySQL-Server");
+                    caption = "Connection failed";
+                    message = "Cannot connect to server.\nContact Administrator!";
+                    prepbox(0,caption, message);
                     break;
             }
 
         }
-        private void prepbox(string caption, string message)
+        private void prepbox(int mbb, string caption, string message)
         {
-
-            MessageBoxButton buttons = MessageBoxButton.YesNo;
+            MessageBoxButton buttons = MessageBoxButton.OK;
             MessageBoxResult result;
+            if (mbb == 1)
+            {  
+                buttons = MessageBoxButton.YesNo;
+            }
+            else if(mbb == 0)
+            {
+                 buttons = MessageBoxButton.OK;
+            }
 
             // Displays the MessageBox.
 
