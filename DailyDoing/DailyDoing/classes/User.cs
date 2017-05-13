@@ -66,6 +66,10 @@ namespace DailyDoing.classes
             {
                 return true;
             }
+            if (UserID == -2)
+            {
+                return false;
+            }
             throw new InvalidCredentialException();
         }
     }

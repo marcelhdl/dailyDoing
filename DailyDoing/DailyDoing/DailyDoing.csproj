@@ -73,7 +73,7 @@
     </ApplicationDefinition>
     <Compile Include="classes\Contact.cs" />
     <Compile Include="classes\ContactDAO.cs" />
-    <Compile Include="classes\DBException.cs" />
+    <Compile Include="classes\ErrorHandlers\DBError.cs" />
     <Compile Include="classes\EmailValidator.cs" />
     <Compile Include="classes\ErrorHandlers\ContactError.cs" />
     <Compile Include="classes\ErrorHandlers\ErrorHandler.cs" />
