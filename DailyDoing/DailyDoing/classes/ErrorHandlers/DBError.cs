@@ -11,12 +11,10 @@ namespace DailyDoing.classes
     class DBError : ErrorHandler
     {
         int errorcode;
-        string message;
-        public DBError(int errorcode)
+        public DBError()
         {
             this.errorHeader = getErrorHeader();
             this.errorDescription = getErrorDescription();
-            this.errorcode = errorcode;
         }
 
         private string getErrorDescription()
@@ -24,26 +22,29 @@ namespace DailyDoing.classes
             switch (errorcode)
             {
                 case 0:
-                    message = "Cannot connect to server.\nContact Administrator!";
+                    errorDescription = "Cannot connect to server.\nContact Administrator!";
                     break;
 
                 case 1045:
-                    message = "Cannot connect to server.\nInvalid username or password.";
+                    errorDescription = "Cannot connect to server.\nInvalid username or password.";
                     break;
 
                 case 1042:
-                    message = "Cannot connect to server.\nUnable to resolve DNS.\nCheck your internet connection and your DNS-settings,";
+                    errorDescription = "Cannot connect to server.\nUnable to resolve DNS.\nCheck your internet connection and your DNS-settings,";
                     break;
                 default:
-                    message = "Cannot connect to server.\nContact Administrator!";
+                    errorDescription = "Cannot connect to server.\nContact Administrator!";
                     break;
             }
-            return message;
+            return errorDescription;
         }
 
         private string getErrorHeader()
         {
             return "Connection failed!";
+        }
+        public void setErrorCode(int errorCode) {
+            this.errorcode = errorCode;
         }
     }
 }

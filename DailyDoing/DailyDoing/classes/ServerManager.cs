@@ -22,7 +22,8 @@ namespace DailyDoing
         string DBConnection;
         string DBName;
         int DBPort;
-        
+        DBError dbex = new DBError();
+
         public ServerManager()
         {
             StreamReader reader = new StreamReader("C:" + Environment.ExpandEnvironmentVariables("%HOMEPATH%") + "\\.connectionDB_DailyDoing.cfg");
@@ -105,7 +106,7 @@ namespace DailyDoing
                 }
                 catch (MySqlException e)
                 {
-                    DBError dbex = new DBError(e.Number);
+                    dbex.setErrorCode(e.Number);
                     dbex.showErrorBox();
                 }
             }
