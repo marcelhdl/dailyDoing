@@ -11,9 +11,10 @@ namespace DailyDoing.classes
     class DBError : ErrorHandler
     {
         int errorcode;
-        public DBError()
+        public DBError(int errorcode)
         {
             this.errorHeader = getErrorHeader();
+            this.errorcode = errorcode;
             this.errorDescription = getErrorDescription();
         }
 
@@ -22,7 +23,7 @@ namespace DailyDoing.classes
             switch (errorcode)
             {
                 case 0:
-                    errorDescription = "Cannot connect to server.\nContact Administrator!";
+                    errorDescription = "Cannot connect to server.\nContact Administrator!\nNumber zero";
                     break;
 
                 case 1045:
@@ -33,12 +34,12 @@ namespace DailyDoing.classes
                     errorDescription = "Cannot connect to server.\nUnable to resolve DNS.\nCheck your internet connection and your DNS-settings.";
                     break;
 
-                case 1051:
-                    errorDescription = "Constraint Fail";
+                case 1451:
+                    errorDescription = "Constraint Fail\nPlease delete all contact specific lendings to delete the contact!";
                     break;
 
                 default:
-                    errorDescription = "Cannot connect to server.\nContact Administrator!";
+                    errorDescription = "Cannot connect to server.\nContact Administrator\nDefault!";
                     break;
             }
             return errorDescription;
@@ -46,10 +47,10 @@ namespace DailyDoing.classes
 
         private string getErrorHeader()
         {
-            return "Connection failed!";
+            return "Invalid Action!";
         }
-        public void setErrorCode(int errorCode) {
+        /*public void setErrorCode(int errorCode) {
             this.errorcode = errorCode;
-        }
+        }*/
     }
 }
