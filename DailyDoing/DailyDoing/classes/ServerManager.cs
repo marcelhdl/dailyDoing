@@ -83,6 +83,7 @@ namespace DailyDoing
                 catch (MySqlException e)
                 {
                     //dbex.setErrorCode(e.Number);
+                    dbex = new DBError(e.Number);
                     dbex.showErrorBox();
                 }
             }
@@ -121,6 +122,7 @@ namespace DailyDoing
                 }
                 catch(MySqlException e)
                 {
+                    dbex = new DBError(e.Number);
                     //dbex.setErrorCode(e.Number);
                     dbex.showErrorBox();
                 }
@@ -212,7 +214,7 @@ namespace DailyDoing
             return true;
         }
 
-        public List<string[]> Lendings(string sql) //Return the Lendings as sql-string wants
+        public List<string[]> Lendings(string sql) //Return the Lendings how the sql-string wants
         {
             Con = createconnectionstring();
             Command = Con.CreateCommand();
@@ -239,7 +241,7 @@ namespace DailyDoing
 
         #endregion
 
-        public string[] getDetails(string sql) //Get the Details of a specific Lending.
+        public string[] getDetails(string sql) //Get the Details of a specific Contact/Lending.
         {
             Con = createconnectionstring();
             Command = Con.CreateCommand();

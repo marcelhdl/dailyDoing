@@ -17,7 +17,6 @@ namespace DailyDoing.classes
             }
             catch(FormatException)
             {
-
                 return false;
             }
                 
