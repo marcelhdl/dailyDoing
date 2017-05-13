@@ -32,6 +32,7 @@ namespace DailyDoing.classes
             main.btn_login.Visibility = Visibility.Hidden;
             main.btn_logout.Visibility = Visibility.Visible;
             main.btn_createContact.IsEnabled = true;
+            main.btn_createLending.IsEnabled = true;
         }
 
         private void setGuiToLoggedOut()

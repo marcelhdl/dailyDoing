@@ -49,6 +49,7 @@ namespace DailyDoing.classes
         {
             main.DetailViewLendings.DataContext = null;
             main.ContactInLending.DataContext = null;
+            main.btn_createLending.IsEnabled = true;
         }
 
         internal void setLendingInfo()
