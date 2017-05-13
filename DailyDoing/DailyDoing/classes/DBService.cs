@@ -152,7 +152,9 @@ namespace DailyDoing
         // Please give DateTime.Date
         public bool createLending(int uid, Contact contact ,Lending lending)
         {
-           sql = @"INSERT INTO tbl_lendings_new
+        string start = lending.Start.ToString("yyyy-MM-dd HH:mm:ss");
+        string end = lending.End.ToString("yyyy-MM-dd HH:mm:ss");
+            sql = @"INSERT INTO tbl_lendings_new
                    (uid, cid, title, description, category, priority, timestamp_lend, timestamp_lendback, get_back) 
                    VALUES
                    ('" + uid + 
@@ -161,8 +163,8 @@ namespace DailyDoing
                    "','" + lending.Description +
                    "','" + lending.Category +
                    "','" + lending.Priority + 
-                   "','" + lending.Start +
-                   "','" + lending.End +
+                   "','" + start +
+                   "','" + end +
                    "','" + lending.AllreadyBack + "')";
 
             return sm.Lending(sql);
@@ -171,14 +173,16 @@ namespace DailyDoing
         //Update a specific landing.
         public bool updateLending(Lending lending)
         {
+            string start = lending.Start.ToString("yyyy-MM-dd HH:mm:ss");
+            string end = lending.End.ToString("yyyy-MM-dd HH:mm:ss");
             sql = @"UPDATE tbl_lendings_new 
                     SET cid='" + lending.Cid + "'," +
                     " title='"+ lending.Title + "'," +
                     " description='" + lending.Description + "'," +
                     " category='"+ lending.Category + "'," +
                     " priority='" + lending.Priority + "'," +
-                    " timestamp_lend='" + lending.Start + "'," +
-                    " timestamp_lendback='" + lending.End + "'," +
+                    " timestamp_lend='" + start + "'," +
+                    " timestamp_lendback='" + end + "'," +
                     " get_back='" + lending.AllreadyBack +
                     "' WHERE lid='" + lending.Lid + "'";
             return sm.Lending(sql);

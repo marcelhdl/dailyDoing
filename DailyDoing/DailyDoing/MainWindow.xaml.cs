@@ -55,6 +55,8 @@ namespace DailyDoing
         {
             DetailView.DataContext = new Contact();
             DetailViewLendings.DataContext = new Lending();
+            datePicker_end.SelectedDate = DateTime.Today;
+            datePicker_start.SelectedDate = DateTime.Today;
             ContactInLending.DataContext = new Contact();
         }
 
