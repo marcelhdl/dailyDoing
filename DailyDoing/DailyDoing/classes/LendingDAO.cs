@@ -42,6 +42,11 @@ namespace DailyDoing.classes
             lendings = lendings.OrderBy(lending => lending.Title).ToList();
             main.lBox_Lendings.ItemsSource = lendings;
         }
+        internal void setLendingInfo()
+        {
+            main.DetailViewLendings.DataContext = getSelectedLending();
+            main.ContactInLending.DataContext = contactService.getContact(getSelectedLending().Cid);
+        }
         public Lending getSelectedLending() {
             return (Lending)main.lBox_Lendings.SelectedItem;
         }
@@ -49,12 +54,6 @@ namespace DailyDoing.classes
         {
             main.DetailViewLendings.DataContext = null;
             main.ContactInLending.DataContext = null;
-        }
-
-        internal void setLendingInfo()
-        {
-            main.DetailViewLendings.DataContext = getSelectedLending();
-            main.ContactInLending.DataContext = contactService.getContact(getSelectedLending().Cid);
         }
 
         internal bool createLending(Contact contactForNewLending, Lending lendingToCreate)
@@ -67,6 +66,19 @@ namespace DailyDoing.classes
             contactService.db.createLending(main.getCurrentUserID(), contactForNewLending, lendingToCreate);
             return true;
         }
+        internal bool updateLending()
+        {
+            if (hasMandatoryFieldsError(getSelectedLending()))
+            {
+                return false;
+            }
+            contactService.db.updateLending(getSelectedLending());
+            return true;
+        }
+        internal void deleteLending()
+        {
+            contactService.db.deleteLending(getSelectedLending().Lid);
+        }
 
         private bool hasMandatoryFieldsError(Lending lendingToCheck)
         {
@@ -77,21 +89,6 @@ namespace DailyDoing.classes
                 return true;
             }
             return false;
-        }
-
-        internal void deleteLending()
-        {
-            contactService.db.deleteLending(getSelectedLending().Lid);
-        }
-
-        internal bool updateLending()
-        {
-            if (hasMandatoryFieldsError(getSelectedLending()))
-            {
-                return false;
-            }
-            contactService.db.updateLending(getSelectedLending());
-            return true;
         }
     }
 }
