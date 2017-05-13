@@ -12,17 +12,21 @@ using System.Windows;
 
 namespace DailyDoing
 {
+    /// <summary>
+    /// Manage the Database-Connections 
+    /// </summary>
     class ServerManager
     {
+        //Initialise the Objects for the Connection, the DataReader, the Command and the DBError for Errorhandling
         MySqlConnection Con;
         MySqlDataReader Reader;
         MySqlCommand Command;
+        DBError dbex; 
         string DBUser;
         string DBPass;
         string DBConnection;
         string DBName;
         int DBPort;
-        DBError dbex = new DBError();
 
         public ServerManager()
         {
@@ -46,47 +50,19 @@ namespace DailyDoing
             Con = new MySqlConnection(con_string.ToString());
             return Con;
         }
-        
+
 
         #region User
 
-        public bool checkPassword(string sql, string username, string pw)
+        public int getUserID(string sql) //Returns the UserID
         {
             Con = createconnectionstring();
             Command = Con.CreateCommand();
             Command.CommandText = sql;
+
             if (Con.State.ToString() == "Open") { }
-            else { Con.Open(); }
-            Reader = Command.ExecuteReader();
-            while (Reader.Read())
+            else
             {
-                string row = "";
-                for (int i = 0; i < Reader.FieldCount; i++)
-                    row += Reader.GetValue(i).ToString();
-                if (row == pw)
-                {
-                    Con.Close();
-                    return true;
-                }
-                else
-                {
-                    Con.Close();
-                    return false;
-                }
-            }
-            Con.Close();
-            return false;
-        }
-
-
-        public int getUserID(string sql)
-        {
-            Con = createconnectionstring();
-            Command = Con.CreateCommand();
-            Command.CommandText = sql;
-
-            if (Con.State.ToString() == "Open") { }
-            else {
                 try
                 {
                     Con.Open();
@@ -99,10 +75,10 @@ namespace DailyDoing
                             row = Reader.GetValue(i).ToString();
                         }
                         Con.Close();
-                        return Convert.ToInt32(row);
+                        return Convert.ToInt32(row);  //UserID
                     }
                     Con.Close();
-                    return -1;
+                    return -1; //No User Found
                 }
                 catch (MySqlException e)
                 {
@@ -110,12 +86,52 @@ namespace DailyDoing
                     dbex.showErrorBox();
                 }
             }
-            return -2;
+            return -2; //Exception throwed
         }
+
+        public bool checkPassword(string sql, string username, string pw)
+        {
+            Con = createconnectionstring();
+            Command = Con.CreateCommand();
+            Command.CommandText = sql;
+            if (Con.State.ToString() == "Open") { }
+            else {
+                try
+                {
+                    Con.Open();
+                    Reader = Command.ExecuteReader();
+                    while (Reader.Read())
+                    {
+                        string row = "";
+                        for (int i = 0; i < Reader.FieldCount; i++)
+                            row += Reader.GetValue(i).ToString();
+                        if (row == pw)
+                        {
+                            Con.Close();
+                            return true;
+                        }
+                        else
+                        {
+                            Con.Close();
+                            return false;
+                        }
+                    }
+                    Con.Close();
+                    return false;
+                }
+                catch(MySqlException e)
+                {
+                    dbex.setErrorCode(e.Number);
+                    dbex.showErrorBox();
+                }
+            }
+            return false;
+        }
+
         #endregion
 
         #region Contacts
-        public List<string[]> getContacts(string sql)
+        public List<string[]> getContacts(string sql) //Returns all Contacts from a User
         {
             Con = createconnectionstring();
             Command = Con.CreateCommand();
@@ -186,7 +202,7 @@ namespace DailyDoing
             return true;
         }
 
-        public List<string[]> Lendings(string sql)
+        public List<string[]> Lendings(string sql) //Return the Lendings as sql-string wants
         {
             Con = createconnectionstring();
             Command = Con.CreateCommand();
@@ -213,7 +229,7 @@ namespace DailyDoing
 
         #endregion
 
-        public string[] getDetails(string sql)
+        public string[] getDetails(string sql) //Get the Details of a specific Lending.
         {
             Con = createconnectionstring();
             Command = Con.CreateCommand();

@@ -30,8 +30,13 @@ namespace DailyDoing.classes
                     break;
 
                 case 1042:
-                    errorDescription = "Cannot connect to server.\nUnable to resolve DNS.\nCheck your internet connection and your DNS-settings,";
+                    errorDescription = "Cannot connect to server.\nUnable to resolve DNS.\nCheck your internet connection and your DNS-settings.";
                     break;
+
+                case 1051:
+                    errorDescription = "Constraint Fail";
+                    break;
+
                 default:
                     errorDescription = "Cannot connect to server.\nContact Administrator!";
                     break;
