@@ -21,7 +21,7 @@ namespace DailyDoing
         MySqlConnection Con;
         MySqlDataReader Reader;
         MySqlCommand Command;
-        DBError dbex; 
+        DBError dbex = new DBError(); 
         string DBUser;
         string DBPass;
         string DBConnection;

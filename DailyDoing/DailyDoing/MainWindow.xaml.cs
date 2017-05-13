@@ -137,6 +137,7 @@ namespace DailyDoing
             {
                 return;
             }
+            contactService.resetContactInfo();
             contactService.fillContactsInListBox();
         }
 
