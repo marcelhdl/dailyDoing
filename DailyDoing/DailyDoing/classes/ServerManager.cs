@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DailyDoing.classes;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -104,12 +105,11 @@ namespace DailyDoing
                 }
                 catch (MySqlException e)
                 {
-                    DBException dbex = new DBException(e.Number);
-                                       
+                    DBError dbex = new DBError(e.Number);
+                    dbex.showErrorBox();
                 }
             }
             return -2;
-
         }
         #endregion
 
