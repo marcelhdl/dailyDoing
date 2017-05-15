@@ -10,6 +10,8 @@ using System.Windows.Input;
 using MySql.Data;
 using System.Linq;
 using System.Security.Authentication;
+using System.Net.Mail;
+
 
 namespace DailyDoing
 {
@@ -181,7 +183,8 @@ namespace DailyDoing
                 tab_contacts.IsSelected = true;
                 return;
             }
-            if (!lendingService.createLending((Contact)ContactInLending.DataContext,(Lending)DetailViewLendings.DataContext)) {
+            if (!lendingService.createLending((Contact)ContactInLending.DataContext, (Lending)DetailViewLendings.DataContext))
+            {
                 return;
             }
             lendingService.fillLendingsInListBox();
@@ -209,6 +212,30 @@ namespace DailyDoing
         public int getCurrentUserID()
         {
             return user.UserID;
+        }
+
+        private void forgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txt_username.Text))
+            {
+                MessageBox.Show("Please insert your username.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                txt_username.Focus();
+                return;
+            }
+            string username = txt_username.Text;
+            MailMessage msg = new MailMessage(/**Absender**/, /**Empfänger**/, "Reset Password for " + username, "He forgot his Passwort, please reset it.");
+            SmtpClient client = new SmtpClient("smtp.live.com", 25);
+            try
+            {
+                client.Credentials = new System.Net.NetworkCredential(/**Bitte noch Anmeldeadresse und Passwort einfügen mit Komma getrennt**/);
+                client.EnableSsl = true;
+                client.Send(msg);
+                MessageBox.Show("E-Mail wurde versendet");
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong with the connection, please try again!");
+            }
         }
     }
 }
