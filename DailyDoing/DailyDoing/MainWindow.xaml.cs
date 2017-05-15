@@ -220,7 +220,7 @@ namespace DailyDoing
                 return;
             }
             string username = txt_username.Text;
-            MailMessage msg = new MailMessage(/**Absender**/, /**Empfänger**/, "Reset Password for " + username, "He forgots his Passwort please reset it.");
+            MailMessage msg = new MailMessage(/**Absender**/, /**Empfänger**/, "Reset Password for " + username, "He forgot his Passwort, please reset it.");
             SmtpClient client = new SmtpClient("smtp.live.com", 25);
             try
             {
@@ -231,7 +231,7 @@ namespace DailyDoing
             }
             catch
             {
-                MessageBox.Show("Iwas schief gelaufen");
+                MessageBox.Show("Something went wrong with the connection, please try again!");
             }
         }
     }
