@@ -83,9 +83,9 @@ namespace DailyDoing.classes
             db.createContact(newContact);
             return true;
         }
-        public void deleteContactFromDB()
+        public bool deleteContactFromDB()
         {
-            db.deleteContact(getSelectedContact().Cid);
+           return db.deleteContact(getSelectedContact().Cid);
         }
 
         public void resetContactInfo()

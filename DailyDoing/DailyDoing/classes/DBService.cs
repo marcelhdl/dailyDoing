@@ -17,8 +17,7 @@ namespace DailyDoing
         ServerManager sm = new ServerManager();
         string sql;
 
-        public DBService(){
-        }
+        public DBService(){}
 
         #region User
       

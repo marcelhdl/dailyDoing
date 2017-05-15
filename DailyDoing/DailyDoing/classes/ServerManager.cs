@@ -21,7 +21,7 @@ namespace DailyDoing
         MySqlConnection Con;
         MySqlDataReader Reader;
         MySqlCommand Command;
-        DBError dbex = new DBError(); 
+        DBError dbex; 
         string DBUser;
         string DBPass;
         string DBConnection;
@@ -82,7 +82,8 @@ namespace DailyDoing
                 }
                 catch (MySqlException e)
                 {
-                    dbex.setErrorCode(e.Number);
+                    //dbex.setErrorCode(e.Number);
+                    dbex = new DBError(e.Number);
                     dbex.showErrorBox();
                 }
             }
@@ -121,7 +122,8 @@ namespace DailyDoing
                 }
                 catch(MySqlException e)
                 {
-                    dbex.setErrorCode(e.Number);
+                    dbex = new DBError(e.Number);
+                    //dbex.setErrorCode(e.Number);
                     dbex.showErrorBox();
                 }
             }
@@ -161,19 +163,29 @@ namespace DailyDoing
             Con = createconnectionstring();
             Command = Con.CreateCommand();
             Command.CommandText = sql;
-            if (Con.State.ToString() == "Open") { }
-            else { Con.Open(); }
-            Reader = Command.ExecuteReader();
-            while (Reader.Read())
+            try
             {
-                string row = "";
-                for (int i = 0; i < Reader.FieldCount; i++)
+                if (Con.State.ToString() == "Open") { }
+                else { Con.Open(); }
+                Reader = Command.ExecuteReader();
+                while (Reader.Read())
                 {
-                    row = Reader.GetValue(i).ToString() + ",";
+                    string row = "";
+                    for (int i = 0; i < Reader.FieldCount; i++)
+                    {
+                        row = Reader.GetValue(i).ToString() + ",";
+                    }
                 }
+                Con.Close();
+                return true;
             }
-            Con.Close();
-            return true;
+            catch (MySqlException e)
+            {
+                //dbex.setErrorCode(e.Number);
+                dbex = new DBError(e.Number);
+                dbex.showErrorBox();
+            }
+            return false;
         }
 
 
@@ -202,7 +214,7 @@ namespace DailyDoing
             return true;
         }
 
-        public List<string[]> Lendings(string sql) //Return the Lendings as sql-string wants
+        public List<string[]> Lendings(string sql) //Return the Lendings how the sql-string wants
         {
             Con = createconnectionstring();
             Command = Con.CreateCommand();
@@ -229,7 +241,7 @@ namespace DailyDoing
 
         #endregion
 
-        public string[] getDetails(string sql) //Get the Details of a specific Lending.
+        public string[] getDetails(string sql) //Get the Details of a specific Contact/Lending.
         {
             Con = createconnectionstring();
             Command = Con.CreateCommand();

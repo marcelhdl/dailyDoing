@@ -146,8 +146,10 @@ namespace DailyDoing
         //Löschen eines vorhandenen Kontakts
         private void btn_deleteContact_Click(object sender, RoutedEventArgs e)
         {
-            contactService.deleteContactFromDB();
+            bool success = contactService.deleteContactFromDB();
+            if (success) { 
             MessageBox.Show("Contact successfully deleted!");
+            }
             contactService.fillContactsInListBox();
         }
         //Einstiegspunkt für das Updaten eines vorhandenen Kontakts
