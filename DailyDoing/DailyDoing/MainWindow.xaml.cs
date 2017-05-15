@@ -71,9 +71,10 @@ namespace DailyDoing
         private void btn_logout_Click(object sender, RoutedEventArgs e)
         {
             user.IsLoggedIn = false;
-            guiService.switchBetweenLoggedInAndLoggedOut(user.IsLoggedIn);
             contactService.resetContactInfo();
             lendingService.resetLendingInfo();
+            guiService.switchBetweenLoggedInAndLoggedOut(user.IsLoggedIn);
+            
         }
         private void mainwindow_KeyDown(object sender, KeyEventArgs e)
         {
