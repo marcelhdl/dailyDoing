@@ -216,8 +216,9 @@ namespace DailyDoing
             return user.UserID;
         }
 
-        /*private void forgotPassword_Click(object sender, RoutedEventArgs e)
+        private void forgotPassword_Click(object sender, RoutedEventArgs e)
         {
+            /*
             if (string.IsNullOrEmpty(txt_username.Text))
             {
                 MessageBox.Show("Please insert your username.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -237,7 +238,8 @@ namespace DailyDoing
             catch
             {
                 MessageBox.Show("Something went wrong with the connection, please try again!");
-            }
-        }*/
+            }*/
+            return;
+        }
     }
 }
