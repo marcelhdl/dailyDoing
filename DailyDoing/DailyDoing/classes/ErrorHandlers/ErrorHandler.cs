@@ -11,12 +11,6 @@ namespace DailyDoing.classes
     {
         public string errorDescription = String.Empty;
         public string errorHeader = String.Empty;
-        public ErrorHandler(string errorDescription, string errorHeader)
-        {
-            this.errorDescription = errorDescription;
-            this.errorHeader = errorHeader;
-
-        }
         public ErrorHandler()
         {
 

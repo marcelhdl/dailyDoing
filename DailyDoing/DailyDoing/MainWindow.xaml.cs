@@ -216,7 +216,7 @@ namespace DailyDoing
             return user.UserID;
         }
 
-        private void forgotPassword_Click(object sender, RoutedEventArgs e)
+        /*private void forgotPassword_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(txt_username.Text))
             {
@@ -225,11 +225,11 @@ namespace DailyDoing
                 return;
             }
             string username = txt_username.Text;
-            MailMessage msg = new MailMessage(/**Absender**/, /**Empfänger**/, "Reset Password for " + username, "He forgot his Passwort, please reset it.");
+            MailMessage msg = new MailMessage(/**Absender, /**Empfänger, "Reset Password for " + username, "He forgot his Passwort, please reset it.");
             SmtpClient client = new SmtpClient("smtp.live.com", 25);
             try
             {
-                client.Credentials = new System.Net.NetworkCredential(/**Bitte noch Anmeldeadresse und Passwort einfügen mit Komma getrennt**/);
+                client.Credentials = new System.Net.NetworkCredential(/**Bitte noch Anmeldeadresse und Passwort einfügen mit Komma getrennt);
                 client.EnableSsl = true;
                 client.Send(msg);
                 MessageBox.Show("E-Mail wurde versendet");
@@ -238,6 +238,6 @@ namespace DailyDoing
             {
                 MessageBox.Show("Something went wrong with the connection, please try again!");
             }
-        }
+        }*/
     }
 }
