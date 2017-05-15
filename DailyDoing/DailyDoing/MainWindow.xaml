@@ -5,6 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         xmlns:local="clr-namespace:DailyDoing"
         mc:Ignorable="d"
         Title="DailyDoing v1.0" Height="350" Width="900" ResizeMode="NoResize">
@@ -73,7 +78,7 @@
                         </ListView.ItemContainerStyle>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}"/>
+                                <GridViewColumn Width="220" Header="Title" DisplayMemberBinding="{Binding Title}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
