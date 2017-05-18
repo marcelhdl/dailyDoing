@@ -46,7 +46,7 @@ namespace DailyDoing
         public List<string[]> getContacts(int uid)
         {
             sql= @"SELECT * 
-                   FROM tbl_contacts_new 
+                   FROM tbl_contacts 
                    WHERE uid='" + uid + "'";
 
             return sm.getContacts(sql);
@@ -56,7 +56,7 @@ namespace DailyDoing
         public string[] getDetailsFromContacts(int cid)
         {
             sql = @"SELECT * 
-                    FROM tbl_contacts_new 
+                    FROM tbl_contacts 
                     WHERE cid='" + cid + "'";
 
             return sm.getDetails(sql);
@@ -66,7 +66,7 @@ namespace DailyDoing
         public bool createContact(Contact contact)
         {
             sql = @"INSERT INTO
-                    tbl_contacts_new (uid, name,firstname,mail,street,housenr,postcode,city,tel,mobile)
+                    tbl_contacts (uid, name,firstname,mail,street,housenr,postcode,city,tel,mobile)
                     VALUES ('" 
                     + contact.Uid + "','" 
                     + contact.Name + "','" 
@@ -85,7 +85,7 @@ namespace DailyDoing
         //Updates an existing contact.
         public bool updateContact(Contact contact)
         {
-            sql = @"UPDATE tbl_contacts_new 
+            sql = @"UPDATE tbl_contacts 
                     SET uid='" + contact.Uid +
                     "', name='" + contact.Name +
                     "', firstname='" + contact.Firstname +
@@ -105,7 +105,7 @@ namespace DailyDoing
         public bool deleteContact(int cid)
         {
             sql = @"DELETE FROM 
-                    tbl_contacts_new 
+                    tbl_contacts 
                     WHERE cid='" + cid + "'";
             return sm.Contact(sql);
         }
@@ -118,7 +118,7 @@ namespace DailyDoing
         public List<string[]> getallLendings(int uid)
         {
             sql = @"SELECT * 
-                    FROM tbl_lendings_new 
+                    FROM tbl_lendings 
                     WHERE uid='" + uid + "'";
 
             return sm.Lendings(sql);
@@ -127,7 +127,7 @@ namespace DailyDoing
         public List<string[]> getrecentLendings(int uid)
         {
             sql = @"SELECT * 
-                    FROM tbl_lendings_new 
+                    FROM tbl_lendings 
                     WHERE uid='" + uid + "' AND get_back='false'";
 
             return sm.Lendings(sql);
@@ -135,14 +135,14 @@ namespace DailyDoing
         public List<string[]> getoldLendings(int uid)
         {
             sql = @"SELECT * 
-                    FROM tbl_lendings_new 
+                    FROM tbl_lendings 
                     WHERE uid='" + uid + "' AND get_back='true'";
             return sm.Lendings(sql);
         }
         public string[] getDetailsFromLending(int lid)
         {
             sql = @"SELECT * 
-                    FROM tbl_lendings_new 
+                    FROM tbl_lendings 
                     WHERE lid='" + lid + "'";
             return sm.getDetails(sql);
         }
@@ -153,7 +153,7 @@ namespace DailyDoing
         {
         string start = lending.Start.ToString("yyyy-MM-dd HH:mm:ss");
         string end = lending.End.ToString("yyyy-MM-dd HH:mm:ss");
-            sql = @"INSERT INTO tbl_lendings_new
+            sql = @"INSERT INTO tbl_lendings
                    (uid, cid, title, description, category, priority, timestamp_lend, timestamp_lendback, get_back) 
                    VALUES
                    ('" + uid + 
@@ -174,7 +174,7 @@ namespace DailyDoing
         {
             string start = lending.Start.ToString("yyyy-MM-dd HH:mm:ss");
             string end = lending.End.ToString("yyyy-MM-dd HH:mm:ss");
-            sql = @"UPDATE tbl_lendings_new 
+            sql = @"UPDATE tbl_lendings 
                     SET cid='" + lending.Cid + "'," +
                     " title='"+ lending.Title + "'," +
                     " description='" + lending.Description + "'," +
@@ -191,7 +191,7 @@ namespace DailyDoing
         public bool deleteLending(int lid)
         {
             sql = @"DELETE FROM 
-                    tbl_lendings_new 
+                    tbl_lendings 
                     WHERE lid='" + lid + "'";
             return sm.Lending(sql);
         }
