@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DailyDoing.classes
+namespace DailyDoing.classes.ErrorHandlers
 {
     class DBError : ErrorHandler
     {
