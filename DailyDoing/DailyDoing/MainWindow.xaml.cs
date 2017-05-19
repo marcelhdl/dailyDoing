@@ -67,7 +67,7 @@ namespace DailyDoing
             contactService.fillContactsInListBox();
             lendingService.fillLendingsInListBox();
         }
-        //Logout and Reset all
+        //Logout und Reset von allem
         private void btn_logout_Click(object sender, RoutedEventArgs e)
         {
             user.IsLoggedIn = false;
@@ -78,7 +78,7 @@ namespace DailyDoing
         }
         private void mainwindow_KeyDown(object sender, KeyEventArgs e)
         {
-            //Disslected Contact/Lending with ESC
+            //Deslektieren nach drücken "ESC"
             if (tab_contacts.IsSelected)
             {
                 if (e.Key == Key.Escape)

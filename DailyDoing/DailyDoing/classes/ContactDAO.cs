@@ -20,13 +20,16 @@ namespace DailyDoing.classes
             this.main = main;
             db = new DBService();
         }
+        //Holen der Kontakte aus der DB
         public void fillContactsInListBox()
         {
             main.tab_contacts.IsSelected = true;
-            List<Contact> allContacts = getAllContactsForUser(db.getContacts(main.getCurrentUserID())).OrderBy(contact => contact.Name).ToList();
+            List<Contact> allContacts = getAllContactsForUser(db.getContacts(main.getCurrentUserID()));
             main.lBox_Contacts.ItemsSource = allContacts;
 
         }
+        //Initialisieren der Kontaktliste und die einzelnen Informationen 
+        //an die Felder des Kontakts hängen und sortierte Liste zurück geben
         private List<Contact> getAllContactsForUser(List<string[]> contactsPerUser)
         {
             List<Contact> contacts = new List<Contact>();
@@ -34,8 +37,9 @@ namespace DailyDoing.classes
             {
                 contacts.Add(getContact(Convert.ToInt32(contactInfo[0])));
             }
-            return contacts;
+            return contacts.OrderBy(contact => contact.Name).ToList();
         }
+        //Felder des Kontakts füllen
         public Contact getContact(int cid)
         {
             string[] contactInfo = db.getDetailsFromContacts(cid);
@@ -55,6 +59,8 @@ namespace DailyDoing.classes
             };
             return contact;
         }
+
+        //Setzen des DataContext auf den gewählten Kontakt in der ListBox
         public void getDetailsForSelectedContact()
         {
             if (main.lBox_Contacts.SelectedItem != null)
@@ -63,6 +69,7 @@ namespace DailyDoing.classes
             }
         }
 
+        //Bei Update prüfen auf Pflichtfelder und Datenbankzugriff für gewählten Kontakt
         internal bool updateSelectedContact(Contact selectedContact)
         {
             if (hasMandatoryFieldsError(selectedContact))
@@ -72,7 +79,7 @@ namespace DailyDoing.classes
             db.updateContact(selectedContact);
             return true;
         }
-
+        //Neuen User anlegen wenn keine Pflichtfelder verletzt sind und Datenbankzugriff
         internal bool createNewContactforUserInDB(Contact newContact)
         {
             if (hasMandatoryFieldsError(newContact))
@@ -83,6 +90,7 @@ namespace DailyDoing.classes
             db.createContact(newContact);
             return true;
         }
+        //Löschen des gewählten Kontakts
         public bool deleteContactFromDB()
         {
            return db.deleteContact(getSelectedContact().Cid);
@@ -92,11 +100,12 @@ namespace DailyDoing.classes
         {
             main.DetailView.DataContext = new Contact();
         }
-        
+        //Über Binding Kontakt aus Liste zurückbekommen
         public Contact getSelectedContact()
         {
             return (Contact)main.lBox_Contacts.SelectedItem;
         }
+        //Pflichtfelder prüfen für Kontakt
         private bool hasMandatoryFieldsError(Contact newContact)
         {
             if (String.IsNullOrEmpty(newContact.Name) || String.IsNullOrEmpty(newContact.Firstname))

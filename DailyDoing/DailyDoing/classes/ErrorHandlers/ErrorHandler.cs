@@ -9,8 +9,8 @@ namespace DailyDoing.classes
 {
     class ErrorHandler
     {
-        public string errorDescription = String.Empty;
-        public string errorHeader = String.Empty;
+        protected string errorDescription = String.Empty;
+        protected string errorHeader = String.Empty;
         public ErrorHandler()
         {
 

@@ -47,15 +47,15 @@ namespace DailyDoing.classes
 
         private void resetContactTab()
         {
-            deactivateAllContactButtons();
             resetContactsList();
+            deactivateAllContactButtons();
         }
 
         
         private void resetLendingsTab()
         {
-            deactivateAllLendingButtons();
             resetLendingsList();
+            deactivateAllLendingButtons();
         }
         private void resetContactsList()
         {
