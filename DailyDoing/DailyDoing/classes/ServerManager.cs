@@ -22,7 +22,7 @@ namespace DailyDoing
         MySqlConnection Con;
         MySqlDataReader Reader;
         MySqlCommand Command;
-        DBError dbex; 
+        DBError dbex;
         string DBUser;
         string DBPass;
         string DBConnection;
@@ -97,7 +97,8 @@ namespace DailyDoing
             Command = Con.CreateCommand();
             Command.CommandText = sql;
             if (Con.State.ToString() == "Open") { }
-            else {
+            else
+            {
                 try
                 {
                     Con.Open();
@@ -121,10 +122,9 @@ namespace DailyDoing
                     Con.Close();
                     return false;
                 }
-                catch(MySqlException e)
+                catch (MySqlException e)
                 {
                     dbex = new DBError(e.Number);
-                    //dbex.setErrorCode(e.Number);
                     dbex.showErrorBox();
                 }
             }
@@ -140,24 +140,38 @@ namespace DailyDoing
             Command = Con.CreateCommand();
             Command.CommandText = sql;
             if (Con.State.ToString() == "Open") { }
-            else { Con.Open(); }
-            Reader = Command.ExecuteReader();
-            List<string[]> contact = new List<string[]>();
-
-            while (Reader.Read())
+            else
             {
-                string row = "";
-                for (int i = 0; i < Reader.FieldCount; i++)
+                try
                 {
-                    row += Reader.GetValue(i).ToString() + ",";
-                }
-                String[] contactInfo = row.Split(',');
-                contact.Add(contactInfo);
-            }
-            Con.Close();
-            return contact;
-        }
+                    Con.Open();
 
+                    Reader = Command.ExecuteReader();
+                    List<string[]> contact = new List<string[]>();
+
+                    while (Reader.Read())
+                    {
+                        string row = "";
+                        for (int i = 0; i < Reader.FieldCount; i++)
+                        {
+                            row += Reader.GetValue(i).ToString() + ",";
+                        }
+                        String[] contactInfo = row.Split(',');
+                        contact.Add(contactInfo);
+                    }
+                    Con.Close();
+                    return contact;
+                }
+
+                catch (MySqlException e)
+                {
+                    dbex = new DBError(e.Number);
+                    dbex.showErrorBox();
+                }
+            }
+            List<string[]> empty = new List<string[]>();
+            return empty;
+        }
 
         public bool Contact(string sql) //Create,Update,Delete ~
         {
@@ -182,13 +196,11 @@ namespace DailyDoing
             }
             catch (MySqlException e)
             {
-                //dbex.setErrorCode(e.Number);
                 dbex = new DBError(e.Number);
                 dbex.showErrorBox();
             }
             return false;
         }
-
 
         #endregion
 
@@ -200,19 +212,33 @@ namespace DailyDoing
             Command = Con.CreateCommand();
             Command.CommandText = sql;
             if (Con.State.ToString() == "Open") { }
-            else { Con.Open(); }
-            Reader = Command.ExecuteReader();
-
-            while (Reader.Read())
+            else
             {
-                string row = "";
-                for (int i = 0; i < Reader.FieldCount; i++)
+                try
                 {
-                    row = Reader.GetValue(i).ToString() + ",";
+                    Con.Open();
+
+                    Reader = Command.ExecuteReader();
+
+                    while (Reader.Read())
+                    {
+                        string row = "";
+                        for (int i = 0; i < Reader.FieldCount; i++)
+                        {
+                            row = Reader.GetValue(i).ToString() + ",";
+                        }
+                    }
+                    Con.Close();
+                    return true;
                 }
+                catch (MySqlException e)
+                {
+                    dbex = new DBError(e.Number);
+                    dbex.showErrorBox();
+                }
+
             }
-            Con.Close();
-            return true;
+            return false;
         }
 
         public List<string[]> Lendings(string sql) //Return the Lendings how the sql-string wants
@@ -221,51 +247,79 @@ namespace DailyDoing
             Command = Con.CreateCommand();
             Command.CommandText = sql;
             if (Con.State.ToString() == "Open") { }
-            else { Con.Open(); }
-            Reader = Command.ExecuteReader();
-            List<string[]> lendings = new List<string[]>();
-
-            while (Reader.Read())
+            else
             {
-                string row = "";
-                for (int i = 0; i < Reader.FieldCount; i++)
+                try
                 {
-                    row += Reader.GetValue(i).ToString() + ",";
-                }
-                String[] lendingsinfo = row.Split(',');
-                lendings.Add(lendingsinfo);
-            }
-            Con.Close();
-            return lendings;
-        }
+                    Con.Open();
 
+                    Reader = Command.ExecuteReader();
+                    List<string[]> lendings = new List<string[]>();
+
+                    while (Reader.Read())
+                    {
+                        string row = "";
+                        for (int i = 0; i < Reader.FieldCount; i++)
+                        {
+                            row += Reader.GetValue(i).ToString() + ",";
+                        }
+                        String[] lendingsinfo = row.Split(',');
+                        lendings.Add(lendingsinfo);
+                    }
+                    Con.Close();
+                    return lendings;
+                }
+                catch (MySqlException e)
+                {
+                    dbex = new DBError(e.Number);
+                    dbex.showErrorBox();
+                }
+            }
+            List<string[]> empty = new List<string[]>();
+            return empty;
+        }
 
         #endregion
 
         public string[] getDetails(string sql) //Get the Details of a specific Contact/Lending.
         {
+            string[] empty = new string[1];
             Con = createconnectionstring();
             Command = Con.CreateCommand();
             Command.CommandText = sql;
             if (Con.State.ToString() == "Open") { }
-            else { Con.Open(); }
-            Reader = Command.ExecuteReader();
-            string[] info;
-            while (Reader.Read())
+            else
             {
-                string row = "";
-                for (int i = 0; i < Reader.FieldCount; i++)
+                try
                 {
-                    row += Reader.GetValue(i).ToString() + ",";
+                    Con.Open();
+
+                    Reader = Command.ExecuteReader();
+                    string[] info;
+                    while (Reader.Read())
+                    {
+                        string row = "";
+                        for (int i = 0; i < Reader.FieldCount; i++)
+                        {
+                            row += Reader.GetValue(i).ToString() + ",";
+                        }
+                        info = row.Split(',');
+                        Con.Close();
+                        return info;
+                    }
+                    Con.Close();
+                    return empty;
                 }
-                info = row.Split(',');
-                Con.Close();
-                return info;
+
+                catch (MySqlException e)
+                {
+                    dbex = new DBError(e.Number);
+                    dbex.showErrorBox();
+                }
             }
-            Con.Close();
-            string[] empty = new string[1];
             return empty;
         }
     }
-
 }
+
+

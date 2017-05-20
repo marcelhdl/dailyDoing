@@ -49,8 +49,5 @@ namespace DailyDoing.classes.ErrorHandlers
         {
             return "Invalid Action!";
         }
-        /*public void setErrorCode(int errorCode) {
-            this.errorcode = errorCode;
-        }*/
     }
 }

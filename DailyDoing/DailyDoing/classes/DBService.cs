@@ -12,6 +12,9 @@ using DailyDoing.classes;
 
 namespace DailyDoing
 {
+    /// <summary>
+    /// Create the SQL Statements for the Requests
+    /// </summary>
     class DBService
     {
         ServerManager sm = new ServerManager();
@@ -43,7 +46,7 @@ namespace DailyDoing
         #region methods for contacts/user requests
 
         //Request all contacts for an specific user.
-        public List<string[]> getContacts(int uid)
+        public List<string[]> getContacts(int uid) 
         {
             sql= @"SELECT * 
                    FROM tbl_contacts 
@@ -115,6 +118,7 @@ namespace DailyDoing
 
         #region methods for lending requests
 
+        //Get all Lendings for this user
         public List<string[]> getallLendings(int uid)
         {
             sql = @"SELECT * 
@@ -124,6 +128,7 @@ namespace DailyDoing
             return sm.Lendings(sql);
         }
 
+        //get Lendings which are still lent
         public List<string[]> getrecentLendings(int uid)
         {
             sql = @"SELECT * 
@@ -132,6 +137,8 @@ namespace DailyDoing
 
             return sm.Lendings(sql);
         }
+
+        //get Lendings which aren't lend any more
         public List<string[]> getoldLendings(int uid)
         {
             sql = @"SELECT * 
@@ -139,6 +146,8 @@ namespace DailyDoing
                     WHERE uid='" + uid + "' AND get_back='true'";
             return sm.Lendings(sql);
         }
+
+        //get the details of a Lending
         public string[] getDetailsFromLending(int lid)
         {
             sql = @"SELECT * 
@@ -147,8 +156,7 @@ namespace DailyDoing
             return sm.getDetails(sql);
         }
 
-        // Create a Lending in the Database Table
-        // Please give DateTime.Date
+        //Create a Lending
         public bool createLending(int uid, Contact contact ,Lending lending)
         {
         string start = lending.Start.ToString("yyyy-MM-dd HH:mm:ss");
@@ -169,7 +177,7 @@ namespace DailyDoing
             return sm.Lending(sql);
         }
 
-        //Update a specific landing.
+        //Update a specific Lending.
         public bool updateLending(Lending lending)
         {
             string start = lending.Start.ToString("yyyy-MM-dd HH:mm:ss");
@@ -187,7 +195,7 @@ namespace DailyDoing
             return sm.Lending(sql);
         }
 
-        //Delete a specific landing.
+        //Delete a specific Lending.
         public bool deleteLending(int lid)
         {
             sql = @"DELETE FROM 
