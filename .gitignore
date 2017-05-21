@@ -288,8 +288,6 @@ __pycache__/
 *.xsd.cs
 Doku.docx
 DailyDoing/DailyDoing_Setup/
-*.dgml
 *.png
 *.jpeg
-*.sql
-*.xps
+*.7z
